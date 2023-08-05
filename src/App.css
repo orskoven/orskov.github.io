@@ -238,3 +238,22 @@ a {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
 }
+
+.category {
+  margin-bottom: 30px;
+}
+
+.skills-container {
+  display: flex;
+  overflow-x: auto;
+  /* ... other styles as needed */
+}
+
+.skill {
+  flex: 0 0 auto;
+  margin-right: 15px;
+  padding: 10px 20px;
+  /* ... other styles as needed */
+}
+
+/* ... rest of the styles ... */
