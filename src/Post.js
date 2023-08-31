@@ -2,7 +2,7 @@ const Post1 = () => {
     return (
       <section className="section">
             <h2>Finding a 3-month intership </h2>
-            <h5>Author: <a href="orskovbeckmann.com">Simon Ø. D. Beckmann</a></h5>
+            <h5>Author: <a href="https://master.d2p1vjkxtgfh0z.amplifyapp.com">Simon Ø. D. Beckmann</a></h5>
             <p>As a part of my education as an AP Computer Science student at KEA, i have to get an intership in my own business or in another business that operates in the field of informations systems.</p>
             <p>I primarly focus on cyber security, because i am curious about the industry and have an opportunity to get the "top-up" in cyber security at KEA, by extending my education with 1,5 years. </p>
             <p> Currently my eyes has fallen on the danish cyber security company <a href="https://www.dubex.dk/?utm_source=google&utm_medium=paid&utm_campaign=brand&utm_id=655700301570&utm_term=%7Bkeyword%7D&gclid=EAIaIQobChMIk7_N8fmGgQMVZlSRBR3r-wkREAAYASAAEgJb7PD_BwE" class="youtube-link">DUBEX</a>. I have had an opportunity to see Keld, who is working for the company, speak about threats and risk assesment at KEA and at a Data conference in Copenhagen last year.</p>
