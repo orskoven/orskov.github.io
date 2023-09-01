@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import Post from './Post';
+import Post1 from './Post1';
+import Post2 from './Post2';
 
 
 const App = () => {
@@ -12,7 +13,8 @@ const App = () => {
         </p>
       </header>
       <main className="content">
-  <Post />
+  <Post1 />
+  <Post2 />
 </main>
     </div>
   );
