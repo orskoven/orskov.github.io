@@ -13,8 +13,8 @@ const App = () => {
         </p>
       </header>
       <main className="content">
-  <Post1 />
   <Post2 />
+  <Post1 />
 </main>
     </div>
   );
