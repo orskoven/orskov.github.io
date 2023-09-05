@@ -256,4 +256,49 @@ a {
   /* ... other styles as needed */
 }
 
-/* ... rest of the styles ... */
+/* Toolbar.css */
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333; /* Change to your preferred background color */
+  color: white;
+}
+
+.toolbar-logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.toolbar-buttons {
+  display: flex;
+}
+
+.toolbar-button {
+  background: none;
+  border: none;
+  margin: 0 10px;
+  padding: 5px 10px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Media Query for Mobile-First Design */
+@media (max-width: 768px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .toolbar-buttons {
+    margin-top: 10px;
+  }
+
+  .toolbar-button {
+    margin: 0;
+  }
+}
+
