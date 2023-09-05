@@ -9,8 +9,7 @@
 
 <p>The discussion featured two speakers, one from the IT industry and another from TV 2's tech advisory. They discussed the growing interest in AI across various sectors, including the finance industry. Many companies are eager to harness AI's capabilities to streamline operations and make data-driven decisions. This technological shift is reminiscent of the transformative impact of fire and electricity, according to Google's founder, whose views were considered during the show.</p>
 
-<p>One significant concern raised during the discussion was the need for regulation, as highlighted by Danish Minister. He emphasized the importance of protecting citizens from misinformation and ensuring the responsible use of AI. This issue was a focal point of the conversation, especially in terms of cybersecurity and economic implications.</p>
-
+<p>One significant concern raised during the discussion was the need for regulation, as highlighted by Danish Minister. He emphasized the importance of protecting citizens from misinformation and ensuring the responsible use of AI.</p>
 <p>AI indeed has the potential to generate substantial income, primarily through automation and improved productivity. However, it also poses security challenges. One notable topic that came up was the rise of deep fakes, which can manipulate audio and video content to deceive individuals. This technology can be exploited by criminals, particularly in phishing attempts and other forms of cybercrime.</p>
 
 <p>I share the concern that deep fakes and AI-generated text may be used to deceive individuals, making them vulnerable to criminal activities. This emphasizes the need for businesses, governments, and the general public to address not only the potential benefits of AI but also the associated risks, especially in terms of cybersecurity.</p>
