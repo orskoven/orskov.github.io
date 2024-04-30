@@ -11,7 +11,6 @@ const App = () => {
     <div className="container">
       <header className="header">
         <Toolbar />
-        <h1>Spilled Beans</h1>
         <p className="intro-text">
         </p>
       </header>
