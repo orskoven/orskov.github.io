@@ -3,6 +3,7 @@ import './App.css';
 import Post1 from './Post1';
 import Post2 from './Post2';
 import Post3 from './Post3';
+import Post4 from './Post4';
 import Toolbar from './Toolbar';
 
 
@@ -15,6 +16,7 @@ const App = () => {
         </p>
       </header>
       <main className="content">
+    <Post4 />
   <Post3 />
   <Post2 />
   <Post1 />
