@@ -1,28 +1,41 @@
-import React from 'react';
-import './App.css';
-import Post1 from './Post1';
-import Post2 from './Post2';
-import Post3 from './Post3';
-import Post4 from './Post4';
-import Post5 from './Post5';
+import React, { useState, useEffect } from 'react';
 import Toolbar from './Toolbar';
+import Posts from './Posts';
 
+// Simulating a post component that could be dynamically generated based on props.
+const Post = ({ Posts }) => (
+  <div className="post">
+    <h2>{post.title}</h2>
+    <p>Date: {post.date} Author: {post.author} </p>
+    <p>{post.content}</p>
+    {link && <a href={link.href}>{link.text}</a>}
+  </div>
+);
 
 const App = () => {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    // Simulate fetching JSON data from a local file or server
+    fetch('/path/to/posts.json') // Adjust the path as needed
+      .then(response => response.json())
+      .then(data => setPosts(data))
+      .catch(error => console.error('Error loading the posts:', error));
+  }, []);
+
   return (
     <div className="container">
       <header className="header">
         <Toolbar />
         <p className="intro-text">
+          Welcome to Binary Beans in technology and business.
         </p>
       </header>
       <main className="content">
-            <Post5 />
-    <Post4 />
-  <Post3 />
-  <Post2 />
-  <Post1 />
-</main>
+        {posts.map((post, index) => (
+          <Post key={index} {...post} />
+        ))}
+      </main>
     </div>
   );
 };
