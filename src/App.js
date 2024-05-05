@@ -10,6 +10,7 @@ import Post7 from './Post7';
 import Post8 from './Post8';
 import Post10 from './Post10';
 import Post11 from './Post11';
+import app.css from 'App.css'
 
 // List of posts ordered by ID (assuming ID is chronological)
 const posts = [
