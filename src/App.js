@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import Toolbar from './Toolbar'; // Adjust path if necessary, assuming it's in the same directory
+import React, { useState } from 'react';
+import Toolbar from './Toolbar';
 import Post1 from './Post1';
 import Post2 from './Post2';
 import Post3 from './Post3';
@@ -12,6 +12,7 @@ import Post9 from './Post9';
 import Post10 from './Post10';
 import Post11 from './Post11';
 
+// List of posts in normal order
 const posts = [
   { id: 1, component: <Post1 />, title: "Post Title 1" },
   { id: 2, component: <Post2 />, title: "Post Title 2" },
@@ -27,19 +28,18 @@ const posts = [
 ];
 
 const App = () => {
-  const [filteredPosts, setFilteredPosts] = useState(posts);
   const [searchTerm, setSearchTerm] = useState('');
 
+  // Handle change in search term
   const handleSearchChange = (event) => {
     const term = event.target.value;
     setSearchTerm(term);
-    if (term === '') {
-      setFilteredPosts(posts);
-    } else {
-      const filtered = posts.filter(post => post.title.toLowerCase().includes(term.toLowerCase()));
-      setFilteredPosts(filtered);
-    }
   };
+
+  // Filter and sort posts based on search term and descending order by id
+  const displayPosts = posts
+    .filter(post => post.title.toLowerCase().includes(searchTerm.toLowerCase()))
+    .sort((a, b) => b.id - a.id); // Sorting in descending order
 
   return (
     <div className="App">
@@ -52,8 +52,8 @@ const App = () => {
         style={{ margin: '10px', padding: '5px', width: '95%' }}
       />
       <div className="content">
-        {filteredPosts.length > 0 ? (
-          filteredPosts.map(post => (
+        {displayPosts.length > 0 ? (
+          displayPosts.map(post => (
             <div key={post.id}>
               {post.component}
             </div>
