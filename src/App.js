@@ -15,7 +15,6 @@ import Post11 from './Post11';
 const posts = [
   { id: 11, component: <Post11 />, title: "Innovative Strategies in Tech Startups" },
   { id: 10, component: <Post10 />, title: "Evolving Trends in Renewable Energy" },
-  { id: 9, component: <Post9 />, title: "Challenges and Opportunities in Quantum Computing" },
   { id: 8, component: <Post8 />, title: "The Rise of Smart Cities and IoT" },
   { id: 7, component: <Post7 />, title: "Breaking New Grounds in Blockchain Technology" },
   { id: 6, component: <Post6 />, title: "Exploring the Depths of Deep Learning in Modern AI" },
