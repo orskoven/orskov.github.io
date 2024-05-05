@@ -1,41 +1,67 @@
 import React, { useState, useEffect } from 'react';
-import Toolbar from './Toolbar';
-import Posts from './Posts';
+import Toolbar from './Toolbar'; // Adjust path if necessary, assuming it's in the same directory
+import Post1 from './Post1';
+import Post2 from './Post2';
+import Post3 from './Post3';
+import Post4 from './Post4';
+import Post5 from './Post5';
+import Post6 from './Post6';
+import Post7 from './Post7';
+import Post8 from './Post8';
+import Post9 from './Post9';
+import Post10 from './Post10';
+import Post11 from './Post11';
 
-// Simulating a post component that could be dynamically generated based on props.
-const Post = ({ Posts }) => (
-  <div className="post">
-    <h2>{post.title}</h2>
-    <p>Date: {post.date} Author: {post.author} </p>
-    <p>{post.content}</p>
-    {link && <a href={link.href}>{link.text}</a>}
-  </div>
-);
+const posts = [
+  { id: 1, component: <Post1 />, title: "Post Title 1" },
+  { id: 2, component: <Post2 />, title: "Post Title 2" },
+  { id: 3, component: <Post3 />, title: "Post Title 3" },
+  { id: 4, component: <Post4 />, title: "Post Title 4" },
+  { id: 5, component: <Post5 />, title: "Post Title 5" },
+  { id: 6, component: <Post6 />, title: "Post Title 6" },
+  { id: 7, component: <Post7 />, title: "Post Title 7" },
+  { id: 8, component: <Post8 />, title: "Post Title 8" },
+  { id: 9, component: <Post9 />, title: "Post Title 9" },
+  { id: 10, component: <Post10 />, title: "Post Title 10" },
+  { id: 11, component: <Post11 />, title: "Post Title 11" },
+];
 
 const App = () => {
-  const [posts, setPosts] = useState([]);
+  const [filteredPosts, setFilteredPosts] = useState(posts);
+  const [searchTerm, setSearchTerm] = useState('');
 
-  useEffect(() => {
-    // Simulate fetching JSON data from a local file or server
-    fetch('/path/to/posts.json') // Adjust the path as needed
-      .then(response => response.json())
-      .then(data => setPosts(data))
-      .catch(error => console.error('Error loading the posts:', error));
-  }, []);
+  const handleSearchChange = (event) => {
+    const term = event.target.value;
+    setSearchTerm(term);
+    if (term === '') {
+      setFilteredPosts(posts);
+    } else {
+      const filtered = posts.filter(post => post.title.toLowerCase().includes(term.toLowerCase()));
+      setFilteredPosts(filtered);
+    }
+  };
 
   return (
-    <div className="container">
-      <header className="header">
-        <Toolbar />
-        <p className="intro-text">
-          Welcome to Binary Beans in technology and business.
-        </p>
-      </header>
-      <main className="content">
-        {posts.map((post, index) => (
-          <Post key={index} {...post} />
-        ))}
-      </main>
+    <div className="App">
+      <Toolbar />
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={handleSearchChange}
+        placeholder="Search posts by title..."
+        style={{ margin: '10px', padding: '5px', width: '95%' }}
+      />
+      <div className="content">
+        {filteredPosts.length > 0 ? (
+          filteredPosts.map(post => (
+            <div key={post.id}>
+              {post.component}
+            </div>
+          ))
+        ) : (
+          <p>No posts match your search criteria.</p>
+        )}
+      </div>
     </div>
   );
 };
