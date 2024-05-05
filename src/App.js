@@ -10,7 +10,7 @@ import Post7 from './Post7';
 import Post8 from './Post8';
 import Post10 from './Post10';
 import Post11 from './Post11';
-import './App.css'
+import './App.css';
 
 const App = () => {
   return (
