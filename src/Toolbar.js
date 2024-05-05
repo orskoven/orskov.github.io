@@ -6,7 +6,7 @@ const Toolbar = () => {
     <div className="toolbar">
       <div className="toolbar-logo">
         {/* Replace with your logo or site name */}
-        <span>dcpeeyhr - decrypted data/span>
+        <span>dcpeeyhr - decrypted data</span>
       </div>
       <div className="toolbar-buttons">
         {/* Add your toolbar buttons here */}
