@@ -8,7 +8,6 @@ import Post5 from './Post5';
 import Post6 from './Post6';
 import Post7 from './Post7';
 import Post8 from './Post8';
-import Post9 from './Post9';
 import Post10 from './Post10';
 import Post11 from './Post11';
 
