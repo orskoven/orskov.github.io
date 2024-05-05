@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Toolbar from './Toolbar';
+import React from 'react';
+import Toolbar from './Toolbar'; // Ensure Toolbar is imported if it's used for navigation or other UI elements.
 import Post1 from './Post1';
 import Post2 from './Post2';
 import Post3 from './Post3';
@@ -12,55 +12,31 @@ import Post9 from './Post9';
 import Post10 from './Post10';
 import Post11 from './Post11';
 
-// List of posts in normal order
+// List of posts ordered by ID (assuming ID is chronological)
 const posts = [
-  { id: 1, component: <Post1 />, title: "Post Title 1" },
-  { id: 2, component: <Post2 />, title: "Post Title 2" },
-  { id: 3, component: <Post3 />, title: "Post Title 3" },
-  { id: 4, component: <Post4 />, title: "Post Title 4" },
-  { id: 5, component: <Post5 />, title: "Post Title 5" },
-  { id: 6, component: <Post6 />, title: "Post Title 6" },
-  { id: 7, component: <Post7 />, title: "Post Title 7" },
-  { id: 8, component: <Post8 />, title: "Post Title 8" },
-  { id: 9, component: <Post9 />, title: "Post Title 9" },
-  { id: 10, component: <Post10 />, title: "Post Title 10" },
-  { id: 11, component: <Post11 />, title: "Post Title 11" },
+  { id: 11, component: <Post11 />, title: "Innovative Strategies in Tech Startups" },
+  { id: 10, component: <Post10 />, title: "Evolving Trends in Renewable Energy" },
+  { id: 9, component: <Post9 />, title: "Challenges and Opportunities in Quantum Computing" },
+  { id: 8, component: <Post8 />, title: "The Rise of Smart Cities and IoT" },
+  { id: 7, component: <Post7 />, title: "Breaking New Grounds in Blockchain Technology" },
+  { id: 6, component: <Post6 />, title: "Exploring the Depths of Deep Learning in Modern AI" },
+  { id: 5, component: <Post5 />, title: "Max Schrems: Prioritizing Enforcement and Innovation in Data Protection" },
+  { id: 4, component: <Post4 />, title: "Navigating the Murky Waters of Cybersecurity Insurance" },
+  { id: 3, component: <Post3 />, title: "Morten, Coach of the Cyber National Team" },
+  { id: 2, component: <Post2 />, title: "Vestas: Advocating for Effective Cybersecurity Practices Amidst Rising Threats" },
+  { id: 1, component: <Post1 />, title: "Advanced Cybersecurity Insights from the V2 Conference" },
 ];
 
 const App = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-
-  // Handle change in search term
-  const handleSearchChange = (event) => {
-    const term = event.target.value;
-    setSearchTerm(term);
-  };
-
-  // Filter and sort posts based on search term and descending order by id
-  const displayPosts = posts
-    .filter(post => post.title.toLowerCase().includes(searchTerm.toLowerCase()))
-    .sort((a, b) => b.id - a.id); // Sorting in descending order
-
   return (
     <div className="App">
       <Toolbar />
-      <input
-        type="text"
-        value={searchTerm}
-        onChange={handleSearchChange}
-        placeholder="Search posts by title..."
-        style={{ margin: '10px', padding: '5px', width: '95%' }}
-      />
       <div className="content">
-        {displayPosts.length > 0 ? (
-          displayPosts.map(post => (
-            <div key={post.id}>
-              {post.component}
-            </div>
-          ))
-        ) : (
-          <p>No posts match your search criteria.</p>
-        )}
+        {posts.map(post => (
+          <div key={post.id}>
+            {post.component}
+          </div>
+        ))}
       </div>
     </div>
   );
