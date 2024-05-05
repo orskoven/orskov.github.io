@@ -1,4 +1,4 @@
-import React from 'react';
+
 const Post11 = () => {
   return (
     <section className="section">
