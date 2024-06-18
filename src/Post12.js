@@ -1,7 +1,7 @@
 const Post12 = () => {
   return (
     <section className="section">
-      <h2>Microsoft's AI Strategy: Navigating Challenges and Embracing Innovation</h2>
+      <h2>Heard on Wall Street Journal Podcast Tech News Briefing: Microsoft's AI Strategy: Navigating Challenges and Embracing Innovation</h2>
       <p>Under the leadership of Satya Nadella, Microsoft has embraced a startup-like mentality, fostering innovation and taking on new ideas. This approach has paid off significantly, with the company's share price increasing tenfold since Nadella took the helm. A key aspect of this success has been Microsoft's partnership with OpenAI, leading to groundbreaking developments such as Copilot.</p>
 
       <h3>The Challenge of External Collaboration</h3>
