@@ -10,6 +10,8 @@ import Post7 from './Post7';
 import Post8 from './Post8';
 import Post10 from './Post10';
 import Post11 from './Post11';
+import Post13 from './Post13';
+
 import './App.css';
 
 const App = () => {
@@ -17,6 +19,7 @@ const App = () => {
     <div className="App">
       <Toolbar />
       <main className="content">
+        <Post13 />
         <Post12 />
         <Post11 />
         <Post10 />
