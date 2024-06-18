@@ -4,7 +4,7 @@ import Post1 from './Post1';
 import Post2 from './Post2';
 import Post3 from './Post3';
 import Post4 from './Post4';
-
+import Post12 from './Post12';
 import Post6 from './Post6';
 import Post7 from './Post7';
 import Post8 from './Post8';
@@ -17,6 +17,7 @@ const App = () => {
     <div className="App">
       <Toolbar />
       <main className="content">
+        <Post12 />
         <Post11 />
         <Post10 />
         <Post8 />
