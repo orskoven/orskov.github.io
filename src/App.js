@@ -11,6 +11,7 @@ import Post8 from './Post8';
 import Post10 from './Post10';
 import Post11 from './Post11';
 import Post13 from './Post13';
+import MainTable from './Post20';
 
 import './App.css';
 
@@ -19,6 +20,7 @@ const App = () => {
     <div className="App">
       <Toolbar />
       <main className="content">
+        <MainTable />
         <Post13 />
         <Post12 />
         <Post11 />
