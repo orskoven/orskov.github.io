@@ -1,0 +1,5 @@
+# ./migration/requirements.txt
+pymysql==1.0.2
+pymongo==3.12.1
+py2neo==2021.2.4
+cryptography
