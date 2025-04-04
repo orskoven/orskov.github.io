@@ -2,9 +2,7 @@ ___
 
 ## 📖 CRYPTOLOGY: HASHING 
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/ldC6oRNcznzSkLOl/0.jpg)]([https://youtu.be/phh2ciFK_fI?si=ldC6oRNcznzSkLOl])
-
-
+{% include youtube.html id="GTJkUS3c9bpWKQCo" %}
 
 ### 4 Properties of Hashing 
 
