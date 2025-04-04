@@ -1,28 +1,22 @@
-```md
-# 🛡️ [TITLE]  
-## **[Engaging Subtitle Related to Cybersecurity]**  
+___
 
-![Banner](https://source.unsplash.com/1600x600/?cybersecurity,technology)  
+## 📖 CRYPTOLOGY: HASHING 
 
-🔍 **Overview:**  
-[Provide a concise summary of the blog post, highlighting key takeaways.]  
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/ldC6oRNcznzSkLOl/0.jpg)]([https://youtu.be/phh2ciFK_fI?si=ldC6oRNcznzSkLOl])
 
-📡 **Key Topics Covered:**  
-- [Topic 1: Brief description]  
-- [Topic 2: Brief description]  
-- [Topic 3: Brief description]  
 
----
 
-## **🚀 Prerequisites**  
-✔️ **Technical Knowledge** – [List required skills]  
-✔️ **Tools Needed** – [Mention any software or frameworks]  
-✔️ **Environment Setup** – [Explain setup steps]  
+### 4 Properties of Hashing 
 
-```bash
-# Example: Installing necessary tools
-sudo apt update && sudo apt install -y [tool_name]
-```
+
+**Preimage resistance:**
+
+The hashing algorithm 
+
+  
+
+
+
 
 ---
 
