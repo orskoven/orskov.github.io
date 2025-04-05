@@ -31,9 +31,9 @@ It should be difficult to find two different messages m1 and m2 such that hash(m
 ```
 
 
-**Preimage resistance:**
+*** Attack vectors against hashes (output of the hash functions) count, 
 
-When a hash function is able to generate the same hash output for the same 
-
+| Attack Vector | Likely hood | Impact |  Risk Factor | Condition | 
+| ------------- | ----------- | ------ | ------------ | --------- |    
 
 ---
