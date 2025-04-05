@@ -1,15 +1,14 @@
 ___
 
-## 📖 CRYPTOLOGY: HASHING 
+## 📖 CRYPTOLOGY: HASHING WEAKNESS
 
 Sources:
 <p><a href="https://www.rfc-editor.org/rfc/rfc8554.html">RFC-8554 </a>.</p>
+<a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function"> wikipedia
+
+### 3 Weaknesses of Hashing 
 
 
-### 4 Properties of Hashing 
-
-
-**General** 
 
 The hashing function must be deterministic in it's output given an input of arbritary size. 
 This is the way hashing is used to encode data for more effcient memory utilization.
@@ -27,13 +26,22 @@ Given a hash value h, it should be difficult to find any message m such that h =
 Second pre-image resistance
 Given an input m1, it should be difficult to find a different input m2 such that hash(m1) = hash(m2). This property is sometimes referred to as weak collision resistance. Functions that lack this property are vulnerable to second-preimage attacks.
 Collision resistance
-It should be difficult to find two different messages m1 and m2 such that hash(m1) = hash(m2). Such a pair is called a cryptographic hash collision. This property is sometimes referred to as strong collision resistance. It requires a hash value at least twice as long as that required for pre-image resistance; otherwise, collisions may be found by a birthday attack.[5]
+It should be difficult to find two different messages m1 and m2 such that hash(m1) = hash(m2). Such a pair is called a cryptographic hash collision. This property is sometimes referred to as strong collision resistance. It requires a hash value at least twice as long as that required for pre-image resistance; otherwise, collisions may be found by a birthday attack.
 ```
 
+Attack vectors against hashes (output of the hash functions) count, birthday attacks, preimage-attack, second-preimage attack.
 
-*** Attack vectors against hashes (output of the hash functions) count, 
-
-| Attack Vector | Likely hood | Impact |  Risk Factor | Condition | 
-| ------------- | ----------- | ------ | ------------ | --------- |    
 
 ---
+
+## 📖 SYMMETRIC ENCRYPTION WEAKNESSES
+
+Sources:
+
+Jon, Hacking The art of exploitation
+
+# Block Ciphers
+
+Hiding relationships between plaintext, ciphertext and the key, are methodes performed by the algorithm to ensure the highest level of security of block ciphers. 
+
+
