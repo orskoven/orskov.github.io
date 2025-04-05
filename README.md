@@ -41,11 +41,9 @@ Attack vectors against hashes (output of the hash functions) count, birthday att
 | HASH FUNCTION | SECURITY |
 |-------------- | -------|
 | SHA-1         | NOT SECURE |
-| SHA-2         | NOT SECURE|
-| SHA-3         |  SECURE|
-| Argon2         | NOT SECURE |
-| SHA-2         | NOT SECURE|
-| SHA-2         | NOT SECURE|
+| SHA-2         | HIGH|
+| SHA-3         |  HIGHEST|
+| Argon2         | HIGEHST |
 |-------------- | -------|
 
 
