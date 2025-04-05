@@ -19,8 +19,7 @@ This is useful, but not the primer goal of hashing in cryptography.
 While providing the effectiveness of hashing algorithm's ability to obfuscate information, like password storage in databases, many algorithms have proven to be weak to certain types of attacks.
 
 Therefore, as always, we must carefully research and evalutate any security methodes, before bringing them to production environment.
-https://en.wikipedia.org/wiki/Cryptographic_hash_function
-According to <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_functionw<a> the following conditions are met in a secure hash function and it's corresponding output, such as SHA-3 and Argon2.
+According to <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function"> wikipedia <a> the following conditions are met in a secure hash function and it's corresponding output, such as SHA-3 and Argon2.
 
 ```
 Pre-image resistance
@@ -29,9 +28,6 @@ Second pre-image resistance
 Given an input m1, it should be difficult to find a different input m2 such that hash(m1) = hash(m2). This property is sometimes referred to as weak collision resistance. Functions that lack this property are vulnerable to second-preimage attacks.
 Collision resistance
 It should be difficult to find two different messages m1 and m2 such that hash(m1) = hash(m2). Such a pair is called a cryptographic hash collision. This property is sometimes referred to as strong collision resistance. It requires a hash value at least twice as long as that required for pre-image resistance; otherwise, collisions may be found by a birthday attack.[5]
-
-
-
 ```
 
 
