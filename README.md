@@ -67,6 +67,9 @@ SHA-256 algorithm output birthday attack security level is 2^(256/2) = 2^128 dif
 
 The security level against brithday attacks withing the SHA-1 algorithm output of 160 bits (not secure) is 2^(160/2) = 2^80 different inputs needed to collide with an existing hash output hashed with the same algorithm (SHA-1 of 160 bits).
 
+#### Offline Attacks ####
+
+I
 
 
 
