@@ -63,9 +63,9 @@ Relates to the property, collision resistance. Given the output value, it should
 
 In the case of SHA-256, the security from birthday attacks is given by the 50% of hashing the same output given two distinct hash inputs.
 
-SHA-256 algorithm output birthday attack security level is 2^(256/2) = 2^128 different inputs needed to collide with an existing hashoutput.
+SHA-256 algorithm output birthday attack security level is 2^(256/2) = 2^128 different inputs needed to collide with an existing hash output.
 
-The security level against brithday attacks withing the SHA-1 algorithm output of 160 bits (not secure) is 2^(160/2) = 2^80
+The security level against brithday attacks withing the SHA-1 algorithm output of 160 bits (not secure) is 2^(160/2) = 2^80 different inputs needed to collide with an existing hash output hashed with the same algorithm (SHA-1 of 160 bits).
 
 
 
