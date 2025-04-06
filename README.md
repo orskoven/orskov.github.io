@@ -2,12 +2,13 @@ ___
 
 ## 📖 CRYPTOLOGY: HASHING WEAKNESS
 
+
 Sources:
 <p>  <a href="https://www.rfc-editor.org/rfc/rfc8554.html">RFC-8554 </a> </p>
 
 <p> <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function"> wikipedia. </a></p>
 
-### 3 Weaknesses of Hashing 
+### 3 Weaknesses of Hashing ###
 
 
 
@@ -36,8 +37,8 @@ It should be difficult to find two different messages m1 and m2 such that hash(m
 
 Attack vectors against hashes (output of the hash functions) count, birthday attacks, preimage-attack, second-preimage attack.
 
-# How to achieve industry level security
-
+#### Security / Computational Speed Tradeoff ###
+___
 | HASH FUNCTION | SECURITY | SPEED | 
 |-------------- | -------- | ----- |
 | SHA-1         | NOT SECURE | FAST |
@@ -46,18 +47,17 @@ Attack vectors against hashes (output of the hash functions) count, birthday att
 | Argon2         | HIGEHST | SLOW | 
 | SHA-256         | HIGH | FAST |
 | SHA-512         | VERY HIGH | FAST | 
-| SHA-3         |  HIGHEST| |
-| Argon2         | HIGEHST | |
-|-------------- | -------| |
 
-#### Tools used:
-
-| Name | Description | 
-| ---- | ----------- |
-| hash-identifier | Identifies hash functions |
+#### Tools used: ####
 
 
-#### Birthday attack
+| Name | Description | OS |
+| ---- | ----------- | -- |
+| hash-identifier | Identifies hash function algorithm based on an output/digest | Linux | 
+| <a href="https://gchq.github.io/CyberChef/#input=SGVsbG8gd29ybGQ">Cyber Chef </a> | Online tool for calculating outputs/digests with all major cryptology algorithms | webbrowser |
+
+
+#### Birthday attack ####
 
 Relates to the property, collision resistance. Given the output value, it should be extremely hard to calculate another input value. 
 
