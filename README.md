@@ -55,6 +55,10 @@ ___
 | ---- | ----------- | -- |
 | hash-identifier | Identifies hash function algorithm based on an output/digest | Linux | 
 | <a href="https://gchq.github.io/CyberChef/#input=SGVsbG8gd29ybGQ">Cyber Chef </a> | Online tool for calculating outputs/digests with all major cryptology algorithms | webbrowser |
+| John The Ripper | Password cracking tool | Linux |
+| Hash Cat | | Linux |
+
+
 
 
 #### Birthday attack ####
@@ -67,9 +71,22 @@ SHA-256 algorithm output birthday attack security level is 2^(256/2) = 2^128 dif
 
 The security level against brithday attacks withing the SHA-1 algorithm output of 160 bits (not secure) is 2^(160/2) = 2^80 different inputs needed to collide with an existing hash output hashed with the same algorithm (SHA-1 of 160 bits).
 
-#### Offline Attacks ####
+#### Use Key Derivative Functions ####
 
-I
+Attackers can download a database of hashed password and attempt to crack the password by comparing salts from already known passwords, and thereby obtain access to matching passwords accounts.
+
+Salting can to some extend prevent attackers success by adding an extra entry/element together with the hashed password. 
+
+***Best practice*** is to couple salting with a Key Derivative Function.
+
+***KDF's, take a key, salt, iterations as inputs.***
+The goal is to slow down the process of attempts to bruteforce or use dictionary attakcs to obtain the password or passphrase of a victim.
+
+
+
+
+
+
 
 
 
