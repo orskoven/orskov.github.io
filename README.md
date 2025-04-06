@@ -42,7 +42,7 @@ ___
 | HASH FUNCTION | SECURITY | SPEED | 
 |-------------- | -------- | ----- |
 | SHA-1         | NOT SECURE | FAST |
-| SHA-2         | HIGH| FAST |
+| SHA-2         | HIGH | FAST |
 | SHA-3         |  HIGHEST | FAST |
 | Argon2         | HIGEHST | SLOW | 
 | SHA-256         | HIGH | FAST |
