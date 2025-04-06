@@ -38,13 +38,23 @@ Attack vectors against hashes (output of the hash functions) count, birthday att
 
 # How to achieve industry level security
 
-| HASH FUNCTION | SECURITY |
-|-------------- | -------|
-| SHA-1         | NOT SECURE |
-| SHA-2         | HIGH|
-| SHA-3         |  HIGHEST|
-| Argon2         | HIGEHST |
-|-------------- | -------|
+| HASH FUNCTION | SECURITY | SPEED | 
+|-------------- | -------- | ----- |
+| SHA-1         | NOT SECURE | FAST |
+| SHA-2         | HIGH| FAST |
+| SHA-3         |  HIGHEST | FAST |
+| Argon2         | HIGEHST | SLOW | 
+| SHA-256         | HIGH | FAST |
+| SHA-512         | VERY HIGH | FAST | 
+| SHA-3         |  HIGHEST| |
+| Argon2         | HIGEHST | |
+|-------------- | -------| |
+
+#### Tools used:
+
+| Name | Description | 
+| ---- | ----------- |
+| hash-identifier | Identifies hash functions |
 
 
 
