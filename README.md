@@ -1,3 +1,74 @@
+## KERBOROS: IMPLEMENTING KERBOROS
+
+
+
+#### CLIENT ####
+
+```bash
+
+sudo apt-get update
+sudo apt install krb5-user
+```
+
+**Try Pinging Servers**
+
+```bash
+
+```
+
+**Client is ready to request Ticket Granting Server**
+
+
+#### PROTECTED SERVER ####
+
+```bash
+sudo apt install krb5-config
+```
+
+Edit ***/etc/ssh/sshd_config***
+
+add ***yes*** to following lines:
+
+```txt
+GSSAPIAuthentication yes
+GSSAPICleanupCredentials yes
+```
+
+```bash
+restart!!!
+```
+
+### KERBEROS SERVER ###
+
+- add the ssh server to the kerberos management
+- add principal 
+- creat a key file
+```bash
+ktadd -k /tmp/sshserver.kea.dk.keytab
+host/sshserver.kea.dk
+```
+- copy the keyfile to the ssh server /etc directory
+
+```bash
+```
+
+### CLIENT ###
+
+- get the ticket from the kerberos server
+```bash
+kinit root/admin
+klist -A 
+```
+
+
+### SUMMARY OF SETUP ###
+
+- install both kerberos server packages on kerboros server
+- install kerberos client package
+  - add get a a ticket for the user that will login remotely
+- on ssh server [protected server] 
+  - install krb5 
+
 ___
 
 ## 📖 CRYPTOLOGY: HASHING WEAKNESS
