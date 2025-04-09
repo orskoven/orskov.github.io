@@ -1,6 +1,6 @@
 
 
-## 🚦SYSTEM SECURITY : TRANSFERING A FILE SECURELY WITH SCP AND SFTP🗃️🔐🚦 ##
+## 🚦TRANSFERING A FILE SECURELY WITH SCP AND SFTP🗃️🔐🚦 ##
 
 Transferring files should be confidentially encrypted to secure zero tampering while in transit.
 FTP <a href="https://en.wikipedia.org/wiki/File_Transfer_Protocol">[File Transfer Protoco]</a>  was not concieved with proper encryption, hence SFTP is prefered.
