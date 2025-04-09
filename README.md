@@ -42,7 +42,7 @@ Reciever📬 ubuntu server with ip address: ```172.16.196.133```
 
 Basic knowledge of bash command line scripting and perhaps (networking).
 
-##### NETWORK SETUP #####
+#### !NETWORK SETUP! ####
 
 SIGN IN TO THE SENDING HOST SERVER
 
@@ -77,7 +77,7 @@ su - user1
 ```
 
 ### CODE IMPLEMENTATION ###
-
+___
 
 #### FILE TRASNFER USING SCP(outdated) ####
 
