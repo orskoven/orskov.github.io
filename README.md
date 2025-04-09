@@ -73,6 +73,7 @@ ___
 
 #### FILE TRASNFER USING SCP(outdated) ####
 
+ON SENDING HOST
 ```cd``` into the /home/user1 directory
 create a file using ```nano``` 
 ```bash
@@ -98,11 +99,7 @@ scp file.txt user1@$172.16.196.134:/home/user1
 
 ##### Verify the result on the recieving server #####
 
-SIGN IN TO THE RECIEVING HOST SERVER
-
-[in my🏚️ case]: 
-
-Reciever📬 ubuntu server with ip address: ```172.16.196.133``` 
+ON RECIEVING HOST
 
 ```bash
 su - user1
