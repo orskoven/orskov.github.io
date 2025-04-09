@@ -283,7 +283,7 @@ Salting can to some extend prevent attackers success by adding an extra entry/el
 ***KDF's, take a key, salt, iterations as inputs.***
 The goal is to slow down the process of attempts to bruteforce or use dictionary attakcs to obtain the password or passphrase of a victim.
 
-[![Final video of fixing issues in your code in VS Code](https://img.youtube.com/vi/mUH5ffD5X5Q/maxresdefault.jpg)](https://www.youtube.com/watch?v=mUH5ffD5X5Q)
+[![](https://img.youtube.com/vi/mUH5ffD5X5Q/maxresdefault.jpg)](https://www.youtube.com/watch?v=mUH5ffD5X5Q)
 
 
 
@@ -304,10 +304,7 @@ Jon, Hacking The art of exploitation
 
 Hiding relationships between plaintext, ciphertext and the key, are methodes performed by the algorithm to ensure the highest level of security of block ciphers. 
 
+[![](https://img.youtube.com/vi/BwKS_yTj08M/maxresdefault.jpg)](https://www.youtube.com/watch?v=BwKS_yTj08M)
 
 
 
-
-### Key Derivative Function (KDF)
-
-KDFs are applied to symmetric encryption 
