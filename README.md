@@ -1,7 +1,7 @@
 ## 🚦IMPLEMENTING KERBOROS🚦 ##
 
 #### KERBEROS SERVER 🏰 ####
-```{bash, echo=TRUE}
+```bash
 sudo apt get update
 sudo apt install krb5 admin server krb5 kdc
 ``` 
