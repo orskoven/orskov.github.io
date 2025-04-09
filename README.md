@@ -46,10 +46,14 @@ switch user to "user1"
 ```bash
 su - user1
 ```
+
 ```cd``` into the /home/user1 directory
 create a file using ```nano``` 
 ```bash
 cd /home/user1
+ ```
+create a file using ```nano``` 
+```bash
 nano file.txt
  ```
 add some txt
