@@ -38,26 +38,9 @@ Basic knowledge of bash command line scripting and perhaps (networking).
 
 SIGN IN TO THE SENDING HOST SERVER
 
-[in my🏚️ case]: 
-
-Sender💌 ubuntu server with ip address: ```172.16.196.134``` 
-
-Create a user named "user1"
-```bash
-adduser user1
-```
-switch user to "user1"
-```bash
-su - user1
-```
-
-
+& 
 
 SIGN IN TO THE RECIEVING HOST SERVER
-
-[in my🏚️ case]: 
-
-Reciever📬 ubuntu server with ip address: ```172.16.196.133``` 
 
 Create a user named "user1"
 ```bash
