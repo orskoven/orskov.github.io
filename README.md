@@ -1,3 +1,29 @@
+
+
+## SYSTEM SECURITY : TRANSFERING A FILE SECURELY WITH SCP AND SFTP🗃️🔐 ##
+
+Transferring files should be confidentially encrypted to secure zero tampering while in transit.
+FTP <a href="https://en.wikipedia.org/wiki/File_Transfer_Protocol">[File Transfer Protoco]</a>  was not concieved with proper encryption, hence SFTP is prefered.
+
+In this guide i propose two different commandline linux solutions for encrypted file transfer, SFTP (recommended) and SCP (outdated / not-recommended). 
+
+We are using scp even if it is outdated, for learning purposes.
+
+### TOOLS USED ###
+
+| Command | Description | Link | OS |
+|  ---    | ---      | --      | --   |
+| (not-recommended)  ```scp``` | Uses SSH for secure copy (outdated)| <a href="https://en.wikipedia.org/wiki/Secure_copy_protocol">[Secure Copy Protocol]</a> | linux |
+| ```fstp``` | Uses secure channel (like SSH) for file transfering | <a href="https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol">[SSH File Transfer Protocol]</a> | linux |
+| ```cp``` | copy file protocol | <a href="https://en.wikipedia.org/wiki/Cp_(Unix)">[Copy Protocol]</a> | linux |
+| ```ftp``` |file transfer protocol | <a href="https://en.wikipedia.org/wiki/File_Transfer_Protocol">[File Transfer Protoco]</a> | linux |
+
+
+
+
+
+
+___
 ## 🚦IMPLEMENTING KERBOROS🚦 ##
 
 #### KERBEROS SERVER 🏰 ####
@@ -137,7 +163,7 @@ Attack vectors against hashes (output of the hash functions) count, birthday att
 #### Security / Computational Speed Tradeoff ###
 ___
 | HASH FUNCTION | SECURITY | SPEED | 
-|               |          |       |
+| ------        | --------- |  ----- |
 | SHA 1         | NOT SECURE | FAST |
 | SHA 2         | HIGH | FAST |
 | SHA 3         |  HIGHEST | FAST |
