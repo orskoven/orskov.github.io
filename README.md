@@ -32,14 +32,6 @@ You can find the ip address with ```ifconfig``` look at eth0 and inet.
 or 
 
 use ```ip a``` and look for inet.
-
-[in my🏚️ case]: 
-
-Sender💌 ubuntu server with ip address: ```172.16.196.134``` 
-
-Reciever📬 ubuntu server with ip address: ```172.16.196.133``` 
-
-
 Basic knowledge of bash command line scripting and perhaps (networking).
 
 #### !NETWORK SETUP! ####
