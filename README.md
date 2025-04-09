@@ -80,7 +80,7 @@ scp file.txt user1@<ip address>:/home/user1
 scp file.txt user1@$172.16.196.134:/home/user1
 ```
 
-##### Verify the result on the recieving server #####
+#### Verify the result on the recieving server ####
 
 ON RECIEVING HOST
 
