@@ -1,13 +1,39 @@
-## KERBOROS: IMPLEMENTING KERBOROS
+## 🚦IMPLEMENTING KERBOROS🚦 ##
 
+#### KERBEROS SERVER 🏰 ####
+```{bash, echo=TRUE}
+sudo apt get update
+sudo apt install krb5 admin server krb5 kdc
+``` 
+  post configuration
+  [CRITICAL] 🔐!! PROCTECT THE PASSWORD !!🔐
+```bash
+sudo krb5_newrealm
+```
+  Default kerberos realm [upper case]:
+```txt
+KERBEROS.[YOUR COMPANY NAME].COM
+```
+  Kerberos server [lower case]:
+```txt
+kerberos.[your company name].com
+```
+  Administrative server [lower case]:
+ ```txt
+kerberos.[your company name].com
+```
 
+  edit /etc/krb5.conf file & add the following lines in [domain_realm] section
+```txt
+.kerberos.[your company name].com = KERBEROS.[your company name].com
+kerberos.[your company name].com = KERBEROS.[your company name].com
+```
 
-#### CLIENT ####
+#### CLIENT 🖥️ ####
 
 ```bash
-
-sudo apt-get update
-sudo apt install krb5-user
+sudo apt get update
+sudo apt install krb5 user
 ```
 
 **Try Pinging Servers**
@@ -19,10 +45,10 @@ sudo apt install krb5-user
 **Client is ready to request Ticket Granting Server**
 
 
-#### PROTECTED SERVER ####
+#### PROTECTED SERVER 📭 ####
 
 ```bash
-sudo apt install krb5-config
+sudo apt install krb5 config
 ```
 
 Edit ***/etc/ssh/sshd_config***
@@ -38,36 +64,36 @@ GSSAPICleanupCredentials yes
 restart!!!
 ```
 
-### KERBEROS SERVER ###
+### KERBEROS SERVER 🏰 ###
 
-- add the ssh server to the kerberos management
-- add principal 
-- creat a key file
+  add the ssh server to the kerberos management
+  add principal 
+  creat a key file
 ```bash
-ktadd -k /tmp/sshserver.kea.dk.keytab
+ktadd  k /tmp/sshserver.kea.dk.keytab
 host/sshserver.kea.dk
 ```
-- copy the keyfile to the ssh server /etc directory
+  copy the keyfile to the ssh server /etc directory
 
 ```bash
 ```
 
-### CLIENT ###
+### CLIENT 🖥️ ###
 
-- get the ticket from the kerberos server
+  get the ticket from the kerberos server
 ```bash
 kinit root/admin
-klist -A 
+klist  A 
 ```
 
 
 ### SUMMARY OF SETUP ###
 
-- install both kerberos server packages on kerboros server
-- install kerberos client package
-  - add get a a ticket for the user that will login remotely
-- on ssh server [protected server] 
-  - install krb5 
+  install both kerberos server packages on kerboros server
+  install kerberos client package
+    add get a a ticket for the user that will login remotely
+  on ssh server [protected server] 
+    install krb5 
 
 ___
 
@@ -75,7 +101,7 @@ ___
 
 
 Sources:
-<p>  <a href="https://www.rfc-editor.org/rfc/rfc8554.html">RFC-8554 </a> </p>
+<p>  <a href="https://www.rfc editor.org/rfc/rfc8554.html">RFC 8554 </a> </p>
 
 <p> <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function"> wikipedia. </a></p>
 
@@ -91,40 +117,40 @@ This is useful, but not the primer goal of hashing in cryptography.
 While providing the effectiveness of hashing algorithm's ability to obfuscate information, like password storage in databases, many algorithms have proven to be weak to certain types of attacks.
 
 Therefore, as always, we must carefully research and evalutate any security methodes, before bringing them to production environment.
-According to <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function"> wikipedia <a> the following conditions are met in a secure hash function and it's corresponding output, such as SHA-3 and Argon2.
+According to <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function"> wikipedia <a> the following conditions are met in a secure hash function and it's corresponding output, such as SHA 3 and Argon2.
 
 ```
-Pre-image resistance
-Given a hash value h, it should be difficult to find any message m such that h = hash(m). This concept is related to that of a one-way function. Functions that lack this property are vulnerable to preimage attacks.
+Pre image resistance
+Given a hash value h, it should be difficult to find any message m such that h = hash(m). This concept is related to that of a one way function. Functions that lack this property are vulnerable to preimage attacks.
 ```
 ```
-Second pre-image resistance
-Given an input m1, it should be difficult to find a different input m2 such that hash(m1) = hash(m2). This property is sometimes referred to as weak collision resistance. Functions that lack this property are vulnerable to second-preimage attacks.
+Second pre image resistance
+Given an input m1, it should be difficult to find a different input m2 such that hash(m1) = hash(m2). This property is sometimes referred to as weak collision resistance. Functions that lack this property are vulnerable to second preimage attacks.
 ```
 ```
 Collision resistance
-It should be difficult to find two different messages m1 and m2 such that hash(m1) = hash(m2). Such a pair is called a cryptographic hash collision. This property is sometimes referred to as strong collision resistance. It requires a hash value at least twice as long as that required for pre-image resistance; otherwise, collisions may be found by a birthday attack.
+It should be difficult to find two different messages m1 and m2 such that hash(m1) = hash(m2). Such a pair is called a cryptographic hash collision. This property is sometimes referred to as strong collision resistance. It requires a hash value at least twice as long as that required for pre image resistance; otherwise, collisions may be found by a birthday attack.
 ```
 
-Attack vectors against hashes (output of the hash functions) count, birthday attacks, preimage-attack, second-preimage attack.
+Attack vectors against hashes (output of the hash functions) count, birthday attacks, preimage attack, second preimage attack.
 
 #### Security / Computational Speed Tradeoff ###
 ___
 | HASH FUNCTION | SECURITY | SPEED | 
-|-------------- | -------- | ----- |
-| SHA-1         | NOT SECURE | FAST |
-| SHA-2         | HIGH | FAST |
-| SHA-3         |  HIGHEST | FAST |
+|               |          |       |
+| SHA 1         | NOT SECURE | FAST |
+| SHA 2         | HIGH | FAST |
+| SHA 3         |  HIGHEST | FAST |
 | Argon2         | HIGEHST | SLOW | 
-| SHA-256         | HIGH | FAST |
-| SHA-512         | VERY HIGH | FAST | 
+| SHA 256         | HIGH | FAST |
+| SHA 512         | VERY HIGH | FAST | 
 
 #### Tools used: ####
 
 
 | Name | Description | OS |
-| ---- | ----------- | -- |
-| hash-identifier | Identifies hash function algorithm based on an output/digest | Linux | 
+|      |             |    |
+| hash identifier | Identifies hash function algorithm based on an output/digest | Linux | 
 | <a href="https://gchq.github.io/CyberChef/#input=SGVsbG8gd29ybGQ">Cyber Chef </a> | Online tool for calculating outputs/digests with all major cryptology algorithms | webbrowser |
 | John The Ripper | Password cracking tool | Linux |
 | Hash Cat | | Linux |
@@ -136,11 +162,11 @@ ___
 
 Relates to the property, collision resistance. Given the output value, it should be extremely hard to calculate another input value. 
 
-In the case of SHA-256, the security from birthday attacks is given by the 50% of hashing the same output given two distinct hash inputs.
+In the case of SHA 256, the security from birthday attacks is given by the 50% of hashing the same output given two distinct hash inputs.
 
-SHA-256 algorithm output birthday attack security level is 2^(256/2) = 2^128 different inputs needed to collide with an existing hash output.
+SHA 256 algorithm output birthday attack security level is 2^(256/2) = 2^128 different inputs needed to collide with an existing hash output.
 
-The security level against brithday attacks withing the SHA-1 algorithm output of 160 bits (not secure) is 2^(160/2) = 2^80 different inputs needed to collide with an existing hash output hashed with the same algorithm (SHA-1 of 160 bits).
+The security level against brithday attacks withing the SHA 1 algorithm output of 160 bits (not secure) is 2^(160/2) = 2^80 different inputs needed to collide with an existing hash output hashed with the same algorithm (SHA 1 of 160 bits).
 
 #### Use Key Derivative Functions for password storage ####
 
@@ -162,7 +188,7 @@ The goal is to slow down the process of attempts to bruteforce or use dictionary
 
 
 
----
+   
 
 ## 📖 SYMMETRIC ENCRYPTION WEAKNESSES
 
