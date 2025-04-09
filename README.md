@@ -315,5 +315,4 @@ Hiding relationships between plaintext, ciphertext and the key, are methodes per
 ## 📖 HYBRID ENCRYPTION : TLS HANDSHAKE
 
 
-[![](https://img.youtube.com/vi/9FyBmtdMRiE/maxresdefault.jpg)](https://www.youtube.com/watch?v=9FyBmtdMRiE?si=S1bTZPca46wb0SQq)
-
+[![](https://img.youtube.com/vi/9FyBmtdMRiE&t/maxresdefault.jpg)](https://www.youtube.com/watch?v=9FyBmtdMRiE?&t=266)
