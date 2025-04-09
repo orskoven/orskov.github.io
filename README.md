@@ -19,6 +19,76 @@ We are using scp even if it is outdated, for learning purposes.
 | (not safe)```ftp``` |file transfer protocol | <a href="https://en.wikipedia.org/wiki/File_Transfer_Protocol">[File Transfer Protoco]</a> | linux |
 
 
+### Requirements ###
+
+Two (linux) host machines either being local🏚️ or remote🌥️ (doesn't make a difference).
+
+[i run two seperate hosts on vmware (community/free) locally]
+ 
+**[IPv4](https://en.wikipedia.org/wiki/IPv4) addresses (IP addresses)** of the two machines🖥️ running linux (preferrable ubuntu servers).
+
+You can find the ip address with ```ifconfig``` look at eth0 and inet.
+
+or 
+
+use ```ip a``` and look for inet.
+
+
+
+Basic knowledge of bash command line scripting and perhaps (networking).
+
+### IMPLEMENTATION ###
+Create a user named "user1"
+```bash
+adduser user1
+```
+switch user to "user1"
+```bash
+su - user1
+```
+```cd``` into the /home/user1 directory
+create a file using ```nano``` 
+```bash
+cd /home/user1
+nano file.txt
+ ```
+add some txt
+```txt
+hello world
+```
+
+(not-recommended) use scp to transfer the file.txt
+```bash
+scp file.txt user1@<ip address>:/home/user1
+```
+[in my local setup] i use ipv4 address: ```172.16.196.134``` for the recieving server
+```bash
+scp file.txt user1@$172.16.196.134:/home/user1
+```
+
+Verify the result on the recieving server
+
+```bash
+adduser user1
+```
+```bash
+adduser user1
+```
+```bash
+adduser user1
+```
+```bash
+adduser user1
+```
+```bash
+adduser user1
+```
+```bash
+adduser user1
+```
+
+
+
 
 
 
