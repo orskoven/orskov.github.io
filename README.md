@@ -106,7 +106,36 @@ If the text matches ```hello world```, congratulations you are done✔️.
 
 
 ___
-## 🚦IMPLEMENTING KERBOROS🚦 ##
+
+## Kerboros (protocol) 🦮🦮🦮
+
+Preventing potential threat actors from sniffing any enterprise confidential information can be handle with Kerberos, while maintaining high availability to critical to employee resources.
+
+**[Kerberos](https://web.mit.edu/kerberos/)**  a network authentication protocol [Free], offers usability through it's Ticket Granting System/Ticket based authentication. It uses [symmetric-key cryptography](https://en.wikipedia.org/wiki/Kerberos_(protocol)) and requires a trusted third party and optionally may use public-key cryptography during certain phases of communication.
+
+Uses UDP port 88 as default.
+
+
+### Kerberos from the inside
+
+ Use Case: End user wishes to gain access to a service supporting Kerberos (Kerberized Service).
+
+ 1. End User🖥️ uses **Kerberos client** on their system with *username* & *password*
+ 2. **Kerberos client** creates *authentication request* in clear text to **authentication server**
+ 3. **Authentication server** looks up *user* in its *database* and retrieves user's *password*
+ 4. **Authentication server** sends two messages back to client:
+    1. **TGS session key** randomly generated session key for **Kerberos Client** and **Ticket Granting Server** [Message is encrypted using the clients *password*].
+    2. **Ticket Granting Ticket** includes information about the **Kerberos Client** and a copy of the client's **TGS session key**.
+   Message is encrypted with a key only known to the **ticket-granting server**.
+ 5. **Kerberos Client** recieves the messages:
+    1. Decrypts message using the user's *password*.
+    2. This provides access to the **TGS session key** [without correct password, you wont get further].
+ 6
+
+
+
+
+## 🚦IMPLEMENTING KERBEROS🚦 ##
 
 #### KERBEROS SERVER 🏰 ####
 ```bash
