@@ -33,11 +33,25 @@ or
 
 use ```ip a``` and look for inet.
 
+[in my🏚️ case]: 
+
+Sender💌 ubuntu server with ip address: ```172.16.196.134``` 
+
+Reciever📬 ubuntu server with ip address: ```172.16.196.133``` 
 
 
 Basic knowledge of bash command line scripting and perhaps (networking).
 
 ### IMPLEMENTATION ###
+
+#### INITIAL SETUP ####
+
+SIGN IN TO THE SENDING HOST SERVER
+
+[in my🏚️ case]: 
+
+Sender💌 ubuntu server with ip address: ```172.16.196.134``` 
+
 Create a user named "user1"
 ```bash
 adduser user1
@@ -46,6 +60,25 @@ switch user to "user1"
 ```bash
 su - user1
 ```
+
+
+
+SIGN IN TO THE RECIEVING HOST SERVER
+
+[in my🏚️ case]: 
+
+Reciever📬 ubuntu server with ip address: ```172.16.196.133``` 
+
+Create a user named "user1"
+```bash
+adduser user1
+```
+switch user to "user1"
+```bash
+su - user1
+```
+
+#### FILE TRASNFER USING SCP(outdated) ####
 
 ```cd``` into the /home/user1 directory
 create a file using ```nano``` 
@@ -70,31 +103,29 @@ scp file.txt user1@<ip address>:/home/user1
 scp file.txt user1@$172.16.196.134:/home/user1
 ```
 
-Verify the result on the recieving server
+##### Verify the result on the recieving server #####
+
+SIGN IN TO THE RECIEVING HOST SERVER
+
+[in my🏚️ case]: 
+
+Reciever📬 ubuntu server with ip address: ```172.16.196.133``` 
 
 ```bash
-adduser user1
+su - user1
 ```
 ```bash
-adduser user1
+cd /home/user1/
+```
+check if the file.txt appears
+```bash
+ls 
 ```
 ```bash
-adduser user1
-```
-```bash
-adduser user1
-```
-```bash
-adduser user1
-```
-```bash
-adduser user1
+nano file.txt
 ```
 
-
-
-
-
+If the text matches ```hello world```, congratulations you are done✔️.
 
 
 ___
