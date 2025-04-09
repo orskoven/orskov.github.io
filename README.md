@@ -132,8 +132,7 @@ Uses UDP port 88 as default.
     2. This provides access to the **TGS session key** [without correct password, you wont get further].
  6
 
-
-
+---
 
 ## 🚦IMPLEMENTING KERBEROS🚦 ##
 
