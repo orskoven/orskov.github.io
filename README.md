@@ -199,7 +199,10 @@ klist  A
   on ssh server [protected server] 
     install krb5 
 
+
 ___
+# CRYPTOGRAPHY #
+
 
 ## 📖 CRYPTOLOGY: HASHING WEAKNESS
 
