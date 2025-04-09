@@ -239,11 +239,11 @@ It should be difficult to find two different messages m1 and m2 such that hash(m
 Attack vectors against hashes (output of the hash functions) count, birthday attacks, preimage attack, second preimage attack.
 
 #### Security / Computational Speed Tradeoff ###
-___
-| HASH FUNCTION | SECURITY | SPEED | 
-| ------        | --------- |  ----- |
+
+| HASH FUNCTION | SECURITY | SPEED 
+| ------        | ------- |  ----- |
 | SHA 1         | NOT SECURE | FAST |
-| SHA 2         | HIGH | FAST |
+| SHA 2         | HIGH    | FAST |
 | SHA 3         |  HIGHEST | FAST |
 | Argon2         | HIGEHST | SLOW | 
 | SHA 256         | HIGH | FAST |
