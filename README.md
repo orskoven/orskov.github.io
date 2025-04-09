@@ -309,5 +309,5 @@ Hiding relationships between plaintext, ciphertext and the key, are methodes per
 ## 📖 HYBRID ENCRYPTION : DIFFIE-HELLMANN (MERKLE)
 
 
-[![](https://img.youtube.com/vi/9FyBmtdMRiE&t/maxresdefault.jpg)](https://www.youtube.com/watch?v=9FyBmtdMRiE&t=55s)
+[![](https://img.youtube.com/vi/9FyBmtdMRiE&t/maxresdefault.jpg)](https://www.youtube.com/watch?v=9FyBmtdMRiE&t)
 
