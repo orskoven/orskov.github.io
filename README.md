@@ -16,7 +16,7 @@ We are using scp even if it is outdated, for learning purposes.
 | (not-recommended)  ```scp``` | Uses SSH for secure copy (outdated)| <a href="https://en.wikipedia.org/wiki/Secure_copy_protocol">[Secure Copy Protocol]</a> | linux |
 | ```fstp``` | Uses secure channel (like SSH) for file transfering | <a href="https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol">[SSH File Transfer Protocol]</a> | linux |
 | ```cp``` | copy file protocol | <a href="https://en.wikipedia.org/wiki/Cp_(Unix)">[Copy Protocol]</a> | linux |
-| ```ftp``` |file transfer protocol | <a href="https://en.wikipedia.org/wiki/File_Transfer_Protocol">[File Transfer Protoco]</a> | linux |
+| (not safe)```ftp``` |file transfer protocol | <a href="https://en.wikipedia.org/wiki/File_Transfer_Protocol">[File Transfer Protoco]</a> | linux |
 
 
 
