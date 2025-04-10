@@ -336,7 +336,7 @@ Attack vectors against hashes (output of the hash functions) count, birthday att
 
 
 | Name | Description | OS |
-|      |             |    |
+| ---     | ---            | --   |
 | hash identifier | Identifies hash function algorithm based on an output/digest | Linux | 
 | <a href="https://gchq.github.io/CyberChef/#input=SGVsbG8gd29ybGQ">Cyber Chef </a> | Online tool for calculating outputs/digests with all major cryptology algorithms | webbrowser |
 | John The Ripper | Password cracking tool | Linux |
