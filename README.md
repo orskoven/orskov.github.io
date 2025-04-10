@@ -219,7 +219,7 @@ we will edit /etc/krb5.conf file & add the following lines in [domain_realm] sec
 example.com = kdc.example.com
 ```
 
-**check if we can communicate with the KDC 
+**check if we can communicate with the KDC** 
 
 ```bash
 kinit -p simon@EXAMPLE.COM
