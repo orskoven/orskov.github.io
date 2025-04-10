@@ -136,36 +136,57 @@ Uses UDP port 88 as default.
 
 #### KERBEROS SERVER / Key Distribution Center (kdc) 🏰 ####
 
+
+
 Open the hosts file.
 ```bash
-nano /etc/hosts
+sudo nano /etc/hosts
 ```
-add the following to the ip address list.
+add
 ```txt
-127.0.0.1      kdc.example.com
-``` 
-Then start installing.
+127.0.0.1 kdc.example.com
+```
+to the following to the ip address list so it looks something like this:
+```txt
+127.0.0.1 localhost
+127.0.1.1 ldap
+127.0.0.1 kdc.example.com
+```
+
+save the file and start installing.
 ```bash
 sudo apt get update
-sudo apt install krb5-admin-server krb5 kdc
+sudo apt install krb5-kdc krb5-admin-server
 ``` 
-Configure Package configuration using 
-
-  [CRITICAL] 🔐!! PROCTECT THE PASSWORD !!🔐
+Default Kerberos version 5 realm (realm needs to be capital letters):
+```txt
+EXAMPLE.COM
+``` 
+Kerberos servers for your realm:
+ ```txt
+kdc.example.com
+```
+ Administrative server for your Kerberos realm:      
+ ```txt
+kdc.example.com
+```
+**🛑🔐!! PROCTECT THE MASTER KEY !!🔐🛑**
+to create the example.com realm run the following command
+and you will be prompted to enter a master key, which is very important to store in safe manner.
 ```bash
 sudo krb5_newrealm
 ```
-  Default kerberos realm [upper case]:
-```txt
-KERBEROS.[YOUR COMPANY NAME].COM
+add a user to manage centrally
+```bash
+sudo kadmin.local 
 ```
-  Kerberos server [lower case]:
-```txt
-kerberos.[your company name].com
+add a principal, this is what user and services are called 
+```bash
+addprinc simon 
 ```
-  Administrative server [lower case]:
- ```txt
-kerberos.[your company name].com
+enter a password twice and write 'exit to exit
+```bash
+exit
 ```
 
   edit /etc/krb5.conf file & add the following lines in [domain_realm] section
