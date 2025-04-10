@@ -12,7 +12,7 @@ FTP <a href="https://en.wikipedia.org/wiki/File_Transfer_Protocol">[File Transfe
 In this guide i propose two different commandline linux solutions for encrypted file transfer, SFTP (recommended) and SCP (outdated / not-recommended). 
 
 We are using scp even if it is outdated, for learning purposes.
-
+___
 ### TOOLS USED ###
 
 | Command | Description | Link | OS |
@@ -21,7 +21,7 @@ We are using scp even if it is outdated, for learning purposes.
 | ```fstp``` | Uses secure channel (like SSH) for file transfering | <a href="https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol">[SSH File Transfer Protocol]</a> | linux |
 | ```cp``` | copy file protocol | <a href="https://en.wikipedia.org/wiki/Cp_(Unix)">[Copy Protocol]</a> | linux |
 | (not safe)```ftp``` |file transfer protocol | <a href="https://en.wikipedia.org/wiki/File_Transfer_Protocol">[File Transfer Protoco]</a> | linux |
-
+___
 
 ### Requirements ###
 
@@ -37,14 +37,10 @@ or
 
 use ```ip a``` and look for inet.
 Basic knowledge of bash command line scripting and perhaps (networking).
-
+___
 #### !NETWORK SETUP! ####
 
-SIGN IN TO THE SENDING HOST SERVER
-
-& 
-
-SIGN IN TO THE RECIEVING HOST SERVER
+On both hosts add a user1 or use another user to send recieve files.
 
 Create a user named "user1"
 ```bash
@@ -54,9 +50,9 @@ switch user to "user1"
 ```bash
 su - user1
 ```
-
-### CODE IMPLEMENTATION ###
 ___
+### CODE IMPLEMENTATION ###
+
 
 #### FILE TRASNFER USING SCP(outdated) ####
 
