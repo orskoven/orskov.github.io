@@ -199,14 +199,32 @@ kerberos.[your company name].com = KERBEROS.[your company name].com
 
 ```bash
 sudo apt get update
-sudo apt install krb5 user
+sudo apt install krb5-user krb5-config
+```
+create a file called etc krb5.conf
+```bash
+dpkg-reconfigure krb5-config
+```
+Default Kerberos version 5 realm:
+```txt
+EXAMPLE.COM
+```
+look at the krb5.conf file and configure (based on your setup perhaps automation tools)
+```bash
+cat /etc/krb5.confl
+```
+we will edit /etc/krb5.conf file & add the following lines in [domain_realm] section
+```txt
+.example.com = kdc.example.com
+example.com = kdc.example.com
 ```
 
-**Try Pinging Servers**
+**check if we can communicate with the KDC 
 
 ```bash
-
+kinit -p simon@EXAMPLE.COM
 ```
+
 
 **Client is ready to request Ticket Granting Server**
 
