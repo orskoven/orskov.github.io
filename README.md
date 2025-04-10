@@ -134,12 +134,23 @@ Uses UDP port 88 as default.
 
 ## 🚦IMPLEMENTING KERBEROS🚦 ##
 
-#### KERBEROS SERVER 🏰 ####
+#### KERBEROS SERVER / Key Distribution Center (kdc) 🏰 ####
+
+Open the hosts file.
+```bash
+nano /etc/hosts
+```
+add the following to the ip address list.
+```txt
+127.0.0.1      kdc.example.com
+``` 
+Then start installing.
 ```bash
 sudo apt get update
-sudo apt install krb5 admin server krb5 kdc
+sudo apt install krb5-admin-server krb5 kdc
 ``` 
-  post configuration
+Configure Package configuration using 
+
   [CRITICAL] 🔐!! PROCTECT THE PASSWORD !!🔐
 ```bash
 sudo krb5_newrealm
