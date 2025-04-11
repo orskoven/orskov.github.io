@@ -104,7 +104,6 @@ If the text matches ```hello world```, congratulations you are done✔️.
 ___
 
 ## Kerboros (protocol) 🦮🦮🦮
-npNXXRAvMpU
 [![](https://img.youtube.com/vi/npNXXRAvMpU/maxresdefault.jpg)](https://www.youtube.com/watch?v=npNXXRAvMpU&t=524s)
 AUTHENTICATION SYSTEM | CENTRALIZED MANAGEMENT | SINGLE SIGN ON (SSO)
 
