@@ -191,8 +191,8 @@ exit
 
   edit /etc/krb5.conf file & add the following lines in [domain_realm] section
 ```txt
-.kerberos.[your company name].com = KERBEROS.[your company name].com
-kerberos.[your company name].com = KERBEROS.[your company name].com
+.kdc.com = kdc.example.com
+kdc.com = kdc.example.com
 ```
 
 #### CLIENT 🖥️ ####
