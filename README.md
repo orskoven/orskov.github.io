@@ -224,11 +224,39 @@ example.com = kdc.example.com
 ```bash
 kinit -p simon@EXAMPLE.COM
 ```
-
-
+list the details of the ticket with
+```bash
+klist
+```
 **Client is ready to request Ticket Granting Server**
 
+## Configuring the system access 
+We need to configure access on the system that corresponds to the Kerberos Principle.
+Add a user simon
+```bash
+adduser simon
+```
+in order to let someone log in, the system needs an account for them to use.
+Kerberos should handle the authentication/password and the activation of the user's account on that machine. The kerberos user will map onto the local user when they log in.
+[PAM](https://en.wikipedia.org/wiki/Linux_PAM) support is added for our Kerberized user:
+```bash
+sudo apt install libpam-krb5.
+```
+see and control the inclusion of Kerboros in the PAM files:
+```bash
+grep krb /etc/pam.d/*
+```
+**Log in as Kerberized user**
 
+Sign in again to the host/virtual machine, switch to a new console.
+After signing in use:
+```bash
+klist
+```
+verify you get information about the Kerberos Ticket:
+```bash
+
+```
 #### PROTECTED SERVER 📭 ####
 
 ```bash
