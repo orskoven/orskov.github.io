@@ -134,7 +134,7 @@ Uses UDP port 88 as default.
 
 ## 🚦IMPLEMENTING KERBEROS🚦 ##
 
-#### KERBEROS SERVER / Key Distribution Center (kdc) 🏰 ####
+#### KERBEROS SERVER / Key Distribution Center (KDC) 🏰 ####
 
 
 
@@ -219,7 +219,7 @@ we will edit /etc/krb5.conf file & add the following lines in [domain_realm] sec
 example.com = kdc.example.com
 ```
 
-**check if we can communicate with the KDC** 
+**check if we can communicate with the Kerberos server /KDC** 
 
 ```bash
 kinit -p simon@EXAMPLE.COM
