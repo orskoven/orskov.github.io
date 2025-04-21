@@ -11,14 +11,18 @@ Services used for large internal networks for file sharing, printing and more:
 Risk: 
 Used to enumerate system details to cause complete network compromise.
 
-| Keyword | Definition | Technical 
+| Keyword | Definition | Technical |
 | --- | -- | -- |
 Microsoft RPC |   | 
 NetBios |  |
-CIFS | |
+CIFS ||
+
+___
+
+
 
 | service | port | protocol | 
-| --- | --- | --- | 
+| -- | -- | -- | 
 | loc-srv | 135 | tcp | 
 | loc-srvi 135 | udp | 
 | netbios-ns | 137 | udp | 
