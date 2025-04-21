@@ -1,6 +1,31 @@
 # SIMON'S ✍️ CYBER SECURITY NOTES
 
+___
 
+## Windows Network Services ##
+
+Source of truth : Network Security Assesment 
+
+Services used for large internal networks for file sharing, printing and more:
+
+Risk: 
+Used to enumerate system details to cause complete network compromise.
+
+| Keyword | Definition | Technical 
+| --- | -- | -- |
+Microsoft RPC |   | 
+NetBios |  |
+CIFS | |
+
+| service | port | protocol | 
+| --- | --- | --- | 
+| loc-srv | 135 | tcp | 
+| loc-srvi 135 | udp | 
+| netbios-ns | 137 | udp | 
+| netbios-dgm | 138 | udp |
+| netbios-ssn | 139 | tcp | 
+| microsoft-ds | 445 | tcp | 
+| microsoft-ds | 445 | udp | 
 
 
 
