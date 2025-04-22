@@ -1,5 +1,129 @@
 # SIMON'S ✍️ CYBER SECURITY NOTES
-💲
+
+
+___
+## Ethical Hacking : Wireless Networks ##
+
+### Wireless Testing ###
+
+- Use Virutal Machines
+- Kali Linux
+- Computer / Networking basics
+- USB wireless adapters
+- Wifi Pinapple
+
+- Commercial and open-source software
+- 🔻 Testing sites can be target for hackers
+-  Conflicting software
+
+- 🔺 Powerful methodes
+- 🔺 Due diligence must be used for downloading software
+
+  # Wireless Setup #
+
+  - Router or internet gateway
+  - Wired ISP
+
+
+  ## Wireless Speed ##
+
+  Cat 6 10Gbps
+  802.11c 5gHz 2Gbps
+
+   ### 2.4GHz
+  Channel 2412 Channel 2 2417 ----- > Channel 14 2472
+
+  ### Wireless Infrastructure ###
+
+  Public Internet <--> Acess Point <--> Host 
+
+SSID---name
+BSSID---MAC address 
+
+Don't hide SSID 
+
+ ### Wireless Security ###
+Network key 
+Internet login
+MAC filtering  -> can be circumvented 
+Encryption -- WEP, WPA and WPA2
+
+Connection --- WPS 
+
+### MAC filtering ###
+
+On router: 
+Black list or White list 
+
+___
+
+### Wireless Network ###
+
+Uses antennas for sending recieving packets 
+
+cycles through channels 
+
+disconnects internet 
+
+Necessary for virtulized networks 
+
+Converts electrical network and energy to radio waves 
+Antenna are promoted based on transmit power 
+
+Performance dBi benchmark 
+
+Power is measure in dBm (related to miliwatts) 
+positive number reprents better performance 
+negtive is bad performanace
+
+dBm can be negative
+
+
+unidirectional antenna 
+
+### Yagi antenna ### fishbone 
+
+key to performance is phases of elements that radiates.
+High level of unidirectional range.
+
+### Parabolic antennas ### 
+
+Higher dish higher gains achieved used on rural communication. 
+
+
+## Open Wireless Network ##
+
+Unautherized use of bandwith/data.
+Launchpad for malicious internet attacks.
+Launchpad for internal attacks. (MitM)
+
+## Wireless Security ##
+🔺Not Secure
+Wired Equivalent Privacy (WEP) 802.11b
+🔺
+Defeat eavesdropping 
+Ensure integrity
+
+Lightweight Solution for Security -> minimal performance issue
+
+Could not distribute keys at scale
+Weak encryption
+Key recovering through sniffing
+Random number of generators not good enough
+
+
+## WPA ###
+Uses TKIP (changes key for every frame transmitted)
+Supports AES 
+Integrity checks
+longer keys 
+
+WPA2-- futher security improvments 
+  - WPA2 Personal (shared keys)
+  - WPA Enterprise (RADIUS) 
+
+
+
 ___
 
 ## 🕸️Virutal Private Networking (VPN)🕸️ ## 
