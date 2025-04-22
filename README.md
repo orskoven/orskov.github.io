@@ -15,8 +15,65 @@ This allows for making segements private to other segements in the network.
 This can be implemented with weak or no security feautures 
 
 [VPN](https://en.wikipedia.org/wiki/Virtual_private_network)
+[Learning VPN](https://www.linkedin.com/learning/learning-vpn/how-vpn-works?resume=false&u=36836804)
+___
 
-VPNs are used for accessing information on a secure network connection 
+### Routing ###
+
+Routes determines how packets flow to different networks.
+A **Layer 3 VPN** creates a new route for a virtual network adapter
+
+### Bridging ###
+
+**Layer 2** VPNs behave like devices that are on the same physical network.
+
+### Encapsulation ###
+
+Information is wrapped inside of packets that can travel between networks.
+Local traffic is encapsulated to travel between client and server.
+
+___
+
+## Layer 2 (data link layer) ##
+
+Transmission of frames between devices
+Bridged VPN 
+Layer 2 virtual devices are called TAP (tap0,tap1) 
+
+
+## Layer 3 (network layer) ##
+
+Transmission of packets (IP)
+Routed VPN
+Layer 3 virutal devices are called TUN (tun0, tun1)
+
+## PPP (Point-to-Point Protocol) (Layer 2) ##
+
+Sets up a connection between two hosts 
+Creates a connection between two hosts with a virtual network adapter at each end
+ISP used to crete a network link over media-like phones lines to carry ehternet frames between IP networks
+Used in DSL Modems and most VPN protocols
+
+## Key Exchange 
+
+VPN peers exchange encryption information to establish a secure connection
+Some protocols rely on a PSK (pre-shared key) and others agree on what security keys to use when a connection is started. 
+
+
+
+For practical implementation show casing:
+
+Two Virtual Machines: 
+
+One is publicly accesible and other is not.
+A webpage that is not directly accesible from the public internet will be accessed through a VPN. 
+
+___
+
+
+
+
+
 
 
 ___
