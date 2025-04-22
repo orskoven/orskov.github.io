@@ -87,13 +87,16 @@ ___
 
 !!🔺 Considered obsolete because most of the ciphers it uses are easily broken🔺!!
 
+🔺Top out on 128 bit encryption🔺
+
+🔺Uses **TCP port 1723** to set up a **GRE tunnel**, through which a PPP connection **(Protocol 47)** transfers encrypted packets.🔺
+
+
+___
 
 
 
-
-
-
-For practical implementation show casing:
+🚦For practical implementation show casing🚦
 
 Two Virtual Machines: 
 
