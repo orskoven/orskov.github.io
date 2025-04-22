@@ -269,21 +269,40 @@ python3 -m virtualenv --python="$(command -v python3)" .env &&
   python3 -m pip install -U pip virtualenv &&
   python3 -m pip install -r requirements.txt
 ```
+open config.cfg file
+```bash
+nano config.cfg
+```
+cofigure the following usernames to be created:
+```txt
+users:umbers should be escaped in d>
+  - phone
+  - laptop
+  - desktop
+```
+To match: 
+```txt
+users:umbers should be escaped in d>
+  - ssorskov
+```
+save and exit (control + x)
+
+run the last step with the algo command:
 
 ```bash
-wget https://github.com/trailofbits/algo/archive/master.zip
+./algo
 ```
-
+answer the question with pressing ```12``` for installing to existing ubuntu server:
+```12```
+Then press enter on the rest until:
 ```bash
-wget https://github.com/trailofbits/algo/archive/master.zip
+Enter the public IP address or domain name of your server: (IMPORTANT! This is used to verify the certificate)
+[localhost]:
 ```
 
-```bash
-wget https://github.com/trailofbits/algo/archive/master.zip
-```
+enter the public address of your algo cloud server.
 
 
-```cd```
 ```cd```
 ```cd```
 
