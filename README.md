@@ -10,7 +10,7 @@ A Virtual Private Network (VPN) can be setup to securely connect and access reso
 
 Encryption is vital to the security of the VPN when the VPN is accessed through insecure communication lines (the public internet).
 
-Provider-provisioned VPN is isolating the provider own network infrastruture in virtual segments. 
+Provider-provisioned VPN is isolating the provider's own network infrastruture in virtual segments. 
 This allows for making segements private to other segements in the network. 
 This can be implemented with weak or no security feautures 
 
