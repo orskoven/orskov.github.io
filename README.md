@@ -149,6 +149,56 @@ ___
 
 Open-source software and protocol.
 
+Uses OpenSSL library to handle key exchange via **SSL/TLS** (offers 256 bit encryption) 
+
+Creates a Layer 2 or Layer 3 connection. 
+
+Via custom security protocol based on TLS. 
+
+Uses TCP port 1194 by default, can be changed to other UDP/TCP ports. 
+
+Works well through NAT and proxies.
+
+✔️✔️ Widely recommended
+
+
+___
+### Other Protocols ###
+
+## [Secure Socket Tunneling Protocol](https://en.wikipedia.org/wiki/Secure_Socket_Tunneling_Protocol) ##
+
+Creates a secure channel using **SSL/TLS**
+
+Uses **TCP port 443**
+
+Fairly wide support 
+
+Creates a client-network connection
+
+## [WireGuard](https://www.wireguard.com) ##
+
+Software and protocol (offers high security) 
+
+Out-of-band key exchange (keys are assigned to peers in configuration)
+
+Creates Layer 2 and Layer 3 connections over IP
+
+Packets are encrypted with the public key of the destination host
+
+Open source, with a goal of easy auditability
+
+Not considered finalized (yet) [WireGuard.com](https://www.wireguard.com)
+
+
+
+
+
+
+
+
+
+
+
 
 
 
