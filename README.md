@@ -71,7 +71,7 @@ New session keys are generated for each session used to encrypt and decrypt the 
 
 Prevents malicious reuse of keys for future sessions. (Go to the hybrid encryption section)
 
-🔺!! RISK : be sure to use secure and not broken protocols !!🔺
+🔺 RISK : be sure to use secure and not broken protocols 🔺
 
 ## Ports ##
 
@@ -85,7 +85,7 @@ ___
 
 ## 🔺PPTP (Point-to-Point Tunneling Protocol🔺 ###
 
-!!🔺 Considered obsolete because most of the ciphers it uses are easily broken🔺!!
+🔺 Considered obsolete because most of the ciphers it uses are easily broken🔺
 
 🔺Top out on 128 bit encryption🔺
 
