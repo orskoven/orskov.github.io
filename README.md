@@ -22,9 +22,9 @@ ___
 
 
 | service | port | protocol | 
-| -- | -- | -- | 
+| --- | -- | --- | 
 | loc-srv | 135 | tcp | 
-| loc-srvi 135 | udp | 
+| loc-srvi | 135 | udp | 
 | netbios-ns | 137 | udp | 
 | netbios-dgm | 138 | udp |
 | netbios-ssn | 139 | tcp | 
