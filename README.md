@@ -114,6 +114,44 @@ Only carries IP traffic
 
 IPsec uses IKE (Internet Key Exchange) via UDP port 500 to negotiate a Security Association (SA) 
 
+UDP port 4500 for NAT traversal mode
+
+SA sets up ESP (Encapsulating Security Payload; protocol 50) to encrypt packets.
+
+L2TP tunnel is established through TCP port 1701, to pass traffic protected with ESP
+
+PPP establishes virtual network interface with IP addresses at each end.
+
+👱‍♀️
+Uses user authentication and machine-level shared secret or certificate
+may need group name based on system admin setup.
+
+✔️ Good choice for security and is widely available
+
+Useful if you need to transfer Layer 2 data instead of just Layer 3 data.
+
+# IKEv2 #
+Internet Key Exchange, version 2
+
+IKEv2 manages the SA for an IPsec connection
+
+Uses UDP port 500 and UDP port 4500 for NAT traversal (supports 256 bit encryption) 
+
+IPsec provides Layer 3 connectivity (IP)
+
+MOBIKE feature provides quick reconnection - great for mobile devices📴
+
+Uses user authentication, shared secret or certificate and a remote ID
+
+___
+
+## OpenVPN ##
+
+Open-source software and protocol.
+
+
+
+
 
 
 
