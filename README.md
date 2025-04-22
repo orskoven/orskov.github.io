@@ -189,24 +189,44 @@ Open source, with a goal of easy auditability
 
 Not considered finalized (yet) [WireGuard.com](https://www.wireguard.com)
 
+## [SoftEther](https://en.wikipedia.org/wiki/SoftEther_VPN) ##
 
+Software Ethernet
 
+Offers IPsec, SSTP, and other protocols, in addition to its own protocol
 
+Sends traffic through HTTPS
 
+Offers Layer 2 and Layer 3 connections
 
+Creates virtualized Ethernet devices
 
-
-
-
-
-
-
-
-
+Open source [softether.com](https://www.softether.org)
 
 
 ___
 
+## [SSH](https://en.wikipedia.org/wiki/Secure_Shell) FORWARDING ##
+
+Secure Shell 
+
+Create a connection to an SSH server for port forwarding
+
+Uses TCP port 22 but can use other ports 
+
+Can forward a local port to a remote port (connect localhost:8080 to server:80)
+
+Some implementations can open a local port and act as a SOCKS proxy sending traffic to the server
+
+
+SSH doesnt create network interfaces 
+
+Very useful for certain cases 
+
+Widespored and difficult to block
+
+
+___
 
 
 🚦For practical implementation show casing🚦
@@ -217,6 +237,55 @@ One is publicly accesible and other is not.
 A webpage that is not directly accesible from the public internet will be accessed through a VPN. 
 
 ___
+
+The guide will be following:
+[Algo VPN](https://github.com/trailofbits/algo)
+
+For this tutorial i will be using a Free Version of [Cloud Shell](https://cloud.google.com/shell/docs) from GCP (google cloud platform).
+
+Source of truth [Algo Cloud Deployment Guide](https://github.com/trailofbits/algo?tab=readme-ov-file#deploy-the-algo-server)
+On cloudshell perform in the Command Line Interface:
+
+download algo zip file
+```bash
+wget https://github.com/trailofbits/algo/archive/master.zip
+```
+unpack using 
+```bash
+unzip master.zip
+```
+move into directory
+```bash
+cd algo-master
+```
+
+```bash
+sudo apt install -y --no-install-recommends python3-virtualenv file lookup
+```
+
+```bash
+python3 -m virtualenv --python="$(command -v python3)" .env &&
+  source .env/bin/activate &&
+  python3 -m pip install -U pip virtualenv &&
+  python3 -m pip install -r requirements.txt
+```
+
+```bash
+wget https://github.com/trailofbits/algo/archive/master.zip
+```
+
+```bash
+wget https://github.com/trailofbits/algo/archive/master.zip
+```
+
+```bash
+wget https://github.com/trailofbits/algo/archive/master.zip
+```
+
+
+```cd```
+```cd```
+```cd```
 
 
 
