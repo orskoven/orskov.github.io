@@ -2,6 +2,29 @@
 
 ___
 
+## Virutal Private Networking (VPN) ##
+
+Devices are typically protected on a local network, because of local ip address space not being defualt routable across the internet.
+
+A Virtual Private Network (VPN) can be setup to securely connect and access resources on a reomte local ip address space and make resources securely availbale through network tunneling protocols, not requiring connected hosts to be on the same local ip network.
+
+Encryption is vital to the security of the VPN when the VPN is accessed through insecure communication lines (the public internet).
+
+Provider-provisioned VPN is isolating the provider own network infrastruture in virtual segments. 
+This allows for making segements private to other segements in the network. 
+This can be implemented with weak or no security feautures 
+
+[VPN]([https://en.wikipedia.org/wiki/IPv4](https://en.wikipedia.org/wiki/Virtual_private_network))
+
+VPNs are used for accessing information on a secure network connection 
+
+
+___
+
+Setup a connection that allows for connection acroos the internet.
+
+___
+
 ## Windows Network Services ##
 
 Source of truth : Network Security Assesment 
