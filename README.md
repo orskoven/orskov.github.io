@@ -91,6 +91,31 @@ ___
 
 🔺Uses **TCP port 1723** to set up a **GRE tunnel**, through which a PPP connection **(Protocol 47)** transfers encrypted packets.🔺
 
+🔺Most routers pass PPTP traffic without a problem. 🔺
+
+___
+
+## L2TP/IPsec ##
+
+Layer 2 Tunneling Protocol over IPsec (IP security)
+
+IPsec creates a secure channel through which an L2TP tunnel transfers data.
+
+# [L2TP](https://en.wikipedia.org/wiki/Layer_2_Tunneling_Protocol) #
+Encapsulates Layer 2 traffic to travel over Layer 3 (IP) (normally not possible)
+Allows Ethernet Bridging over the internet
+No security
+
+# [IPsec](https://en.wikipedia.org/wiki/IPsec) #
+Creates a secure connection
+Only carries IP traffic
+
+## Making an [L2TP](https://en.wikipedia.org/wiki/Layer_2_Tunneling_Protocol)/[IPsec](https://en.wikipedia.org/wiki/IPsec) Connection ##
+
+IPsec uses IKE (Internet Key Exchange) via UDP port 500 to negotiate a Security Association (SA) 
+
+
+
 
 ___
 
