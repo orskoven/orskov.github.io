@@ -14,7 +14,7 @@ Provider-provisioned VPN is isolating the provider own network infrastruture in 
 This allows for making segements private to other segements in the network. 
 This can be implemented with weak or no security feautures 
 
-[VPN]([https://en.wikipedia.org/wiki/IPv4](https://en.wikipedia.org/wiki/Virtual_private_network))
+[VPN](https://en.wikipedia.org/wiki/Virtual_private_network)
 
 VPNs are used for accessing information on a secure network connection 
 
