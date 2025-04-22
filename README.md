@@ -54,10 +54,42 @@ Creates a connection between two hosts with a virtual network adapter at each en
 ISP used to crete a network link over media-like phones lines to carry ehternet frames between IP networks
 Used in DSL Modems and most VPN protocols
 
-## Key Exchange 
+## Key Exchange ##
 
-VPN peers exchange encryption information to establish a secure connection
+VPN peers exchange encryption information to establish a secure connection.
+
 Some protocols rely on a PSK (pre-shared key) and others agree on what security keys to use when a connection is started. 
+
+Negotiate back and forth to agress on a key exchange before setting up a secure channel.
+
+
+## Forward Security ##
+
+Also called "Perfect Forward Security".
+
+New session keys are generated for each session used to encrypt and decrypt the data.
+
+Prevents malicious reuse of keys for future sessions. (Go to the hybrid encryption section)
+
+🔺!! RISK : be sure to use secure and not broken protocols !!🔺
+
+## Ports ##
+
+Ports used by VPN protocls are the ports on the server.
+
+Clients choose a local port to connect from.
+
+Ports need to be opened on the server's firewall and on the any firewalls between it and the internet. 
+
+___
+
+## 🔺PPTP (Point-to-Point Tunneling Protocol🔺 ###
+
+!!🔺 Considered obsolete because most of the ciphers it uses are easily broken🔺!!
+
+
+
+
 
 
 
