@@ -1,5 +1,5 @@
 # SIMON'S ✍️ CYBER SECURITY NOTES
-
+💲
 ___
 
 ## 🕸️Virutal Private Networking (VPN)🕸️ ## 
@@ -139,7 +139,7 @@ Uses UDP port 500 and UDP port 4500 for NAT traversal (supports 256 bit encrypti
 
 IPsec provides Layer 3 connectivity (IP)
 
-MOBIKE feature provides quick reconnection - great for mobile devices📴
+💲MOBIKE feature provides quick reconnection - great for mobile devices📴💲
 
 Uses user authentication, shared secret or certificate and a remote ID
 
