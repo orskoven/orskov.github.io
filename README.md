@@ -2,7 +2,7 @@
 
 ___
 
-## Virutal Private Networking (VPN) ##
+## 🕸️Virutal Private Networking (VPN)🕸️ ## 
 
 Devices are typically protected on a local network, because of local ip address space not being defualt routable across the internet.
 
@@ -34,14 +34,14 @@ Local traffic is encapsulated to travel between client and server.
 
 ___
 
-## Layer 2 (data link layer) ##
+## Layer 2 (data link layer)💌 ##
 
 Transmission of frames between devices
 Bridged VPN 
 Layer 2 virtual devices are called TAP (tap0,tap1) 
 
 
-## Layer 3 (network layer) ##
+## Layer 3 (network layer)🛤️ ##
 
 Transmission of packets (IP)
 Routed VPN
@@ -54,7 +54,7 @@ Creates a connection between two hosts with a virtual network adapter at each en
 ISP used to crete a network link over media-like phones lines to carry ehternet frames between IP networks
 Used in DSL Modems and most VPN protocols
 
-## Key Exchange ##
+## Key Exchange🗝️<->🗝️ ##
 
 VPN peers exchange encryption information to establish a secure connection.
 
@@ -63,7 +63,7 @@ Some protocols rely on a PSK (pre-shared key) and others agree on what security 
 Negotiate back and forth to agress on a key exchange before setting up a secure channel.
 
 
-## Forward Security ##
+## Forward Security🔐 ##
 
 Also called "Perfect Forward Security".
 
@@ -73,7 +73,7 @@ Prevents malicious reuse of keys for future sessions. (Go to the hybrid encrypti
 
 🔺 RISK : be sure to use secure and not broken protocols 🔺
 
-## Ports ##
+## Ports🛳️ ##
 
 Ports used by VPN protocls are the ports on the server.
 
