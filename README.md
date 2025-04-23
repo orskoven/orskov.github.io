@@ -379,7 +379,6 @@ ___
 The guide will be following:
 [Algo VPN](https://github.com/trailofbits/algo)
 
-For this tutorial i will be using a Free Version of [Cloud Shell](https://cloud.google.com/shell/docs) from GCP (google cloud platform).
 
 Source of truth [Algo Cloud Deployment Guide](https://github.com/trailofbits/algo?tab=readme-ov-file#deploy-the-algo-server)
 On cloudshell perform in the Command Line Interface:
@@ -447,7 +446,11 @@ enter the public address of your algo cloud server.
 
 
 
+___
 
+Algo allows different clients to connect. 
+
+iOS devices.
 
 
 ___
