@@ -2,127 +2,141 @@
 
 
 ___
-## Ethical Hacking : Wireless Networks ##
 
-### Wireless Testing ###
+# Ethical Hacking: Wireless Networks
 
-- Use Virutal Machines
-- Kali Linux
-- Computer / Networking basics
-- USB wireless adapters
-- Wifi Pinapple
+## Wireless Testing
 
-- Commercial and open-source software
-- 🔻 Testing sites can be target for hackers
--  Conflicting software
+- ✅ Use Virtual Machines (VMs) for safer testing environments
+- ✅ Kali Linux – preferred OS for penetration testing
+- ✅ Understand computer and networking basics
+- ✅ USB wireless adapters – monitor/injection capable
+- ✅ WiFi Pineapple – specialized penetration device
 
-- 🔺 Powerful methodes
-- 🔺 Due diligence must be used for downloading software
+**Tools & Considerations:**
 
-  # Wireless Setup #
+- 🛠️ Use both commercial and open-source software
+- 🔻 Testing sites can be targets for hackers
+- ⚠️ Watch for conflicting software that disrupts testing
+- 🔺 Powerful methods available – use responsibly
+- 🔺 Practice due diligence when downloading any tools
 
-  - Router or internet gateway
-  - Wired ISP
+---
 
+## Wireless Setup
 
-  ## Wireless Speed ##
+- 🌐 Router or Internet Gateway required
+- 🔌 Wired ISP connection recommended for stability
 
-  Cat 6 10Gbps
-  802.11c 5gHz 2Gbps
+---
 
-   ### 2.4GHz
-  Channel 2412 Channel 2 2417 ----- > Channel 14 2472
+## Wireless Speed
 
-  ### Wireless Infrastructure ###
+| Standard     | Frequency | Max Speed    |
+|--------------|-----------|--------------|
+| Cat 6 Cable  | Wired     | 10 Gbps      |
+| 802.11ac     | 5 GHz     | Up to 2 Gbps |
 
-  Public Internet <--> Acess Point <--> Host 
+### 2.4 GHz Channels
 
-SSID---name
-BSSID---MAC address 
+- Channel 1: 2412 MHz  
+- Channel 2: 2417 MHz  
+- ...  
+- Channel 14: 2472 MHz
 
-Don't hide SSID 
+---
 
- ### Wireless Security ###
-Network key 
-Internet login
-MAC filtering  -> can be circumvented 
-Encryption -- WEP, WPA and WPA2
+## Wireless Infrastructure
 
-Connection --- WPS 
+```
+Public Internet <--> Access Point <--> Host
+```
 
-### MAC filtering ###
+- **SSID** – Network name (should not be hidden)
+- **BSSID** – MAC address of the access point
 
-On router: 
-Black list or White list 
+---
 
-___
+## Wireless Security
 
-### Wireless Network ###
+- 🔑 Network Key – Required for access
+- 🔒 Internet Login – Authentication portal
+- 🚫 MAC Filtering – Can be circumvented
+- 🔐 Encryption Standards:
+  - WEP (Weak)
+  - WPA (Improved)
+  - WPA2 (Strongest widely supported)
+- 📶 WPS – Simplifies connection, but can be vulnerable
 
-Uses antennas for sending recieving packets 
+---
 
-cycles through channels 
+## MAC Filtering
 
-disconnects internet 
+**On Router Configuration:**
 
-Necessary for virtulized networks 
+- ✅ Whitelist: Only allow specified MACs
+- 🚫 Blacklist: Block specific MAC addresses
 
-Converts electrical network and energy to radio waves 
-Antenna are promoted based on transmit power 
+> ⚠️ Not a robust security method on its own
 
-Performance dBi benchmark 
+---
 
-Power is measure in dBm (related to miliwatts) 
-positive number reprents better performance 
-negtive is bad performanace
+## Wireless Network Basics
 
-dBm can be negative
+- 📡 Uses antennas to send/receive packets
+- 🔁 Cycles through channels for optimal performance
+- ❌ Can cause disconnections
+- 🖥️ Essential for virtualized networks
+- 🔄 Converts electrical signals to radio waves
+- 📈 Antenna performance rated by **dBi**
+  - Positive: Strong signal
+  - Negative: Weak signal (e.g., -90 dBi is poor)
+- ⚡ Power measured in **dBm**
 
+### Antenna Types
 
-unidirectional antenna 
+#### Yagi Antenna (Fishbone Style)
 
-### Yagi antenna ### fishbone 
+- 🎯 High unidirectional range
+- 🔑 Performance depends on phase alignment of elements
 
-key to performance is phases of elements that radiates.
-High level of unidirectional range.
+#### Parabolic Antenna
 
-### Parabolic antennas ### 
+- 📡 Large dish = higher gain
+- 🏞️ Ideal for rural or long-distance communication
 
-Higher dish higher gains achieved used on rural communication. 
+---
 
+## Open Wireless Networks
 
-## Open Wireless Network ##
+- 🚨 Unauthorized bandwidth/data usage
+- 🛡️ Launchpad for malicious internet attacks
+- 🧑‍💻 Can be exploited for internal attacks (e.g., MitM)
 
-Unautherized use of bandwith/data.
-Launchpad for malicious internet attacks.
-Launchpad for internal attacks. (MitM)
+---
 
-## Wireless Security ##
-🔺Not Secure
-Wired Equivalent Privacy (WEP) 802.11b
-🔺
-Defeat eavesdropping 
-Ensure integrity
+## Wireless Security Protocols
 
-Lightweight Solution for Security -> minimal performance issue
+### WEP – Wired Equivalent Privacy
 
-Could not distribute keys at scale
-Weak encryption
-Key recovering through sniffing
-Random number of generators not good enough
+- ❌ Not secure
+- 🧩 Designed to prevent eavesdropping & ensure integrity
+- ✅ Lightweight – low performance impact
+- ❌ Weak encryption and key management
+- ❌ Vulnerable to sniffing and RNG flaws
 
+### WPA – Wi-Fi Protected Access
 
-## WPA ###
-Uses TKIP (changes key for every frame transmitted)
-Supports AES 
-Integrity checks
-longer keys 
+- 🔄 Uses TKIP – rotates key for each frame
+- 🔐 Supports AES encryption
+- ✅ Includes integrity checks and longer keys
 
-WPA2-- futher security improvments 
-  - WPA2 Personal (shared keys)
-  - WPA Enterprise (RADIUS) 
+#### WPA2 – Enhanced WPA
 
+- 🔐 WPA2 Personal – Shared key (PSK)
+- 🔐 WPA2 Enterprise – Uses RADIUS server for auth
 
+> 🔒 WPA2 is the current standard for secure wireless networking
 
 ___
 
