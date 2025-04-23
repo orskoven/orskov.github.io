@@ -614,6 +614,135 @@ spectrum operating
 networks requested 
 device info 
 
+associted devices can be expanded with plus sign
+station view shows all bssids been identified active and inactive devices
+wireless packets view / turn on packet viewing, full 
+data control manage
+expand packets to see the structure 
+scripts tab assists with wpa and keys Seriuous companion testing >>!!!
+
+heat map 
+ekahau
+free popular
+HeatMapper 
+
+commercial 
+
+no multifloor
+
+useful for home and business
+
+walk saround site and click for points right click to terminate
+
+calculate signal strength 
+pentest can provide hearmapping
+
+
+wireshark monitor mode 
+wlan0mon 
+start capturing 
+connect mobile 
+
+wireless lan summary 
+wlan traffic 
+summery
+beacons and data 
+
+collected traffic 
+radio tap header 
+beacon 
+bssid
+dest
+source
+vendor data
+radio tap header 
+
+qos control field
+for delays
+data sections ip 
+
+can add keys to decrypt data 
+enable decryption 
+wireshark website calculate psk paste in the key 
+
+
+Vistumbler
+
+githun repository
+
+list of minor releases 
+versio6
+
+google earth feurures 
+
+tp link added 
+scan aps 
+acess points are listed
+mac address and bssid
+authentication
+
+latitude and longitud
+work with gps
+
+chnnel encryption ssid
+
+
+extra 2.4 ghz 
+select left hand button 
+graph in real time 
+
+gps integration 
+urban regin of access points 
+settings gps settings 
+speed and settings correct
+
+wifi database online database 
+contribute acces point data 
+
+wifidb
+
+5 million records 
+
+open access points 
+
+comm view nodes view 
+
+protocols bar charts 
+
+ssid singal tpe 
+
+context window quickl
+filter channel 
+
+decryption 
+
+commview 
+
+can to acces points attack 
+
+log viewer 
+
+run attack aircrack ng
+
+vemo switch for SOAP protocol
+
+open network 
+
+tcp ports 
+udp
+
+getbinary state
+
+http xml netcat to send 
+upmp services 
+getbinarystate
+control with netcat 
+vulnerablityu 
+
+
+
+
+
 
 
 
