@@ -140,6 +140,152 @@ Public Internet <--> Access Point <--> Host
 
 ___
 
+With TP-link module we can
+
+use some commands 
+
+WIFITE 
+-mac
+-aircrack
+
+it run different attacks 
+
+caffe latte attacks 
+fake authenticatin 
+
+and can crack IV (initial vector) 
+
+Show cases way WEP is vulnerable 
+
+___
+
+WPS can also be tested
+
+TG583 router is tested
+
+setting wireless adapter to monitor mode 
+
+lookig for BSSID for reaver
+
+operating on channel 1 
+
+running reaver to WPS attacks
+
+generating keys and exract model manufacturer 
+model number 
+
+serial number 
+
+m1 and m2 messags
+m3 and m4 messages 
+
+looking at rate limiting and wainting for lifting
+and attempts again 
+smart enough to resume session 
+
+aftwer a while 
+router will make a lock down.
+WPA2 strong solution 
+but WPS rate limiting is needed for more secure WPA2 level 
+disable WPS to remove risk. 
+
+___
+
+How well is protection for WPA handshake 
+
+WIFIT
+
+```bash
+airmon-ng start wlan0
+```
+SCAN 
+
+DEVICES 
+CLIENTS 
+DEVICES associtated with acces point 
+
+Press ctrl + c 
+select targeet 
+
+get into wpa attacks
+checking for clients 
+deauthentication 
+found and 
+saved as pcap file 
+
+aircrack and dictionary "wifi.txt" 
+to crack password
+
+and can user pswd to connect to wifi. 
+
+___
+
+Pixiedust 
+
+recover key
+linksys nexus, 
+
+Linksys n300 range extendor 
+antenna into monitoring mode
+bssid to AP 
+run wash 
+run reaver to specify pixiedust attack
+
+try pin 
+initate authentication handshake 
+send m2 message 
+verbose mode to dump hashes and nonces (set to zero) 
+
+reaver gets pin
+network key should be recoveredd 
+
+not all ap vulnarable 
+
+prevent with equipment is security tested 
+
+
+___
+
+# WPA3 #
+
+2019 router on market 
+
+essential for open networks 
+WPA3 individualized encryption 
+Dragonfly handshake 
+use correct password to negotiate the connection encryption 
+
+WPA2 vulnerability 
+
+WPA3 comes with new krack preventing password almost 100 procent secure
+
+simple connectivuty with qr code 
+
+enhance AES-192 encryption 
+
+## Dragonblood - on WPA3 ##
+
+- timing leaks
+- authentication bypasses
+- downgrade attacks
+- denial of service
+- side channel attacks
+- even after patched
+
+Design issues 
+- 1$ spended on amazon EC2 enough to brute force password
+- History of side channel attacks
+- most attack could be fixed with minor design changes
+
+- research tools available
+
+Wifi alliance have confirmed this WPA3 issues and vulnarbilities
+some controvercy over dragonfly 
+some is validated through the fixes. 
+
+Long way to be trusted
+___
+
 ## 🕸️Virutal Private Networking (VPN)🕸️ ## 
 
 Devices are typically protected on a local network, because of local ip address space not being defualt routable across the internet.
