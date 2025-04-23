@@ -286,6 +286,340 @@ some is validated through the fixes.
 Long way to be trusted
 ___
 
+## Evil Twin ##
+
+Rogue Access Point 
+been activated to attract on vary users to connect for MitM attack 
+same SSID as legimate access points - stronger signal in zone 
+deauth from legitimate access point 
+
+SIGNIFICANT THREAT
+
+Airbase-ng 
+
+set wireless adapter into monitor mode
+
+```bash
+airmon-ng start wlan0 
+```
+
+
+```bash
+airdump-ng wlan0mon
+```
+```bash
+airbase-ng -a <MAC> --essid Telecom05 -c 1 wlan0mon
+```
+
+wireshark to monitor traffic 
+
+wlan0mon
+
+interface
+
+see traffic 
+stop capturing
+
+rerouting traffic airbase-ng for evil twin
+
+buy the wifi Pineapple from hack5.org
+
+wifi testing 
+
+Nano Tetra beeing popular 
+
+MARK VII and ENTERPRISE 
+
+802.11/ac addon unit 
+3 antennas 
+independntly 
+
+USB-C port
+
+172.16.42.1:1471 
+
+access and download software 
+
+after installing firmware
+
+can begin setup
+
+setup 
+
+restrict for SSIDs
+good for client facing roles 
+
+devope and install third party 
+
+___
+Testing with WIFI pinapple 
+
+activating as rogue access point
+
+start harvesting client devices 
+
+scan for access points 
+default 30 seconds 
+
+Reconnaisance 
+
+
+Add MAC to filter 
+PineAP tap 
+HTTPeek start listening 
+Man in the middle 
+
+### Capture WPA handshakes ###
+
+Handshakes panel
+Capture WPA handshake 
+and download for pcap analysis 
+
+___
+Fluxion 
+
+runs on kali linux
+get network hash 
+setup 
+rogues access point 
+
+external wifi usb link 
+
+will check missing dependencies
+
+cd fluxion 
+sudo ./fluxion.sh 
+
+fluxion@kali: 1
+
+scan all 2.4 ghz channels 
+
+attack a network 
+select it
+
+select RA link wifi modem 
+
+reset attack and configure again 
+passive monitoring attack to wait for attack to be made
+take recommended verfication 
+and wait for 30 seconds
+
+attacks taking place connect to network 
+attack complete
+valid hash added to database 
+
+rogue AP first step complete 
+
+obtained Hash to obtain 
+
+select another attack 
+captive portal attack inteface
+create own custom user portal captive portal 
+continue to attack comfast ap
+
+select wlan0 as interface
+select airreplay
+cowpattty for hash verification
+
+use handshake snooper
+use cowpatty 
+
+create new ssl certificate for portal 
+use recoomenced for connectivity 
+
+running main dashboard for captive portal 
+
+dns service active 
+ruuning as man in the middle 
+___
+## Bluetooth ##
+
+vulnerabilities 
+works in 2.4ghz and also zigbee
+defined in IEEE 802.15.1 
+
+master and slave 
+
+48-biut address decive id 
+
+OUI Organ unique identifie 
+
+friendly names 
+
+class one devices 1: 100m 2:10m 3: 10 cm or less
+
+real time stream or files
+
+slave master identify each other and pair 
+
+send inquiry request and active address will reply 
+
+automitic bonding with bluetooth system 
+
+or 6-digit number displayed 
+
+Bluetooth operating profiles 
+
+SERIAL Port Profile (SPP)
+
+human interface device profile (HID) 
+
+handsfree profile (HFP)
+
+advanced audio distribution profile (A2DP)
+
+Audio/Video Remote control profile (AVRCP) 
+
+Service discovery protocol offers direct support for specific ssid 
+AUDIO
+TCP IP HCI RFCOMM 
+DATA 
+L2CAP 
+LINK MANAGET
+DRIVER
+HARDWARE [
+BASEBAND
+RADIO
+]
+
+
+___
+
+USE bluetooth with kali 
+
+usb configuration 
+open a terminal
+lsusb 
+hciconfig command
+hcitool scan --info --oui 
+
+enumrate and tell what device it is 
+
+first is iphone 
+name chip set manufacture 
+first 3 of addres oui 
+
+wireless attacks 
+bluetooth tools
+bluelog -l command 
+
+/tmp/live.log 
+
+foun 3 devices 
+
+BT scanner also tool
+
+l2ping to check active devices  network ping 
+
+can find hidden devics with bruteforce on hidden adresses
+
+redfang:
+fang -s -r 0CD..... < range command 
+
+found hidden device 
+
+hidden address close to wifi address 
+
+run airodump 
+combine wifi scanning and redfang 
+detecting hidden devices straight forward
+
+Bluesnarfer is overtaken by other tools 
+
+go through:
+
+lsusb 
+
+hciconfig 
+
+hcitool scan 
+
+l2ping 00:11:43:...
+
+c flag character based device 
+which channelse communicationg on 
+
+sdp tool 
+phone connected on channel 11
+
+doesnt work with new phones 
+
+
+___
+
+Wifi cracker
+
+select monitoring interface to use 
+monitor mode automatically 
+
+FernWifi 
+
+initialize and detect 
+networks
+
+if been cracked key will be stored 
+
+2 options for attack 
+wps pin attack 
+tpg secured access point
+
+
+fernwifi 
+comes with its own 
+finds associated names
+
+wifi button to start attack 
+found network password 
+
+one entry in key database 
+
+FernPro .> upgrade 
+
+InSSIDer4 payed low cost share product
+identify network strength for walk around 
+
+Graph of signal strengths 
+SSID and secure or not 
+bssid mac address 
+filters to limit display 
+channel minimal signal strength 
+extender not shown in logical display but 
+indicates best channels for sender to best on 
+
+ACRYLIC wifi 
+pro version 
+identifing strength network through walkaround or warrundown 
+SSID vendor infomation 
+
+right click 
+add device to inventory 
+keep track of home network small businesses 
+
+WPS information 
+manufacturer 
+device name
+model
+
+dictionary attack against acces point 
+
+select connectivity 
+disconnect from network 
+
+and right click to start 
+
+network quailty
+
+speed signal to noist 
+spectrum operating 
+networks requested 
+device info 
+
+
+
+
+USB UART
+
+
 ## 🕸️Virutal Private Networking (VPN)🕸️ ## 
 
 Devices are typically protected on a local network, because of local ip address space not being defualt routable across the internet.
