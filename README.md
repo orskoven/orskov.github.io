@@ -762,7 +762,7 @@ This allows for making segements private to other segements in the network.
 This can be implemented with weak or no security feautures 
 
 [VPN](https://en.wikipedia.org/wiki/Virtual_private_network)
-[Learning VPN](https://www.linkedin.com/learning/learning-vpn/how-vpn-works?resume=false&u=36836804)
+Sources for the following content origins from Scott Simpsons course on linkedin learning [Learning VPN](https://www.linkedin.com/learning/learning-vpn/how-vpn-works?resume=false&u=36836804)
 ___
 
 ### Routing ###
