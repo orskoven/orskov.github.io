@@ -55,6 +55,62 @@ sudo arp -a
 ```bash
 sudo arpspoof -i eth0 -t 172.16.196.132 172.16.196.133 & sudo arpspoof -i eth0 -t 172.16.196.133 172.16.196.132 & sudo arp -a
 ```
+
+___
+## ARP Posoning with SCAPY ##
+
+>research the arp possibilities in scapy
+```python
+ls(ARP)
+```
+> >>> ls(ARP)
+hwtype     : XShortEnumField                     = ('1')
+ptype      : XShortEnumField                     = ('2048')
+hwlen      : FieldLenField                       = ('None')
+plen       : FieldLenField                       = ('None')
+op         : ShortEnumField                      = ('1')
+hwsrc      : MultipleTypeField (SourceMACField, StrFixedLenField) = ('None')
+psrc       : MultipleTypeField (SourceIPField, SourceIP6Field, StrFixedLenField) = ('None')
+hwdst      : MultipleTypeField (MACField, StrFixedLenField) = ('None')
+pdst       : MultipleTypeField (IPField, IP6Field, StrFixedLenField) = ('None')
+
+Trying to build an ARP packet:
+```python
+from scapy.all import *
+
+pkt = ARP(psrc="ff-ff-ff-ff-ff")
+print(pkt.psrc)
+```
+> b'ff-ff-ff-ff-ff'
+```python
+ls(ARP)
+```
+https://github.com/KimiNewt/pyshark/
+```python
+ls(ARP)
+```
+```python
+ls(ARP)
+```
+
+```python
+ls(ARP)
+```
+```python
+ls(ARP)
+```
+
+```python
+ls(ARP)
+```
+```python
+ls(ARP)
+```
+
+```python
+ls(ARP)
+```
+
 ___
 
 # Ethical Hacking: Wireless Networks
