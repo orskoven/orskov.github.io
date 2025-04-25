@@ -12,7 +12,7 @@ sudo apt-get update
 ```bash
 sudo apt-get install dsniff
 ```
-Make linux act as a "router" (man in the middle).
+> Make linux act as a "router" (man in the middle).
 Remove '#' commented line with the text: “net.ipv4.ip_forward = 1”.
 /etc/sysctl.conf
 ```bash
