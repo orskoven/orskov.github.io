@@ -158,8 +158,28 @@ print(pkt.psrc)
 ls(ARP)
 ```
 https://github.com/KimiNewt/pyshark/
+
+___
+Man In The Middle: 
+> Fetch the target MAC address / generate a function to handle MAC address fetching
 ```python
-ls(ARP)
+from scapy.all import * 
+
+# Man in the middle
+# 1. get mac adresses we sent arp request on eth from ip addresses
+
+
+def get_mac(IP):
+        packet = Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst=IP)
+        result = srp(packet, timeout=3, verbose=0)[0]
+        return result[0][1].hwsrc
+
+
+
+MAC_target = get_mac("172.16.196.134")
+print(MAC_target)
+
+
 ```
 ```python
 ls(ARP)
