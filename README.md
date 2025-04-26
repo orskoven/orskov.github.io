@@ -3,6 +3,78 @@
 
 ___
 
+## SOF-ELK ##
+
+Elsatic Stack -> SOF ELK 
+
+
+### The Stack ###
+
+ELK stack 
+
+Elasticsearch 
+
+Logstash 
+Kibana
+Beats 
+and others 
+
+Centralized logs 
+
+Helps centralize between example: 
+
+Web servers - Admin servers - Redundant databases - Application Servers
+
+Major outages avoid, since elastic stack is centralized logs. 
+
+Kibana is visualisation of the logs.
+
+Can search logs for it security issues. 
+
+Not like Splunk. 
+
+Core components opensource and free
+
+end point security monitoring self host stack
+
+
+### BEATS ###
+
+Light weight way to ship logs into the stack
+written in go:
+
+Filebeat 
+Packetbeat 
++ more
+
+Logstash transform incoming data.
+Beats single purpose tool. 
+
+Logstash is more resource intensive.
+
+
+Elasticsearch 
+
+holds index of data 
+holds all data itself
+
+in production is deployed in a cluster 
+with shards a b c 
+redundant copies in clusters like kubernetes 
+
+
+### KIBANA ### 
+
+Web frontend, define preset dashboard for birdseye view. 
+
+
+### Setup ###
+
+VM 
+Vagrant
+
+___
+
 ## Arp Spoofing ##
 
 Installing arpspoof for linux.
