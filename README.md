@@ -61,9 +61,9 @@ ___
 
 ## Weakness of passwords ##
 
-** Password reuse **
-** Writing down passwords **
-** Weak system in password creation ** 
+**Password reuse**
+**Writing down passwords**
+**Weak system in password creation** 
 
 
 ___
