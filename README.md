@@ -6,6 +6,8 @@ ___
 
 ## Authentication ## 
 
+Password [HIVE: Brute Force table risk](https://www.hivesystems.com/blog/are-your-passwords-in-the-green)
+
 Read NIST's view on [authenticators](https://pages.nist.gov/800-63-3-Implementation-Resources/63B/Authenticators/) 
 
 Shared secret ( we know something mutaual) 
