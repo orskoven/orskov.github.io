@@ -1,5 +1,65 @@
 # SIMON'S ✍️ CYBER SECURITY NOTES
 
+___
+
+## Authentication ## 
+
+Shared secret ( we know something mutaual) 
+
+Imaging a battlefield -> if soldiers have to pass they should know the mutual shared secret to not be shot down if approcing friendly lines back from scouting. 
+
+In todays digital world this is a bit problematic. 
+
+Why is this not suitable:
+
+- this is something we know and this is easy to steal or guess
+
+Other options? 
+
+- something we have is better
+
+Back in the days, we could rip off a dollar ticket and the two pieces will onyl match and this can verify and authenticate.
+
+We categories this as another methode of verification:
+- This is more unique and authenticate
+- But will be more costly to implement than a password (or something we know)
+
+
+Biometric authentication: 
+- This is another methode of verification
+
+
+## (Authentication)[https://en.wikipedia.org/wiki/Authentication] depends on the weakes link ## 
+
+
+3 methodes:
+        - What you know (passwords)
+        - What you have(dongle, smartcard, certficate, phone,...)
+        - What you are(biometrics, height, voice, walk dynamics,...)
+
+
+Danish solution *NemID* (outfaced)
+An authentication methode implemented often via keys on a physical card with 50 keys.
+        - Implementation : you get a number and must find the correspending key on the physical card. 
+🔺RISKS : 
+        - People take pictures of the physical card and coudl share it.
+        
+Other solutions to keys:
+        - With a dongle 
+
+
+CURRENT danish authentication:
+        - app on phone
+
+
+Password managers? 
+
+(lastpass breach)[https://blog.lastpass.com/posts/notice-of-recent-security-incident]
+
+
+
+
+
 
 ___
 
