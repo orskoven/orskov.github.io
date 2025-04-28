@@ -221,6 +221,31 @@ Strong password policy🔺
 
 ___
 
+> sys admin tools often provide hacking stuff for forgotten passwords 
+
+
+___
+
+
+```bash
+
+adduser user1
+echo 5 chars
+echo dog
+adduser user2
+echo 8 chars
+echo doggydog
+adduser user3
+echo long english word
+echo londonbridg
+```
+
+___
+
+## [John The Ripper](https://en.wikipedia.org/wiki/John_the_Ripper) ##
+
+___
+
 ## SOF-ELK ##
 
 Elsatic Stack -> SOF ELK 
