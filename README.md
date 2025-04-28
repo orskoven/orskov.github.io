@@ -159,7 +159,7 @@ Imagine BOB (current admin)  ALICE(hacker)
 
 
 ```bash
-sudo adduser simon
+sudo adduser alice
 ```
 ```bash
 password123
@@ -175,6 +175,14 @@ swap two password hashes
 now with the hash swap you can login in with the other users password. 
 
 
+KALI: 
+
+| john the ripper | linux passwords | make total bruteforce random | check minimum length(people adjust based on minimal requirements) |   
+
+
+Resarch: 
+
+Password lists based on language. 
 
 ___
 
