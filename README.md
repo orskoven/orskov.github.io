@@ -189,6 +189,11 @@ Password lists based on language.
 
 ___
 
+Attackers will use ***social engineering*** to collect intelligence on your most common words and other related subjects in your online presence. 
+
+
+___
+
 How are you making yourself more secure? 
 
 Blackbox test. 
