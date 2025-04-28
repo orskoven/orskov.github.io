@@ -91,7 +91,8 @@ Middleware Software also default passwords
 - try online guessing
 - hashes brute forcing / download hashes and bruteforce passwords
 - Do not store passwords in clear text
-- use ### [key derevative](https://csrc.nist.gov/csrc/media/Projects/crypto-publication-review-project/documents/initial-comments/sp800-132-initial-public-comments-2023.pdf) ### hashing functions like Argon2 also look at my [explenation of hashing](https://orskoven.github.io/orskov.github.io/#use-key-derivative-functions-for-password-storage)   
+- use ### [key derevative](https://csrc.nist.gov/csrc/media/Projects/crypto-publication-review-project/documents/initial-comments/sp800-132-initial-public-comments-2023.pdf) ### hashing functions like Argon2 also look at my [explenation of hashing](https://orskoven.github.io/orskov.github.io/#use-key-derivative-functions-for-password-storage)
+- use salt and peber ( user database is salt and password (then you save peber someware else))  
 
 ___
 
