@@ -4,6 +4,8 @@ ___
 
 ## Authentication ## 
 
+Read NIST's view on [authenticators](https://pages.nist.gov/800-63-3-Implementation-Resources/63B/Authenticators/) 
+
 Shared secret ( we know something mutaual) 
 
 Imaging a battlefield -> if soldiers have to pass they should know the mutual shared secret to not be shot down if approcing friendly lines back from scouting. 
@@ -65,13 +67,53 @@ ___
 **Writing down passwords**
 **Weak system in password creation** 
 
-
+(Statistics on passwords)[https://explodingtopics.com/blog/password-stats]
 ___
 
 ## Educate users when setting up passwords  ##
 
 - Tell the user if it is to easy to implement the password
 - Check and compare reuse of passwords from databases
+
+___
+
+Middleware Software also default passwords
+- Databases ( MySQL, LDAP, MS, Oracle,...) Web servers, Web shop templates.
+- CRM, economic system
+
+## PROCEDURE Checklist: 
+
+- Check password
+- Delete original admin account
+- document admin account credentials (for all systems all devices)
+- ask people for passwords (what are your passwords)
+- research passwords on social media ( Men chooses : hobbies, football clubs | Women : Chooses emotional topics, family names, interests)
+- try online guessing
+- hashes brute forcing / download hashes and bruteforce passwords
+- Do not store passwords in clear text
+- 
+
+___
+
+
+```bash
+nmap
+```
+Look for gateway (look for dhcp) 
+```bash
+PORTS  STATE  SERVICE REASON  
+22/tcp  open   ssh     syn-ack
+                dhcp
+```
+Enter the following ip address in browser
+```bash
+192.168.0.1 
+```
+Then search for deault password on the web to pass login page. 
+
+___
+
+
 
 ___
 
