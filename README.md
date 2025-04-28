@@ -249,7 +249,7 @@ ___
 ### Online Tool for Password Cracking ### 
 ___
 
-## [Sec Tools](https://sectools.org) ## 
+## [Sec Tools Passwd cracking]([https://sectools.org](https://sectools.org/tag/pass-audit/) ## 
 ___
 
 ## SOF-ELK ##
