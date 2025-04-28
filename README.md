@@ -114,6 +114,64 @@ Then search for deault password on the web to pass login page.
 
 ___
 
+### Practical password ###
+
+🖥️ on linux let's look at the password hashing storing in linux ubuntu system.
+Hashes and plaintext are stored seperately for permission granularity. 
+
+´´´bash
+john:$y$salt$hash
+´´´
+| $ | Seperator | 
+| salt | before hash value / makes rainbowtable useless (will cost the attacker on CPU or and TIME) | 
+
+```bash
+cat /etc/passwd
+```
+```bash
+cat /etc/shadow
+```
+___
+
+Accessing the data maliciosly 
+
+**Remeber to encrypt disk** 
+
+Scenario : 
+> BOOT with your own disk inserted to a host (extenal usb)
+> The system should open with permission for the usb inserted.  
+> Next: the attack should overwrite the /etc/passwd file
+
+This would occur to user:
+> if password is not corretly written in login
+> user will be prompted and cause is the attacker in scenario before
+
+___
+
+### GUIDE : ###
+🔺 Only with physical access and non encrypted disk 🔺 
+
+Booting with permission and priviliges to external usb inserted
+
+Imagine BOB (current admin)  ALICE(hacker)
+
+
+```bash
+sudo adduser simon
+```
+```bash
+password123
+```
+Enter Information 
+and access hashed password file:
+```bash
+sudo cat /etc/shadow 
+```
+in editing mode in the file 
+swap two password hashes
+(for learning: you should know both passwords) 
+now with the hash swap you can login in with the other users password. 
+
 
 
 ___
