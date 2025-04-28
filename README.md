@@ -54,7 +54,7 @@ CURRENT danish authentication:
 
 Password managers? 
 
-(lastpass breach)[https://blog.lastpass.com/posts/notice-of-recent-security-incident]
+[lastpass breach](https://blog.lastpass.com/posts/notice-of-recent-security-incident)
 
 
 
