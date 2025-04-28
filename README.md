@@ -124,9 +124,9 @@ ___
 🖥️ on linux let's look at the password hashing storing in linux ubuntu system.
 Hashes and plaintext are stored seperately for permission granularity. 
 
-´´´bash
+```bash
 john:$y$salt$hash
-´´´
+```
 | $ | Seperator | 
 | salt | before hash value / makes rainbowtable useless (will cost the attacker on CPU or and TIME) | 
 
