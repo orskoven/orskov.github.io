@@ -246,6 +246,12 @@ ___
 
 ___
 
+### Online Tool for Password Cracking ### 
+___
+
+## [Sec Tools](https://sectools.org) ## 
+___
+
 ## SOF-ELK ##
 
 Elsatic Stack -> SOF ELK 
