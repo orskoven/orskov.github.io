@@ -138,6 +138,8 @@ cat /etc/shadow
 ```
 ___
 
+
+
 Accessing the data maliciosly 
 
 **Remeber to encrypt disk** 
@@ -198,6 +200,24 @@ How are you making yourself more secure?
 
 Blackbox test. 
 Whitebox test.
+
+___
+
+### Password Defence ### 
+
+Strong password policy🔺
+- opensource compiled manager - research / sandbox / compile yourself
+- require longer passwords
+- require uppercase lowercase numbers special characters
+- limit password validity 60 or 90 days
+- consuder system generated passwords
+- use some password manager
+- periodic cracking of company users passwords for "simple passwords"
+- no reuse of userid & password across service
+- add location and time limitations for login
+- add second or third factor of authentication
+  > combine with out of band info, one-time pw, tokens 
+
 
 ___
 
