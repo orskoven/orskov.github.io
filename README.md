@@ -59,13 +59,26 @@ Password managers any more secure, well a breach to lastpass occured:
 
 ___
 
+## Weakness of passwords ##
+
+** Password reuse **
+** Writing down passwords **
+** Weak system in password creation ** 
+
+
+___
+
+## Educate users when setting up passwords  ##
+
+- Tell the user if it is to easy to implement the password
+- Check and compare reuse of passwords from databases
+
+___
+
 How are you making yourself more secure? 
 
 Blackbox test. 
 Whitebox test.
-
-
-
 
 ___
 
