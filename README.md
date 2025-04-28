@@ -52,11 +52,17 @@ CURRENT danish authentication:
         - app on phone
 
 
-Password managers? 
+Password managers any more secure, well a breach to lastpass occured: 
 
 [lastpass breach](https://blog.lastpass.com/posts/notice-of-recent-security-incident)
 
 
+___
+
+How are you making yourself more secure? 
+
+Blackbox test. 
+Whitebox test.
 
 
 
