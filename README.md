@@ -1490,7 +1490,6 @@ run the last step with the algo command:
 ./algo
 ```
 answer the question with pressing ```12``` for installing to existing ubuntu server:
-```12```
 Then press enter on the rest until:
 
 Enter the public IP address or domain name of your server: (IMPORTANT! This is used to verify the certificate)
@@ -1499,9 +1498,6 @@ Enter the public IP address or domain name of your server: (IMPORTANT! This is u
 
 enter the public address of your algo cloud server.
 
-
-```cd```
-```cd```
 
 
 
