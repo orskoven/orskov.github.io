@@ -29,7 +29,7 @@ Biometric authentication:
 - This is another methode of verification
 
 
-## (Authentication)[https://en.wikipedia.org/wiki/Authentication] depends on the weakes link ## 
+## [Authentication](https://en.wikipedia.org/wiki/Authentication) depends on the weakes link ## 
 
 
 3 methodes:
