@@ -70,7 +70,7 @@ ___
 **Weak system in password creation** 
 
 For fun only:
-[Statistics on passwords][https://explodingtopics.com/blog/password-stats]
+[Statistics on passwords](https://explodingtopics.com/blog/password-stats)
 ___
 
 ## Educate users when setting up passwords  ##
