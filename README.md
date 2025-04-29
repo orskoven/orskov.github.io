@@ -317,11 +317,11 @@ unzip lab-3.1_source_evidence.zip
 ```
 
 ```bash
-cd /home/elk_user/lab-3.1_source_evidence/
+cd /home/elk_user/sample_evidence/lab-3.1_source_evidence/
 ```
 
 ```bash
-nfdump2sof-elk.sh -e 10.3.58.1 -r /home/elk_user/lab-3.1_source_evidence/netflow/ -w /logstash/nfarch/lab-3.1_netflow.txt
+nfdump2sof-elk.sh -e 10.3.58.1 -r /home/elk_user/sample_evidence/lab-3.1_source_evidence/netflow/ -w /logstash/nfarch/lab-3.1_netflow.txt
 ```
 
 ### KIBANA ###
