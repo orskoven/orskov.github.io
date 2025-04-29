@@ -401,6 +401,45 @@ Copy to SOF-ELK
 sudo scp /var/log/syslog elk_user@192.168.251.130:/logstash/syslog/
 ```
 
+### New Rules ###
+
+```bash
+sudo iptables -A OUTPUT -p icmp --icmp-type echo-reply -j LOG --log-level info --log-prefix "[IP-TABLES] ping res #deny# "
+```
+
+```bash
+sudo iptables -A OUTPUT -p icmp --icmp-type echo-reply -j DROP
+```
+```bash
+sudo iptables -L
+```
+```bash
+sudo iptables -F
+```
+
+### NETFLOW PCAP TO SOF-ELK CONVERTER ###
+
+```bash
+cd ~
+```
+```bash
+unzip /sample_evidence/lab-2.3_source_evidence.zip
+```
+```bash
+cd /sample_evidence/lab-2.3_source_evidence
+```
+```bash
+mkdir nfpcap
+```
+```bash
+nfpcapd -r lab-2.3.pcap -l ./nfpcap/
+```
+```bash
+nfdump2sof-elk.sh -e 192.168.117.129 -r ./nfpcap/ -w /logstash/nfarch/netflow_frompcap.txt
+```
+
+### HTTPD log ###
+
 🔺 
 STOP NETFLOW 
 ```bash 
