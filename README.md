@@ -367,6 +367,32 @@ sudo apt-get install nfdump
 Netflow data inside SOF-ELK
 
 
+### IPTABLES ###
+
+```bash
+sudo iptables -A INPUT -p icmp --icmp-type echo-request -j LOG --log-level info --log-prefix "[IP-TABLES] ping req "
+```
+
+```bash
+sudo iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT
+```
+
+```bash
+sudo iptables -L
+```
+
+```bash
+sudo apt-get update
+```
+
+```bash
+sudo apt-get install rsyslog
+```
+
+Copy to SOF-ELK
+```bash
+sudo scp /var/log/syslog elk_user@192.168.251.130:/logstash/syslog/
+```
 
 
 ### The Stack ###
