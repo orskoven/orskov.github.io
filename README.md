@@ -331,6 +331,27 @@ open kibana in your prefered webbrowser use the SOF-ELK ip : with port 5601
 Set the timeframe to ```2013-06-08 15:00:00 to 2013-06-08 23:30:00```
 
 
+## RUN NETFLOW ##
+
+```bash
+sudo nfcapd -D -p 555 -S 1 -z -I Linux-Host-1-eth0 -w netflow/
+```
+
+
+```bash
+wget http://www.kallas.dk/nf2sof.sh ; sudo chmod +x nf2sof.sh
+```
+
+
+```bash
+./nf2sof.sh -e 192.168.251.128 -r ./netflow/ -w ./my_netflow.txt
+```
+
+```bash
+scp my_netflow.txt elk_user@192.168.186.128:/logstash/nfarch/
+```
+
+
 ```bash
 192.168.251.130:5601
 ```
