@@ -287,14 +287,48 @@ ___
 
 Post installation as vm on host. 
 
-
+Let's prepare some sample data inside SOF-ELK.
 ```bash
 cd /home/elk_user/sample_evidence
 ```
-
 ```bash
 sudo unzip lab-2.3_source_evidence.zip
 ```
+```bash
+cd /logstash/syslog/ 
+```
+```bash
+unzip /home/elk_user/sample_evidence/lab-2.3_source_evidence/fw-router_logs.zip
+unzip /home/elk_user/sample_evidence/lab-2.3_source_evidence/proxy_logs.zip
+```
+
+### NETFLOW DATA ###
+
+```bash
+cd /home/elk_user/
+```
+
+```bash
+unzip lab-3.1_source_evidence.zip
+```
+
+```bash
+cd /home/elk_user/lab-3.1_source_evidence/
+```
+
+```bash
+nfdump2sof-elk.sh -e 10.3.58.1 -r /home/elk_user/lab-3.1_source_evidence/netflow/ -w /logstash/nfarch/lab-3.1_netflow.txt
+```
+
+
+
+```bash
+sudo apt update
+sudo apt-get install fprobe
+sudo apt-get install nfdump
+```
+
+cd /logstash/syslog/ 
 
 Netflow data inside SOF-ELK
 
