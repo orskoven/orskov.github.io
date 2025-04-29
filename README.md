@@ -285,6 +285,10 @@ ___
 
 ## HOW TO SOF-ELK ##
 
+Preferbly use ssh to connect via your preferred terminal.
+
+
+
 Post installation as vm on host. 
 
 Let's prepare some sample data inside SOF-ELK.
@@ -323,6 +327,10 @@ nfdump2sof-elk.sh -e 10.3.58.1 -r /home/elk_user/lab-3.1_source_evidence/netflow
 ### KIBANA ###
 
 open kibana in your prefered webbrowser use the SOF-ELK ip : with port 5601
+
+Set the timeframe to ```2013-06-08 15:00:00 to 2013-06-08 23:30:00```
+
+
 ```bash
 192.168.251.130:5601
 ```
@@ -333,7 +341,7 @@ sudo apt-get install fprobe
 sudo apt-get install nfdump
 ```
 
-cd /logstash/syslog/ 
+
 
 Netflow data inside SOF-ELK
 
