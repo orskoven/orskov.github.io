@@ -401,6 +401,12 @@ Copy to SOF-ELK
 sudo scp /var/log/syslog elk_user@192.168.251.130:/logstash/syslog/
 ```
 
+🔺 
+STOP NETFLOW 
+```bash 
+pkill nfcapd
+```
+🔺
 
 ### The Stack ###
 
