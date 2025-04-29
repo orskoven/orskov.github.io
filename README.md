@@ -271,6 +271,8 @@ When correlating data, we can with benefit use SOF-ELK.
 
 🔺 PCAP files are converted to netflow and read by SOF-ELK 🔺
 
+🔺 HTTPD logs is used in APACHE LOG FORMAT 🔺  
+
 
 
 
