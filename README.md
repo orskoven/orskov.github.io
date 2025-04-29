@@ -281,12 +281,22 @@ Netflows agenda, is aggregated data at least 5 minutes old.
 
 SOF-ELK will be used for correlating forensics data.
 [Phil Hagen, for SANS FOR572, Advanced Network Forensics and Analysis](https://www.youtube.com/watch?v=XTebxMBg7Q4)
+___
+
+## HOW TO SOF-ELK ##
+
+Post installation as vm on host. 
 
 
+```bash
+cd /home/elk_user/sample_evidence
+```
+
+```bash
+sudo unzip lab-2.3_source_evidence.zip
+```
 
 Netflow data inside SOF-ELK
-
-
 
 
 
