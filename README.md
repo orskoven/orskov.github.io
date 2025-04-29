@@ -267,6 +267,11 @@ ___
 
 When correlating data, we can with benefit use SOF-ELK. 
 
+🔺 All malicious actions are relevant to collect 🔺
+
+🔺 PCAP files are converted to netflow and read by SOF-ELK 🔺
+
+
 
 
 
