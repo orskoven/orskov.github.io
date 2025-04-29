@@ -320,7 +320,12 @@ cd /home/elk_user/lab-3.1_source_evidence/
 nfdump2sof-elk.sh -e 10.3.58.1 -r /home/elk_user/lab-3.1_source_evidence/netflow/ -w /logstash/nfarch/lab-3.1_netflow.txt
 ```
 
+### KIBANA ###
 
+open kibana in your prefered webbrowser use the SOF-ELK ip : with port 5601
+```bash
+192.168.251.130:5601
+```
 
 ```bash
 sudo apt update
