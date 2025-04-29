@@ -250,7 +250,7 @@ ___
 ### Online Tool for Password Cracking ### 
 ___
 
-## [Sec Tools Passwd cracking]([https://sectools.org](https://sectools.org/tag/pass-audit/) ## 
+## [Sec Tools Passwd cracking](https://sectools.org/tag/pass-audit/) ## 
 ___
 
 
