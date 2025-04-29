@@ -4,6 +4,7 @@ ALL RIGHTS RESERVED SIMON ØRSKOV BECKMANN
 
 ___
 
+
 ## Authentication ## 
 
 Password [HIVE: Brute Force table risk](https://www.hivesystems.com/blog/are-your-passwords-in-the-green)
@@ -252,16 +253,59 @@ ___
 ## [Sec Tools Passwd cracking]([https://sectools.org](https://sectools.org/tag/pass-audit/) ## 
 ___
 
-## SOF-ELK ##
 
-Elsatic Stack -> SOF ELK 
+___
+-Intercepting traffic
+-Needs certificates for https and sslsplit
+-Social engineering kit
+
+DNS spoof
+
+___
+
+## Forensics ##
+
+When correlating data, we can with benefit use SOF-ELK. 
+
+
+
+
+
+___
+## About SOF-ELK / Security Operations and Forensics - Elasticsearch Logstash Kibana ##
+
+Offline forensics tool.
+We take off the disk data or log files and analyse on those.
+More a forensics tool than monitoring tool. 
+Netflows agenda, is aggregated data at least 5 minutes old.
+
+SOF-ELK will be used for correlating forensics data.
+[Phil Hagen, for SANS FOR572, Advanced Network Forensics and Analysis](https://www.youtube.com/watch?v=XTebxMBg7Q4)
+
+
+
+Netflow data inside SOF-ELK
+
+
+
+
 
 
 ### The Stack ###
 
 ELK stack 
 
-Elasticsearch 
+### Elasticsearch ###
+
+Ensure to link data and correlate data.
+No need for data preparation manually. 
+
+### Kibana ###
+UI for graphical presentation of the data.
+
+### Beats ### 
+Ingest from different systems. 
+We can install beats on hosts to pick up and sensor logs from multiple hosts into the ELK stack.
 
 Logstash 
 Kibana
