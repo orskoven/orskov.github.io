@@ -25,8 +25,20 @@ sudo iptables -S
 ```bash
 sudo iptables -L
 ```
->Chain INPUT (policy ACCEPT)       target     prot opt source               destination         Chain FORWARD (policy ACCEPT)  target     prot opt source               destination         >Chain OUTPUT (policy ACCEPT) target     prot opt source               destination 
+>Chain INPUT (policy ACCEPT)       target     prot opt source               destination         Chain FORWARD (policy ACCEPT)  target     prot opt source               destination Chain OUTPUT (policy ACCEPT) target     prot opt source               destination 
 ___
+
+Append rule at the end of chain:
+```bash
+sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+```
+
+| -m = module (can help about what happend prior to packet (n) | conntrack (list of standard services that uses more than one port)  (stateful inspection) | -- ctstate | ESTABLISHED,RELATED (BASED ON 3-way handshake) Packets not established from inside are dropped, i allow responses from the established connection from internal host RELATED = if protocol uses more n>1 more than 1 protocols for the service  |
+| j = jump |
+| ACCEPT / DROP|
+
+___
+
 
 [Look at ip address lookup](https://www.cyberciti.biz/faq/bash-shell-command-to-find-get-ip-address/)
 
