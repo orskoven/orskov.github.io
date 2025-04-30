@@ -48,6 +48,12 @@ Delete chain rule 2
 sudo iptables -D INPUT 2
 ```
 
+For redundany:
+LOOPBACK important for services performance (most packets must be first in the chain for performance tuning)
+```bash
+sudo iptables -I INPUT 1 -i lo -j ACCEPT
+```
+
 
 
 ___
