@@ -77,24 +77,37 @@ Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
  pkts bytes target     prot opt in     out     source               destination         
 
 ```
-
-
+___
+> Make a new filter chain called ALLOWED and add it to the INPUT filter chain
 Command:
 ```bash
-sudo iptables -A INPUT -m --source 172.0.0.1/24 -j ACCEPT
+sudo iptables –N ALLOWED1
+sudo iptables –A INPUT –j ALLOWED1
 sudo iptables -L -v
+```
+```
+Chain ALLOWED (1 references)
+ pkts bytes target     prot opt in     out     source               destination
 ```
 Output:
 ```
-Chain INPUT (policy ACCEPT 2291 packets, 160K bytes)
+Chain INPUT (policy ACCEPT 2923 packets, 209K bytes)
  pkts bytes target     prot opt in     out     source               destination         
     0     0 ACCEPT     all  --  any    any     172-0-0-0.lightspeed.brhmal.sbcglobal.net/24  anywhere            
+19415 1402K ACCEPT     all  --  any    any     anywhere             anywhere             ctstate RELATED,ESTABLISHED
+    0     0 ACCEPT     icmp --  any    any     anywhere             anywhere             icmp echo-request
+    0     0 ACCEPT     icmp --  any    any     anywhere             anywhere             icmp destination-unreachable
+    0     0 ACCEPT     icmp --  any    any     anywhere             anywhere             icmp time-exceeded
+    0     0 ALLOWED    all  --  any    any     anywhere             anywhere            
 
 Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
  pkts bytes target     prot opt in     out     source               destination         
 
 Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
- pkts bytes target     prot opt in     out     source               destination
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ALLOWED (1 references)
+ pkts bytes target     prot opt in     out     source               destination 
 ```
 
 
