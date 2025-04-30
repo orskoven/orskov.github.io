@@ -18,8 +18,8 @@ alice@alice:
 /etc/netplan$ sudo iptables -S
 ```
 >-P INPUT ACCEPT
--P FORWARD ACCEPT
--P OUTPUT ACCEPT
+>-P FORWARD ACCEPT
+>-P OUTPUT ACCEPT
 
 
 ___
