@@ -55,20 +55,27 @@ ___
 > Allow ICMP packets of type 3, 8 and 11
 Command:
 ```bash
-sudo iptables -A INPUT -p ICMP --type 3,8,11 -j ACCEPT
+sudo iptables -A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT
+sudo iptables -A INPUT -p icmp -m icmp --icmp-type 3 -j ACCEPT
+sudo iptables -A INPUT -p icmp -m icmp --icmp-type 11 -j ACCEPT
 sudo iptables -L -v
 ```
 Output:
 ```
-Chain INPUT (policy ACCEPT 2291 packets, 160K bytes)
+Chain INPUT (policy ACCEPT 2922 packets, 209K bytes)
  pkts bytes target     prot opt in     out     source               destination         
     0     0 ACCEPT     all  --  any    any     172-0-0-0.lightspeed.brhmal.sbcglobal.net/24  anywhere            
+10307  761K ACCEPT     all  --  any    any     anywhere             anywhere             ctstate RELATED,ESTABLISHED
+    0     0 ACCEPT     icmp --  any    any     anywhere             anywhere             icmp echo-request
+    0     0 ACCEPT     icmp --  any    any     anywhere             anywhere             icmp destination-unreachable
+    0     0 ACCEPT     icmp --  any    any     anywhere             anywhere             icmp time-exceeded
 
 Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
  pkts bytes target     prot opt in     out     source               destination         
 
 Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
- pkts bytes target     prot opt in     out     source               destination
+ pkts bytes target     prot opt in     out     source               destination         
+
 ```
 
 
