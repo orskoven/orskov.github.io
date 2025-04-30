@@ -26,13 +26,13 @@ sudo iptables -S
 sudo iptables -L
 ```
 >Chain INPUT (policy ACCEPT)
-        target     prot opt source               destination         
+ >       target     prot opt source               destination         
 
-Chain FORWARD (policy ACCEPT)
-target     prot opt source               destination         
+>Chain FORWARD (policy ACCEPT)
+>target     prot opt source               destination         
 
-Chain OUTPUT (policy ACCEPT)
-target     prot opt source               destination 
+>Chain OUTPUT (policy ACCEPT)
+>target     prot opt source               destination 
 ___
 
 [Look at ip address lookup](https://www.cyberciti.biz/faq/bash-shell-command-to-find-get-ip-address/)
