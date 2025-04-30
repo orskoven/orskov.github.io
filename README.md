@@ -30,6 +30,15 @@ netstat -4 -r -n
 ```
 ___
 
+*Gateway ip*
+
+```bash
+ip route 
+```
+
+
+___
+
 
 ## Authentication ## 
 
