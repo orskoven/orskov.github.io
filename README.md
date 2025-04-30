@@ -4,6 +4,113 @@ ALL RIGHTS RESERVED SIMON ØRSKOV BECKMANN
 
 ___
 
+### IPTABLES : HOW TO ###
+
+>Allow all trafficon the loopback interface
+Command:
+```bash
+ip a | grep inet
+```
+Output:
+``` 
+ inet 127.0.0.1/8 scope host lo
+```
+Command:
+```bash
+sudo iptables -A INPUT -m --source 172.0.0.1/24 -j ACCEPT
+sudo iptables -L -v
+```
+Output:
+```
+Chain INPUT (policy ACCEPT 2291 packets, 160K bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     all  --  any    any     172-0-0-0.lightspeed.brhmal.sbcglobal.net/24  anywhere            
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+```
+___
+> Allow inbound traffic related to outbound connections
+Command:
+```bash
+sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+```
+Output:
+```
+Chain INPUT (policy ACCEPT 2788 packets, 196K bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     all  --  any    any     172-0-0-0.lightspeed.brhmal.sbcglobal.net/24  anywhere            
+  245 17212 ACCEPT     all  --  any    any     anywhere             anywhere             ctstate RELATED,ESTABLISHED
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination 
+```
+___
+> Allow ICMP packets of type 3, 8 and 11
+Command:
+```bash
+sudo iptables -A INPUT -p ICMP --type 3,8,11 -j ACCEPT
+sudo iptables -L -v
+```
+Output:
+```
+Chain INPUT (policy ACCEPT 2291 packets, 160K bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     all  --  any    any     172-0-0-0.lightspeed.brhmal.sbcglobal.net/24  anywhere            
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+```
+
+
+Command:
+```bash
+sudo iptables -A INPUT -m --source 172.0.0.1/24 -j ACCEPT
+sudo iptables -L -v
+```
+Output:
+```
+Chain INPUT (policy ACCEPT 2291 packets, 160K bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     all  --  any    any     172-0-0-0.lightspeed.brhmal.sbcglobal.net/24  anywhere            
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+```
+
+
+Command:
+```bash
+sudo iptables -A INPUT -m --source 172.0.0.1/24 -j ACCEPT
+sudo iptables -L -v
+```
+Output:
+```
+Chain INPUT (policy ACCEPT 2291 packets, 160K bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     all  --  any    any     172-0-0-0.lightspeed.brhmal.sbcglobal.net/24  anywhere            
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+```
+___
+
+
 ## [FIREWALL](https://en.wikipedia.org/wiki/Firewall_(computing)#Packet_filter) ###
 
 **A PACKET FILTER**
