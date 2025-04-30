@@ -79,12 +79,13 @@ Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
 ```
 ___
 > Make a new filter chain called ALLOWED and add it to the INPUT filter chain
-Command:
+🔻Command (if issues with the '-N' then replace '-' in the terminal:
 ```bash
 sudo iptables –N ALLOWED1
 sudo iptables –A INPUT –j ALLOWED1
 sudo iptables -L -v
 ```
+We added:
 ```
 Chain ALLOWED (1 references)
  pkts bytes target     prot opt in     out     source               destination
@@ -109,25 +110,90 @@ Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
 Chain ALLOWED (1 references)
  pkts bytes target     prot opt in     out     source               destination 
 ```
-
+___
+> In the new filter chain ALLOWED add reachable service
+>  •SSH, HTTP, HTTPS
 
 Command:
 ```bash
-sudo iptables -A INPUT -m --source 172.0.0.1/24 -j ACCEPT
+sudo iptables -A ALLOWED -p tcp --destination-port 22 -j ACCEPT
+sudo iptables -A ALLOWED -p tcp --destination-port 80 -j ACCEPT
+sudo iptables -A ALLOWED -p tcp --destination-port 443 -j ACCEPT
 sudo iptables -L -v
 ```
+Obeserve change:
+```
+Chain ALLOWED (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     tcp  --  any    any     anywhere             anywhere             tcp dpt:ssh
+    0     0 ACCEPT     tcp  --  any    any     anywhere             anywhere             tcp dpt:http
+    0     0 ACCEPT     tcp  --  any    any     anywhere             anywhere             tcp dpt:https
+```
+
 Output:
 ```
-Chain INPUT (policy ACCEPT 2291 packets, 160K bytes)
+Chain INPUT (policy ACCEPT 2927 packets, 209K bytes)
  pkts bytes target     prot opt in     out     source               destination         
     0     0 ACCEPT     all  --  any    any     172-0-0-0.lightspeed.brhmal.sbcglobal.net/24  anywhere            
+23462 1688K ACCEPT     all  --  any    any     anywhere             anywhere             ctstate RELATED,ESTABLISHED
+    0     0 ACCEPT     icmp --  any    any     anywhere             anywhere             icmp echo-request
+    0     0 ACCEPT     icmp --  any    any     anywhere             anywhere             icmp destination-unreachable
+    0     0 ACCEPT     icmp --  any    any     anywhere             anywhere             icmp time-exceeded
+    4   333 ALLOWED    all  --  any    any     anywhere             anywhere            
 
 Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
  pkts bytes target     prot opt in     out     source               destination         
 
 Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
- pkts bytes target     prot opt in     out     source               destination
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ALLOWED (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     tcp  --  any    any     anywhere             anywhere             tcp dpt:ssh
+    0     0 ACCEPT     tcp  --  any    any     anywhere             anywhere             tcp dpt:http
+    0     0 ACCEPT     tcp  --  any    any     anywhere             anywhere             tcp dpt:https
 ```
+
+___
+> Add a rule allowing all traffic from localnet ip addresses to acces port range 2000-4723
+
+Command:
+```bash
+sudo iptables -A INPUT -p tcp  --match multiport --dports 1024:3000 --source 192.168.249.1/24 -j ACCEPT
+sudo iptables -L -v
+```
+Obeserve change:
+```
+    0     0 ACCEPT     tcp  --  any    any     192.168.249.0/24     anywhere             multiport dports 1024:3000
+
+```
+
+Output:
+```
+Chain INPUT (policy ACCEPT 2929 packets, 209K bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     all  --  any    any     172-0-0-0.lightspeed.brhmal.sbcglobal.net/24  anywhere            
+28358 2035K ACCEPT     all  --  any    any     anywhere             anywhere             ctstate RELATED,ESTABLISHED
+    0     0 ACCEPT     icmp --  any    any     anywhere             anywhere             icmp echo-request
+    0     0 ACCEPT     icmp --  any    any     anywhere             anywhere             icmp destination-unreachable
+    0     0 ACCEPT     icmp --  any    any     anywhere             anywhere             icmp time-exceeded
+    6   508 ALLOWED    all  --  any    any     anywhere             anywhere            
+    0     0 ACCEPT     tcp  --  any    any     192.168.249.0/24     anywhere             multiport dports 1024:3000
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ALLOWED (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     tcp  --  any    any     anywhere             anywhere             tcp dpt:ssh
+    0     0 ACCEPT     tcp  --  any    any     anywhere             anywhere             tcp dpt:http
+    0     0 ACCEPT     tcp  --  any    any     anywhere             anywhere             tcp dpt:https
+
+```
+
 ___
 
 
