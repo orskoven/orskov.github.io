@@ -10,6 +10,24 @@ ___
 A set of rules that want's to control what packets go in and out.
 Throw out 
 
+
+___
+
+[Look at ip address lookup](https://www.cyberciti.biz/faq/bash-shell-command-to-find-get-ip-address/)
+
+```bash
+lsfw
+```
+```bash
+ip addr
+```
+```bash
+ifconfig
+```
+
+```bash
+netstat -4 -r -n
+```
 ___
 
 
