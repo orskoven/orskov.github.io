@@ -12,6 +12,10 @@ Throw out
 
 ___
 
+USE VERBOSE 
+```bash
+sudo iptables -L -v
+```
 
 > alice@alice: /etc/netplan$
 ```bash
