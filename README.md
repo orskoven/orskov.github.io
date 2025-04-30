@@ -12,6 +12,12 @@ Throw out
 
 ___
 
+Server with economic system and database (seperated). 
+Can protect databases from remote access.
+Granular access
+
+___
+
 Ensure to boot with execute IP rules for saving rules with shutdown and apply rules when boot.
 
 USE VERBOSE 
