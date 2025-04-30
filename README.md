@@ -4,13 +4,14 @@ ALL RIGHTS RESERVED SIMON ØRSKOV BECKMANN
 
 ___
 
-## FIREWALL ###
+## [FIREWALL](https://en.wikipedia.org/wiki/Firewall_(computing)#Packet_filter) ###
 
 **A PACKET FILTER**
 A set of rules that want's to control what packets go in and out.
 Throw out 
 
 [IPTABLES](https://en.wikipedia.org/wiki/Iptables)
+[IP FIREWALLS](https://en.wikipedia.org/wiki/Ipfirewall)
 ___
 
 
