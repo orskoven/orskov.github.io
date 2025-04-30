@@ -12,6 +12,8 @@ Throw out
 
 ___
 
+Ensure to boot with execute IP rules for saving rules with shutdown and apply rules when boot.
+
 USE VERBOSE 
 ```bash
 sudo iptables -L -v
