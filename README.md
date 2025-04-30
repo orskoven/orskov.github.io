@@ -196,6 +196,13 @@ Chain ALLOWED (1 references)
 
 ___
 
+Firwalls implemented on each host system via iptables are a very cost effective way to control and filter out unwanted traffic.
+
+Not only implementing packet filtering mechanism in a network architecture through Firewalls implemented on the communication lines, but also on each host machine system will allow for more secure means of communication.
+
+This also adheares to principle of [defence in depth](https://en.wikipedia.org/wiki/Defense_in_depth_(computing)). [Military  Defenc in depth](https://en.wikipedia.org/wiki/Defence_in_depth)
+
+___
 
 ## [FIREWALL](https://en.wikipedia.org/wiki/Firewall_(computing)#Packet_filter) ###
 
