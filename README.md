@@ -159,12 +159,12 @@ ___
 
 Command:
 ```bash
-sudo iptables -A INPUT -p tcp  --match multiport --dports 1024:3000 --source 192.168.249.1/24 -j ACCEPT
+sudo iptables -A INPUT -p tcp  --match multiport --dports 2000:4723 --source 192.168.249.1/24 -j ACCEPT
 sudo iptables -L -v
 ```
 Obeserve change:
 ```
-    0     0 ACCEPT     tcp  --  any    any     192.168.249.0/24     anywhere             multiport dports 1024:3000
+    0     0 ACCEPT     tcp  --  any    any     192.168.249.0/24     anywhere             multiport dports 2000:4723
 
 ```
 
@@ -178,7 +178,7 @@ Chain INPUT (policy ACCEPT 2929 packets, 209K bytes)
     0     0 ACCEPT     icmp --  any    any     anywhere             anywhere             icmp destination-unreachable
     0     0 ACCEPT     icmp --  any    any     anywhere             anywhere             icmp time-exceeded
     6   508 ALLOWED    all  --  any    any     anywhere             anywhere            
-    0     0 ACCEPT     tcp  --  any    any     192.168.249.0/24     anywhere             multiport dports 1024:3000
+    0     0 ACCEPT     tcp  --  any    any     192.168.249.0/24     anywhere             multiport dports 2000:4723
 
 Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
  pkts bytes target     prot opt in     out     source               destination         
