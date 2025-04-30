@@ -1835,7 +1835,7 @@ Used to enumerate system details to cause complete network compromise.
 | --- | -- | -- |
 Microsoft RPC |   | 
 NetBios |  |
-CIFS ||
+CIFS |
 
 ___
 
@@ -1865,7 +1865,7 @@ ___
 ### TOOLS USED ###
 
 | Command | Description | Link | OS |
-|  ---    | ---      | --      | --   |
+|  ---    | ---         | ---   | --- |
 | (not-recommended)  ```scp``` | Uses SSH for secure copy (outdated)| <a href="https://en.wikipedia.org/wiki/Secure_copy_protocol">[Secure Copy Protocol]</a> | linux |
 | ```fstp``` | Uses secure channel (like SSH) for file transfering | <a href="https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol">[SSH File Transfer Protocol]</a> | linux |
 | ```cp``` | copy file protocol | <a href="https://en.wikipedia.org/wiki/Cp_(Unix)">[Copy Protocol]</a> | linux |
