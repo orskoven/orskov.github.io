@@ -12,6 +12,16 @@ Throw out
 
 ___
 
+
+## Chains ##
+
+Set a chain with a purpose: 
+We can insert subchains in the iptables main 3 chains  INPUT, FORWARD, OUTPUT.
+
+
+
+___
+
 Server with economic system and database (seperated). 
 Can protect databases from remote access.
 Granular access
