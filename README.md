@@ -36,7 +36,7 @@ ___
 ip route 
 ```
 
-
+[Manial configure Netplan IP/TCP](https://netplan.readthedocs.io/en/latest/netplan-yaml/)
 ___
 
 
