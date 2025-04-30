@@ -35,6 +35,21 @@ sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 
 | -m = module (can help about what happend prior to packet (n) | conntrack (list of standard services that uses more than one port)  (stateful inspection) | -- ctstate | ESTABLISHED,RELATED (BASED ON 3-way handshake) Packets not established from inside are dropped, i allow responses from the established connection from internal host RELATED = if protocol uses more n>1 more than 1 protocols for the service | j = jump | ACCEPT / DROP|
 
+Allow anywhere tcp 
+```bash
+sudo iptables -A INPUT -p TCP --dport 22 -j ACCEPT
+```
+Allow only specific ip address:
+```bash
+sudo iptables -A INPUT -p TCP --dport 22 --source 192.168.249.1/24 -j ACCEPT
+```
+Delete chain rule 2
+```bash
+sudo iptables -D INPUT 2
+```
+
+
+
 ___
 
 
