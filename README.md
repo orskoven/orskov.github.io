@@ -10,6 +10,14 @@ ___
 A set of rules that want's to control what packets go in and out.
 Throw out 
 
+___
+
+```bash
+alice@alice:/etc/netplan$ sudo iptables -S
+-P INPUT ACCEPT
+-P FORWARD ACCEPT
+-P OUTPUT ACCEPT
+```
 
 ___
 
