@@ -4,6 +4,14 @@ ALL RIGHTS RESERVED SIMON ØRSKOV BECKMANN
 
 ___
 
+## FIREWALL ###
+
+**A PACKET FILTER**
+A set of rules that want's to control what packets go in and out.
+Throw out 
+
+___
+
 
 ## Authentication ## 
 
@@ -193,8 +201,6 @@ Password lists based on language.
 ___
 
 Attackers will use ***social engineering*** to collect intelligence on your most common words and other related subjects in your online presence. 
-
-
 ___
 
 How are you making yourself more secure? 
@@ -252,6 +258,7 @@ ___
 
 ## [Sec Tools Passwd cracking](https://sectools.org/tag/pass-audit/) ## 
 ___
+
 
 
 ___
