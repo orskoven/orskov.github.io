@@ -916,8 +916,9 @@ ls(ARP)
 https://github.com/KimiNewt/pyshark/
 
 ___
-Man In The Middle: 
+### Man In The Middle SCAPY code ### 
 > Fetch the target MAC address / generate a function to handle MAC address fetching
+
 ```python
 from scapy.all import * 
 
@@ -1045,20 +1046,6 @@ _gateway (192.168.251.2) at 00:50:56:fd:1e:95 [ether] on ens160
 ? (192.168.251.128) at 00:0c:29:69:a8:77 [ether] on ens160
 ? (192.168.251.1) at be:d0:74:f2:83:65 [ether] on ens160
 ? (192.168.251.254) at 00:50:56:e8:23:2f [ether] on ens160
-```
-```python
-ls(ARP)
-```
-
-```python
-ls(ARP)
-```
-```python
-ls(ARP)
-```
-
-```python
-ls(ARP)
 ```
 
 ___
