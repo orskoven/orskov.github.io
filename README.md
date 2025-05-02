@@ -4,6 +4,16 @@ ALL RIGHTS RESERVED SIMON ØRSKOV BECKMANN
 
 ___
 
+## Cracking Passwords with John The Ripper ##
+> VM MACHINES: | ATTACKER: KALI Linux | TARGET: Ubuntu |
+___
+> Exract and merge the passwd and shadow files with John The Ripper unshadow
+```
+john unshadow /etc/passwd /etc/shadow > unshadow.txt
+```
+[Wordlists](https://github.com/The-Art-of-Hacking/h4cker/tree/master/cracking_passwords/more_wordlists)
+___
+
 ### IPTABLES : HOW TO ###
 
 >Allow all trafficon the loopback interface
