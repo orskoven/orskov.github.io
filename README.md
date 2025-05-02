@@ -579,6 +579,63 @@ ___
 DNS spoof
 
 ___
+### MANDATORY SOF_ELK ###
+
+Download the nf2sof.sh
+```bash
+wget http://www.kallas.dk/nf2sof.sh ; sudo chmod +x nf2sof.sh
+```
+output:
+```
+--2025-05-02 12:29:26--  http://www.kallas.dk/nf2sof.sh
+Resolving www.kallas.dk (www.kallas.dk)... 165.232.77.195
+Connecting to www.kallas.dk (www.kallas.dk)|165.232.77.195|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 5066 (4.9K) [text/x-sh]
+Saving to: ‘nf2sof.sh’
+
+nf2sof.sh      0%       0  --.-KB/s        nf2sof.sh    100%   4.95K  --.-KB/s    in 0s      
+
+2025-05-02 12:29:26 (43.1 MB/s) - ‘nf2sof.sh’ saved [5066/5066]
+
+```
+create an empty file called my_netflow.txt
+```bash
+nano my_netflow.txt
+```
+depending on your ip (insert your sof-elk ip) run the commmand to transfer the netflow folder with the help from just downloaded nf2sof.sh file
+```bash
+ ./nf2sof.sh -e 192.168.251.130 -r ./netflow -w ./my_netflow.txt
+```
+
+output:
+```
+./nf2sof.sh -e 192.168.251.130 -r ./netflow -w ./my_netflow.txt
+WARNING: Output file location is not in /logstash/nfarch/. Resulting file will
+         not be automatically ingested unless moved/copied to the correct
+         filesystem location.
+         Press Ctrl-C to try again or <Enter> to continue.
+
+Running distillation.  Putting output in /Users/john/Downloads/my_netflow.txt
+
+Text file creation complete.
+You must move/copy the generated file to the /logstash/nfarch/ directory before
+  SOF-ELK can process it.
+
+
+```
+
+```bash
+scp my_netflow.txt  elk_user@192.168.251.130:/logstash/nfarch/
+```
+output:
+```
+my_netfl 100%   20MB  42.5MB/s   00:00  
+
+```
+
+
+___
 
 ## Forensics ##
 
