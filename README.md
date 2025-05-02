@@ -9,7 +9,7 @@ ___
 ___
 > Exract and merge the passwd and shadow files with John The Ripper unshadow
 ```
-john unshadow /etc/passwd /etc/shadow > unshadow.txt
+unshadow /etc/passwd /etc/shadow > unshadow.txt
 ```
 [Wordlists](https://github.com/The-Art-of-Hacking/h4cker/tree/master/cracking_passwords/more_wordlists)
 ___
