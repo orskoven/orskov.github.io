@@ -634,7 +634,12 @@ my_netfl 100%   20MB  42.5MB/s   00:00
 
 ```
 
+## in Sof-elk kibana gui ##
 
+filter search in the top
+```
+netflow.tcp_flags_str.keyword :"........" 
+```
 ___
 
 ## Forensics ##
