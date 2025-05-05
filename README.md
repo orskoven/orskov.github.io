@@ -107,7 +107,7 @@ Gateway with multiple functions/interfaces (often 3) (DMZ's).
 ___
 ## sXID Excercices ##
 
-```bash
+```bashx
 sudo apt-get install sxid
 ```
 **configure the /etc/sxid.conf**
@@ -677,7 +677,7 @@ Obeserve change:
 ```
 
 Output:
-```
+```txt
 Chain INPUT (policy ACCEPT 2929 packets, 209K bytes)
  pkts bytes target     prot opt in     out     source               destination         
     0     0 ACCEPT     all  --  any    any     172-0-0-0.lightspeed.brhmal.sbcglobal.net/24  anywhere            
@@ -707,21 +707,16 @@ sudo iptables -A INPUT -j DROP
 ```
 
 ```txt
-    4   324 DROP       all  --  any    any     anywhere             anywhere            
+ 4   324 DROP       all  --  any    any     anywhere             anywhere        
 ```
 
 ```bash
 sudo iptables -L -v
-``
+```
 
 ```txt
 Chain INPUT (policy ACCEPT 4557 packets, 350K bytes)
- pkts bytes target     prot opt in     out     source               destination         
-
-
-
-
-
+ pkts bytes target     prot opt in     out     source               destination    
     0     0 ACCEPT     all  --  any    any     172.0.0.0/24         anywhere            
 81984   31M ACCEPT     all  --  any    any     anywhere             anywhere             ctstate RELATED,ESTABLISHED
     0     0 ACCEPT     icmp --  any    any     anywhere             anywhere             icmp echo-request
@@ -742,7 +737,7 @@ Chain ALLOWED (1 references)
     4   256 ACCEPT     tcp  --  any    any     anywhere             anywhere             tcp dpt:ssh
     0     0 ACCEPT     tcp  --  any    any     anywhere             anywhere             tcp dpt:http
     0     0 ACCEPT     tcp  --  any    any     anywhere             anywhere             tcp dpt:https
-``
+```
 
 
 
