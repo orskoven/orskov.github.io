@@ -2,6 +2,8 @@ ALL RIGHTS RESERVED SIMON ØRSKOV BECKMANN
 
 # SIMON'S ✍️ CYBER SECURITY NOTES
 
+___
+
 
 ___
 
@@ -107,6 +109,22 @@ ___
 
 ```bash
 sudo apt-get install sxid
+```
+**configure the /etc/sxid.conf**
+```txt
+Enter a valid emailto send reportto. (optional)
+```
+```txt
+Set the KEEP_LOGS to keepa numberof old logs.
+```
+```txt
+Set the SEARCH to bethe list of directoriesor files youwantto searchfor SUID/GUID changes.
+```
+```txt
+–Addthe criticaldirswith commands.
+```
+```txt
+–Add also a test directory to be protected. Test chmod +s
 ```
 
 
