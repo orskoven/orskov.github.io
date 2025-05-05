@@ -121,7 +121,9 @@ sudo apt-get install sxid
 ## Tripwire ##
 ## Shorewall ##
 
+___
 
+## 
 ___
 
 ## Cracking Passwords with John The Ripper ##
@@ -132,6 +134,11 @@ ___
 unshadow /etc/passwd /etc/shadow > unshadow.txt
 ```
 [Wordlists](https://github.com/The-Art-of-Hacking/h4cker/tree/master/cracking_passwords/more_wordlists)
+
+
+```bash
+sudo john --format-crypt /etc/shadow
+```
 ___
 
 ### IPTABLES : HOW TO ###
