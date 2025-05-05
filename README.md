@@ -130,9 +130,64 @@ ___
 > VM MACHINES: | ATTACKER: KALI Linux | TARGET: Ubuntu |
 ___
 > Exract and merge the passwd and shadow files with John The Ripper unshadow
+
+check files content: 
+```bash
+sudo cat /etc/passwd | wc -l
+sudo cat /etc/shadow | wc -l
+
 ```
+check if there exists any hashed passwords:
+```bash
+sudo grep -v '!*' /etc/shadow | grep -v '::'
+```
+Insert a hashed password by adding a user: 
+
+```bash
+sudo useradd -m testuser
+sudo passwd testuser
+```
+then run 
+```bash
 sudo unshadow /etc/passwd /etc/shadow > unshadow.txt
 ```
+___
+```bash
+sudo grep -v '^[^:]*:[!*]' /etc/shadow
+```
+
+```txt
+john:$y$j9T$rSdngTR2tSKGmIekfOwke.$fwOSdb20vj4BXDxXCFFKlQ.5JyA.P4dz774tb8rDUG4:20206:0:99999:7:::
+testuser:$y$j9T$jrDQrNby/p0W8zXTaFISS.$ViEzxfX0DjsJUkhfk5b/3mOctkvXRx8f8s6sTTPUCL1:20213:0:99999:7:::
+```
+
+___
+```txt
+┌──(john㉿john)-[~/h4cker/cracking_passwords/more_wordlists]
+└─$ sudo john --format=crypt  --wordlist=./10-million-passwords.txt  /etc/unshadow.txt
+Using default input encoding: UTF-8
+Loaded 2 password hashes with 2 different salts (crypt, generic crypt(3) [?/64])
+Cost 1 (algorithm [1:descrypt 2:md5crypt 3:sunmd5 4:bcrypt 5:sha256crypt 6:sha512crypt]) is 0 for all loaded hashes
+Cost 2 (algorithm specific iterations) is 1 for all loaded hashes
+Will run 2 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+test             (testuser)     
+test             (john)     
+2g 0:00:00:01 DONE (2025-05-05 04:56) 1.092g/s 104.9p/s 209.8c/s 209.8C/s austin..miller
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed. 
+
+
+```
+
+___
+
+```bash
+sudo apt-get install build-essential libssl-dev zlib1g-dev
+```
+
+
+
 [Wordlists](https://github.com/The-Art-of-Hacking/h4cker/tree/master/cracking_passwords/more_wordlists)
 
 ```bash
@@ -144,7 +199,7 @@ cd h4cker/cracking_passwords/more_wordlists
 ```
 
 ```bash
-john --wordlist=/usr/share/john/password.lst
+sudo john --wordlist=/10-million-passwords.txt /etc/unshadow.txt
 ```
 
 ``
