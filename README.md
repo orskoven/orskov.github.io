@@ -131,14 +131,23 @@ ___
 ___
 > Exract and merge the passwd and shadow files with John The Ripper unshadow
 ```
-unshadow /etc/passwd /etc/shadow > unshadow.txt
+sudo unshadow /etc/passwd /etc/shadow > unshadow.txt
 ```
 [Wordlists](https://github.com/The-Art-of-Hacking/h4cker/tree/master/cracking_passwords/more_wordlists)
 
+```bash
+git clone https://github.com/The-Art-of-Hacking/h4cker.git
+```
 
 ```bash
-sudo john --format-crypt /etc/shadow
+cd h4cker/cracking_passwords/more_wordlists
 ```
+
+```bash
+john --wordlist=/usr/share/john/password.lst
+```
+
+``
 ___
 
 ### IPTABLES : HOW TO ###
