@@ -34,6 +34,13 @@ man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
 Accisble by default user.
 ```
 
+Special permissions allows all users to run
+```bash
+passwd
+```
+
+and change password because a service running (runs with ROOT privileges) momentarily provides temprorary root access to the user to change the password.
+
 ## sXID ##
 ## PortSentry (Port Guardian) ##
 ## Squid Proxy ##
