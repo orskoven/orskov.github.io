@@ -118,14 +118,286 @@ Enter a valid emailto send reportto. (optional)
 Set the KEEP_LOGS to keepa numberof old logs.
 ```
 ```txt
-Set the SEARCH to bethe list of directoriesor files youwantto searchfor SUID/GUID changes.
+Set the SEARCH to bethe list of directoriesor files you want to search for SUID/GUID changes.
 ```
 ```txt
-–Addthe criticaldirswith commands.
+–Add the critical dirs with commands.
 ```
 ```txt
 –Add also a test directory to be protected. Test chmod +s
 ```
+
+___
+````markdown
+## sXID Exercises ##
+
+### Install `sxid`
+```bash
+sudo apt-get install sxid
+````
+
+### Configure `/etc/sxid.conf`
+
+Edit the configuration file to define how `sxid` behaves. Open the file:
+
+```bash
+sudo nano /etc/sxid.conf
+```
+
+Make the following changes:
+
+* **Set report email (optional):**
+
+  ```txt
+  EMAIL="your_email@example.com"
+  ```
+
+* **Set number of log backups:**
+
+  ```txt
+  KEEP_LOGS=5
+  ```
+
+* **Define which paths to monitor:**
+
+  ```txt
+  SEARCH="/bin /sbin /usr/bin /usr/sbin /your/test/dir"
+  ```
+
+* **Add critical directories manually:**
+
+  ```bash
+  mkdir -p /your/test/dir
+  sudo chmod +s /your/test/dir/testfile
+  ```
+
+### Run sxid manually
+
+```bash
+sudo sxid -v
+```
+
+### Schedule sxid to run every hour
+
+Edit crontab:
+
+```bash
+sudo crontab -e
+```
+
+Add this line:
+
+```cron
+0 * * * * /usr/sbin/sxid -q
+```
+
+---
+
+## Exercise 12.b – Tripwire
+
+### Install Tripwire
+
+```bash
+sudo apt-get install tripwire
+```
+
+### Initialize configuration
+
+Set the passphrase when prompted.
+
+### Edit `/etc/tripwire/twpol.txt` to define protected directories
+
+Example:
+
+```bash
+(
+  rulename = "System binaries",
+  severity = 100
+)
+{
+  /bin -> $(SEC_CRIT);
+  /sbin -> $(SEC_CRIT);
+  /etc -> $(SEC_CRIT);
+}
+```
+
+### Create site and local keys
+
+```bash
+sudo twadmin --generate-keys
+```
+
+### Initialize the Tripwire database
+
+```bash
+sudo tripwire --init
+```
+
+### Test Tripwire
+
+1. Create a new file in `/bin`:
+
+   ```bash
+   sudo touch /bin/evil
+   ```
+
+2. Run Tripwire check:
+
+   ```bash
+   sudo tripwire --check
+   ```
+
+### Schedule Tripwire in crontab
+
+```bash
+sudo crontab -e
+```
+
+Add:
+
+```cron
+*/20 * * * * /usr/sbin/tripwire --check
+```
+
+---
+
+## Exercise 12.c – PortSentry
+
+### Install PortSentry
+
+```bash
+sudo apt-get install portsentry
+```
+
+### Edit `/etc/portsentry/portsentry.conf`
+
+* **Protect common ports from scans:**
+
+  ```txt
+  TCP_PORTS="1,7,9,11,13,15,17,19,20,21,22,23,25,37,42,43,53,69,79,80,110,111"
+  UDP_PORTS="1,7,9,69,161,162"
+  ```
+
+* **Add fake ports to monitor non-existing ones.**
+
+* **Uncomment iptables integration to block scans:**
+
+  ```txt
+  KILL_ROUTE="/sbin/iptables -I INPUT -s $TARGET$ -j DROP"
+  ```
+
+### Run PortSentry and test with Nmap from another machine
+
+```bash
+sudo systemctl restart portsentry
+```
+
+Example Nmap command from another machine:
+
+```bash
+nmap -sS <target-IP>
+```
+
+Check logs:
+
+```bash
+cat /var/log/syslog | grep portsentry
+```
+
+---
+
+## Exercise 12.d – Squid Proxy
+
+### Install Squid Proxy
+
+```bash
+sudo apt-get install squid
+```
+
+### Edit Squid config file
+
+```bash
+sudo nano /etc/squid/squid.conf
+```
+
+Add filters:
+
+* **Block countries by domain suffix:**
+
+  ```squid
+  acl blocked_domains dstdomain .se .ru .ch
+  http_access deny blocked_domains
+  ```
+
+* **Block by content keywords:**
+
+  ```squid
+  acl block_keywords url_regex -i "Sverige" "Sweden" "drop table" "insert"
+  http_access deny block_keywords
+  ```
+
+### Restart Squid
+
+```bash
+sudo systemctl restart squid
+```
+
+### Configure browser to use proxy and test filters
+
+---
+
+## Exercise 12.e – Shorewall (Optional)
+
+### Install Shorewall
+
+```bash
+sudo apt-get install shorewall
+```
+
+### Setup Shorewall zones
+
+Define `zones` file:
+
+```txt
+# ZONE   TYPE
+fw       firewall
+net      ipv4
+dmz      ipv4
+loc      ipv4
+```
+
+### Define interfaces in `interfaces`:
+
+```txt
+#ZONE  INTERFACE  BROADCAST
+net    eth0       detect
+dmz    eth1       detect
+loc    eth2       detect
+```
+
+### Setup routing rules in `policy`:
+
+```txt
+#SOURCE  DEST    POLICY
+loc      net     ACCEPT
+loc      dmz     ACCEPT
+dmz      loc     DROP
+net      dmz     ACCEPT
+net      loc     DROP
+```
+
+### Start Shorewall
+
+```bash
+sudo systemctl restart shorewall
+```
+
+Ensure Apache and mail servers are only accessible according to rules.
+
+---
+
+
+___
 
 
 ## Tripwire Excercises ##
