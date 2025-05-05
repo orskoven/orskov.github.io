@@ -166,8 +166,8 @@ Make the following changes:
 * **Add critical directories manually:**
 
   ```bash
-  mkdir -p /your/test/dir
-  sudo chmod +s /your/test/dir/testfile
+  mkdir rocku
+  sudo chmod +s rocku
   ```
 
 ### Run sxid manually
