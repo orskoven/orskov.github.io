@@ -39,7 +39,43 @@ Special permissions allows all users to run
 passwd
 ```
 
+## ATTACK on S-bit creating a service to escalate to root privileges ## 
+
 and change password because a service running (runs with ROOT privileges) momentarily provides temprorary root access to the user to change the password.
+
+Find files:
+```bash
+sudo find /usr -perm -4000
+```
+```bash
+sudo find /usr -perm -4000 - exec ls -l {} \;
+```
+
+Important for success:
+chaning the s-bit
+```bash
+chmod u+s somefile.txt
+```
+```bash
+chmod 4755 somefile.txt
+```
+
+### sXID package monito to SUID ###
+
+install sxid package.
+
+configure in the /etc/sxid.conf
+
+```bash
+nano /etc/sxid.conf
+```
+- remember email
+
+
+### TRIPWIRE ###
+
+Intruder in system will change critical 
+
 
 ## sXID ##
 ## PortSentry (Port Guardian) ##
