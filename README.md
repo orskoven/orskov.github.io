@@ -1026,6 +1026,12 @@ nfpcapd -r lab-2.3.pcap -l ./nfpcap/
 nfdump2sof-elk.sh -e 192.168.117.129 -r ./nfpcap/ -w /logstash/nfarch/netflow_frompcap.txt
 ```
 
+### Filter SOF_ELK ###
+
+```bash
+netflow.tcp_flags_str:"S" and network.packets <= 2 and destination.port < 80 or destination.port > 80
+```
+
 ### HTTPD log ###
 
 🔺 
