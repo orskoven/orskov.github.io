@@ -189,6 +189,9 @@ Add this line:
 ```cron
 0 * * * * /usr/sbin/sxid -q
 ```
+>- 0 * * * * – This means the command will run at the top of every hour (i.e.,
+>- minute 0 of each hour).
+/usr/sbin/sxid -q – This is the command being run. It's executing sxid with the -q option.
 
 ---
 
