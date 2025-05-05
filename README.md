@@ -128,7 +128,6 @@ Set the SEARCH to bethe list of directoriesor files you want to search for SUID/
 ```
 
 ___
-````markdown
 ## sXID Exercises ##
 
 ### Install `sxid`
