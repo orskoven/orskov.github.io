@@ -162,6 +162,11 @@ testuser:$y$j9T$jrDQrNby/p0W8zXTaFISS.$ViEzxfX0DjsJUkhfk5b/3mOctkvXRx8f8s6sTTPUC
 ```
 
 ___
+THIS COMMANDS CRACKS THE PASSWORDS IN 🗃️UNSHADOW.txt with corresponding wordlist 🔐./10-million-passwords.txt
+```bash
+sudo john --format=crypt  --wordlist=./10-million-passwords.txt  /etc/unshadow.txt
+```
+output:
 ```txt
 ┌──(john㉿john)-[~/h4cker/cracking_passwords/more_wordlists]
 └─$ sudo john --format=crypt  --wordlist=./10-million-passwords.txt  /etc/unshadow.txt
@@ -177,9 +182,22 @@ test             (john)
 Use the "--show" option to display all of the cracked passwords reliably
 Session completed. 
 
-
 ```
 
+Check the cracking result:
+```bash
+sudo john --show /etc/unshadow.txt
+```
+output:
+```txt
+┌──(john㉿john)-[~/h4cker/cracking_passwords/more_wordlists]
+└─$ sudo john --show /etc/unshadow.txt
+
+john:<HERE SHOULD BE PLAIN TEXT PASSWORD>:1000:1000:john,,,:/home/john:/usr/bin/zsh
+testuser:<HERE SHOULD BE PLAIN TEXT PASSWORD>:1001:1001::/home/testuser:/bin/sh
+
+2 password hashes cracked, 0 left
+```                                    
 ___
 
 ```bash
