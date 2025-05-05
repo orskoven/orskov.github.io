@@ -76,6 +76,15 @@ nano /etc/sxid.conf
 
 Intruder in system will change critical 
 
+Checks hashes of the most important sysadmin files to periodically checks for any modifications by comparing hahses.
+
+### PortSentry ###
+
+Guard over ports. 
+Look at packets and modify firewall rules to prevent attacks.
+EXAMPLE:Firewall can be realtime updated to update firewall rules.
+EXAMPLE:🗺️ also to make another picture of the real setup (honeypot🍯) "lie" about the ports (ghosts ports).
+
 
 ## sXID ##
 ## PortSentry (Port Guardian) ##
