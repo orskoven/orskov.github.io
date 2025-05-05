@@ -87,8 +87,36 @@ EXAMPLE:🗺️ also to make another picture of the real setup (honeypot🍯) "l
 
 #### 🔺 Can be misused for denial of service 🔺 ####
 
-## sXID ##
-## PortSentry (Port Guardian) ##
+
+### Squid Proxy ###
+
+A web🕸️ proxy
+
+HTTP, HTTPS, FTP, SSL, TLS,...
+Forwarding and caching for performance.
+Filtering traffic based on application.
+
+
+### Shorewall ###
+
+Interface for making iptables (for GUI purposes). 
+Gateway with multiple functions/interfaces (often 3) (DMZ's).
+
+___
+## sXID Excercices ##
+
+```bash
+sudo apt-get install sxid
+```
+
+
+## Tripwire Excercises ##
+
+
+
+## PortSentry (Port Guardian) Excercise ##
+
+
 ## Squid Proxy ##
 ## Tripwire ##
 ## Shorewall ##
