@@ -20,11 +20,14 @@ Here’s the complete script:
 echo "Creating necessary directories for Docker Compose setup..."
 mkdir -p ./logstash/config
 mkdir -p ./logstash/pipeline
+mkdir -p ./suricata
 
-# Step 2: Create the docker-compose.yml file
+# Step 2: Create the docker-compose.yml file with Suricata setup
 echo "Creating docker-compose.yml..."
 
 cat <<EOF > docker-compose.yml
+version: '3.8'
+
 services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.10.0
@@ -35,7 +38,7 @@ services:
       - elastic
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:8.10.0
+    image: docker.elastic.co/kibana/kibana:8.9.0  # Changed version to 8.9.0
     environment:
       - ELASTICSEARCH_URL=http://elasticsearch:9200
       - ELASTICSEARCH_USERNAME=elastic
@@ -77,12 +80,47 @@ services:
     command: >
       filebeat -e -E output.elasticsearch.hosts=["http://elasticsearch:9200"]
 
+  suricata:
+    image: docker://oisf/suricata:latest
+    container_name: suricata
+    volumes:
+      - ./suricata:/etc/suricata
+      - /var/log/suricata:/var/log/suricata
+    networks:
+      - elastic
+    cap_add:
+      - NET_ADMIN
+    command: >
+      /bin/bash -c "suricata -c /etc/suricata/suricata.yaml -i eth0"
+    depends_on:
+      - elasticsearch
+    ports:
+      - "8080:8080"  # Optional: for Suricata's Evebox UI (if enabled)
+
 networks:
   elastic:
     driver: bridge
 EOF
 
-# Step 3: Create Packetbeat configuration
+# Step 3: Create Suricata configuration
+echo "Creating Suricata configuration file..."
+
+cat <<EOF > ./suricata/suricata.yaml
+# Suricata Configuration - Enable EVE JSON output
+outputs:
+  - eve-log:
+      enabled: yes
+      filetype: json
+      filename: /var/log/suricata/eve.json
+      types:
+        - alert
+        - dns
+        - http
+        - tls
+        - files
+EOF
+
+# Step 4: Create Packetbeat configuration for Suricata integration
 echo "Creating Packetbeat configuration file..."
 
 cat <<EOF > ./logstash/config/packetbeat.yml
@@ -100,42 +138,49 @@ output.elasticsearch:
   password: "elastic_password"
 EOF
 
-# Step 4: Create Filebeat configuration
-echo "Creating Filebeat configuration file..."
+# Step 5: Create Filebeat configuration to forward Suricata logs
+echo "Creating Filebeat configuration file for Suricata..."
 
 cat <<EOF > ./logstash/config/filebeat.yml
 filebeat.inputs:
   - type: log
     paths:
-      - /var/log/*.log
+      - /var/log/suricata/eve.json  # Suricata EVE JSON logs path
+    json:
+      keys_under_root: true
+      add_error_key: true
 output.elasticsearch:
   hosts: ["http://elasticsearch:9200"]
   username: "elastic"
   password: "elastic_password"
 EOF
 
-# Step 5: Pull the latest Docker images to avoid pulling errors
-echo "Pulling latest Docker images for Elastic Stack..."
+# Step 6: Pull the latest Docker images to avoid pulling errors
+echo "Pulling latest Docker images for Elastic Stack and Suricata..."
 docker pull docker.elastic.co/elasticsearch/elasticsearch:8.10.0
-docker pull docker.elastic.co/kibana/kibana:8.10.0
+docker pull docker.elastic.co/kibana/kibana:8.9.0  # Changed to 8.9.0
 docker pull docker.elastic.co/logstash/logstash:8.10.0
 docker pull docker.elastic.co/beats/packetbeat:8.10.0
 docker pull docker.elastic.co/beats/filebeat:8.10.0
+docker pull oisf/suricata:latest
 
-# Step 6: Start Docker Compose in detached mode
+# Step 7: Start Docker Compose in detached mode
 echo "Starting Docker Compose..."
 docker-compose up -d
 
-# Step 7: Check Docker Compose status
+# Step 8: Check Docker Compose status
 echo "Checking the status of the Docker Compose services..."
 docker-compose ps
 
-# Step 8: Final message
-echo "Elastic Stack setup is complete!"
+# Step 9: Final message
+echo "Elastic Stack setup with Suricata IDS is complete!"
 echo "Access Kibana at http://localhost:5601"
 echo "Your Elasticsearch is running on http://elasticsearch:9200"
+echo "Suricata is capturing network traffic and logging to /var/log/suricata/eve.json"
 
 ```
+
+
 
 ### Explanation:
 
