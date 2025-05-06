@@ -3,6 +3,134 @@ ALL RIGHTS RESERVED SIMON ØRSKOV BECKMANN
 # SIMON'S ✍️ CYBER SECURITY NOTES
 ___
 
+Sure! Below is a complete Bash script to run and test all the containers you've mentioned, including Kibana, Elasticsearch, Filebeat, and `nfcapd`. The script will:
+
+1. Pull the necessary Docker images.
+2. Run the containers.
+3. Check if the containers are running.
+4. Test if the web services (Kibana and Elasticsearch) are accessible via the specified ports.
+5. Stop the containers at the end.
+
+Here’s the complete script:
+
+```bash
+#!/bin/bash
+
+# Function to check if a container is running
+check_container() {
+    container_name=$1
+    if [[ "$(docker ps -q -f name=$container_name)" ]]; then
+        echo "$container_name is running."
+    else
+        echo "$container_name is not running."
+    fi
+}
+
+# Function to test a web service is accessible
+test_web_service() {
+    url=$1
+    port=$2
+    echo "Testing $url:$port ..."
+    if curl -s --head "http://$url:$port" | grep "HTTP/1.1 200 OK" > /dev/null; then
+        echo "Service $url:$port is accessible."
+    else
+        echo "Service $url:$port is not accessible."
+    fi
+}
+
+# Pull Docker images
+echo "Pulling Docker images..."
+docker pull docker.elastic.co/kibana/kibana:8.13.4
+docker pull docker.elastic.co/elasticsearch/elasticsearch:8.13.4
+docker pull docker.elastic.co/beats/filebeat:8.13.4
+docker pull heywoodlh/nfcapd:latest
+
+# Run Kibana container
+echo "Running Kibana container..."
+docker run -d --name kibana -p 5601:5601 docker.elastic.co/kibana/kibana:8.13.4
+
+# Run Elasticsearch container
+echo "Running Elasticsearch container..."
+docker run -d --name elasticsearch -p 9200:9200 -p 9300:9300 docker.elastic.co/elasticsearch/elasticsearch:8.13.4
+
+# Run Filebeat container
+echo "Running Filebeat container..."
+docker run -d --name filebeat docker.elastic.co/beats/filebeat:8.13.4
+
+# Run nfcapd container
+echo "Running nfcapd container..."
+docker run -d --name nfcapd -p 9995:9995 heywoodlh/nfcapd:latest
+
+# Wait for containers to fully start
+echo "Waiting for containers to initialize..."
+sleep 20  # Adjust if needed based on container startup time
+
+# Test Kibana (http://localhost:5601)
+test_web_service "localhost" 5601
+
+# Test Elasticsearch (http://localhost:9200)
+test_web_service "localhost" 9200
+
+# Test Filebeat (this doesn't have a direct web service, but ensure it's running)
+check_container "filebeat"
+
+# Test nfcapd (port 9995 for the nfcapd service)
+test_web_service "localhost" 9995
+
+# Check if all containers are running
+check_container "kibana"
+check_container "elasticsearch"
+check_container "nfcapd"
+
+# Stop the containers
+echo "Stopping all containers..."
+docker stop kibana elasticsearch filebeat nfcapd
+
+# Optional: Remove the containers
+# echo "Removing containers..."
+# docker rm kibana elasticsearch filebeat nfcapd
+
+echo "All tests are complete!"
+```
+
+### Explanation:
+
+1. **Pulling Docker images**: The script pulls the required Docker images for Kibana, Elasticsearch, Filebeat, and `nfcapd`.
+2. **Running containers**: Each container is started in detached mode (`-d`) and mapped to the appropriate ports.
+3. **Waiting for initialization**: The script waits for 20 seconds to allow containers to initialize fully. You can adjust the wait time based on your environment.
+4. **Testing the services**:
+
+   * It checks if Kibana is accessible at `localhost:5601`.
+   * It checks if Elasticsearch is accessible at `localhost:9200`.
+   * It checks if `nfcapd` is accessible at port `9995`.
+   * It checks if Filebeat is running (as it doesn't have a web service, just verifies it is running).
+5. **Stopping and cleaning up**: After testing, the containers are stopped. Optionally, you can uncomment the line that removes the containers (`docker rm`).
+
+### Usage:
+
+1. **Save the script**: Copy the script into a file, e.g., `test_docker_containers.sh`.
+
+2. **Make it executable**:
+
+   ```bash
+   chmod +x test_docker_containers.sh
+   ```
+
+3. **Run the script**:
+
+   ```bash
+   ./test_docker_containers.sh
+   ```
+
+### Notes:
+
+* The script assumes you have Docker installed and running on your system.
+* If you're running Docker on macOS/Windows through Docker Desktop, you can access the containers via `localhost` (127.0.0.1).
+* Adjust the `sleep` time if the containers need more time to initialize.
+
+Let me know if you need further customization or any other help!
+
+___
 
 ### 🔄 Goal
 
