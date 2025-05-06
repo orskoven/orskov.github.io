@@ -1,9 +1,264 @@
 ALL RIGHTS RESERVED SIMON ØRSKOV BECKMANN
 
 # SIMON'S ✍️ CYBER SECURITY NOTES
+___
+
+
+### 🔄 Goal
+
+* **Maintain NAT between Mac ↔ Kali Linux VM** (handled by VMware Fusion).
+* **Ensure inter-container communication (ELK, Suricata, Zeek, etc.) within Kali**.
+* **Avoid `network_mode: host`**, which bypasses NAT and can break communication in a virtualized NAT environment on **macOS**.
+
+---
+
+### ✅ Key Fixes:
+
+* Replace `network_mode: host` with **custom Docker bridge networks**.
+* Explicitly **attach all containers** to the same Docker network for seamless communication.
+* Set correct interfaces for packet capture (`ens34`) but ensure **interfaces are accessible from within containers**—this may require interface pass-through or `macvlan` if host interface capture is needed.
+
+---
+
+### ✅ Updated `docker-compose.yml` with NAT-Compatible Networking:
+
+```yaml
+version: '3.8'
+
+services:
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    networks:
+      - siem
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.13.0
+    container_name: kibana
+    depends_on:
+      - elasticsearch
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    networks:
+      - siem
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:8.13.0
+    container_name: filebeat
+    user: root
+    volumes:
+      - ./filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - /var/log:/hostfs/var/log:ro
+    depends_on:
+      - elasticsearch
+      - kibana
+    networks:
+      - siem
+
+  suricata:
+    image: jasonish/suricata:latest
+    container_name: suricata
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+    networks:
+      - siem
+    volumes:
+      - ./suricata.yaml:/etc/suricata/suricata.yaml
+      - /var/log/suricata:/var/log/suricata
+    command: suricata -i eth0 -c /etc/suricata/suricata.yaml
+
+  zeek:
+    image: blacktop/zeek:latest
+    container_name: zeek
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+    networks:
+      - siem
+    volumes:
+      - ./zeek:/zeek/logs
+    command: zeek -i eth0
+
+  fprobe:
+    image: pavelbazika/fprobe
+    container_name: fprobe
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+    networks:
+      - siem
+    command: -i eth0 -fip 127.0.0.1 -p 9995
+
+  nfcapd:
+    image: netsniff-ng/nfdump
+    container_name: nfcapd
+    networks:
+      - siem
+    command: nfcapd -w -D -l /data -p 9995
+    volumes:
+      - ./netflow:/data
+    ports:
+      - "2055:2055/udp"
+
+  nids-light:
+    build: ./nids-light
+    container_name: nids-light
+    depends_on:
+      - filebeat
+      - suricata
+    networks:
+      - siem
+    volumes:
+      - ./nids-light/config:/app/config
+
+  elk-siem21suricatafull:
+    build: ./elk-siem21suricatafull
+    container_name: elk-siem21
+    depends_on:
+      - elasticsearch
+      - kibana
+      - suricata
+    networks:
+      - siem
+
+volumes:
+  esdata:
+
+networks:
+  siem:
+    driver: bridge
+```
+
+---
+
+### 🔍 Important Notes:
+
+1. **Interface Name**:
+
+   * You may need to **map `ens34` to container eth0** using `macvlan` if you require direct packet sniffing from that interface.
+   * Otherwise, **pass mirrored traffic** from the host or tap into traffic using pcap with a mount.
+
+2. **Host Interface Access** (e.g., for Suricata/Zeek):
+
+   * On macOS with Fusion + NAT, using `host` mode is **problematic**.
+   * Use **`--net=macvlan`** outside Compose if true interface access is needed.
+
+3. **Cross-VM communication**:
+
+   * Ensure Fusion’s NAT is properly forwarding or bridging traffic from Kali to your macOS network stack.
+   * Optionally, expose `5601`, `9200`, and other ports via Fusion port forwarding.
+
+---
+
+Would you like me to provide a working `macvlan` example or a script to simulate mirrored traffic to `eth0` for testing Suricata and Zeek?
 
 ___
 
+To run your Docker Compose setup on **Kali Linux in VMware Fusion** (or any Linux system), follow these steps:
+
+---
+
+### ✅ Step-by-Step: Run Docker Compose
+
+#### 1. 🛠 Install Docker and Docker Compose (if not already)
+
+If you haven’t already:
+
+```bash
+sudo apt update
+sudo apt install docker.io docker-compose -y
+sudo systemctl start docker
+sudo systemctl enable docker
+```
+
+> Confirm Docker is installed:
+
+```bash
+docker --version
+docker-compose --version
+```
+
+---
+
+#### 2. 📁 Prepare the Project Directory
+
+Create a directory for your project and navigate into it:
+
+```bash
+mkdir ~/nids-elk-stack && cd ~/nids-elk-stack
+```
+
+Place the following files inside this directory:
+
+* `docker-compose.yml` (your full setup)
+* `suricata.yaml`
+* `filebeat.yml`
+* Any build contexts like:
+
+  * `./nids-light/Dockerfile`
+  * `./elk-siem21suricatafull/Dockerfile`
+
+---
+
+#### 3. 🏗️ Build and Start the Stack
+
+Run the following command to **build and launch** the services:
+
+```bash
+sudo docker-compose up -d --build
+```
+
+* `-d` runs it in the background (detached).
+* `--build` ensures it rebuilds custom Docker images (`nids-light`, `elk-siem21suricatafull`).
+
+---
+
+#### 4. ✅ Check Running Services
+
+```bash
+docker ps
+```
+
+You should see all your containers running, including `elasticsearch`, `kibana`, `suricata`, etc.
+
+---
+
+#### 5. 🌐 Access Services in Browser (from host/mac)
+
+If you've forwarded ports correctly via **VMware NAT settings**, access:
+
+* **Kibana**: `http://<kali-vm-ip>:5601`
+* **Elasticsearch**: `http://<kali-vm-ip>:9200`
+
+> Use `ip a` or `ifconfig` inside the Kali VM to find your NAT-assigned IP (`ens33` interface).
+
+---
+
+#### 6. 🛑 Stop the Stack
+
+When you're done, you can shut everything down with:
+
+```bash
+sudo docker-compose down
+```
+
+---
+
+Would you like a helper script (`start.sh`, `stop.sh`) to automate this?
+
+
+___
 # IDS (intrusion detection system(live real time)) / IPS🛰️ #
 
 
@@ -607,6 +862,245 @@ sudo apt-get install kibana
 ```bash
 sudo systemctl enable kibana
 sudo systemctl start kibana
+```
+___
+Absolutely. Below is a **top professional chapter** written in **Markdown with UX/UI best practices** for inclusion in a **high-end cybersecurity practitioner’s handbook or online reference book**. It focuses on **NIDS Light, Suricata rule writing, testing, and alert generation**, based on your detailed content.
+
+---
+
+# 📖 Chapter 7: NIDS Light & Suricata Rule Crafting Best Practices
+
+**Audience**: Cybersecurity Practitioners, SOC Engineers, Red/Blue Team Operators  
+**Scope**: NIDS operation, rule development, alert interpretation, and traffic simulation  
+**Stack Focus**: Suricata, Emerging Threats Rules, Fast Logging, Full Packet Capture  
+**Prerequisites**: Linux CLI proficiency, packet analysis fundamentals, IDS/IPS concepts  
+
+---
+
+## 🛠️ 1. Verifying Suricata (NIDS Light) Service Status
+
+To confirm if Suricata is operational:
+
+```bash
+sudo service suricata status
+````
+
+Expected output (example):
+
+```
+● suricata.service - LSB: Next generation IDS/IPS
+   Loaded: loaded (/etc/init.d/suricata)
+   Active: active (running)
+```
+
+If inactive, start the service:
+
+```bash
+sudo service suricata start
+```
+
+---
+
+## 🌐 2. Rule Management & Emerging Threats (ET) Sources
+
+Suricata supports two major **open rule feed sources**:
+
+| Rule Set | Type       | Update Frequency  | Access Type       |
+| -------- | ---------- | ----------------- | ----------------- |
+| ET Open  | Community  | Delayed (30 days) | Free              |
+| ET Pro   | Commercial | Real-time         | Paid Subscription |
+
+Auto-updating can be configured using **`suricata-update`**:
+
+```bash
+sudo suricata-update
+```
+
+> 🔁 This ensures the latest rules are fetched from your configured provider (ET Open by default).
+
+Rule files are stored in:
+
+```bash
+/var/lib/suricata/rules/
+```
+
+Custom rules are usually placed in:
+
+```bash
+/etc/suricata/rules/local.rules
+```
+
+---
+
+## 🧾 3. Anatomy of a Suricata / Snort Rule
+
+```snort
+alert tcp any any -> any any (msg: "TCP packet detected"; sid:5000001;)
+```
+
+### 🔍 Rule Breakdown:
+
+| Element        | Meaning                                              |
+| -------------- | ---------------------------------------------------- |
+| `alert`        | Action: alert, log, drop, reject                     |
+| `tcp`          | Protocol                                             |
+| `any any`      | Source IP and source port                            |
+| `->`           | Direction of traffic                                 |
+| `any any`      | Destination IP and port                              |
+| `(msg: "...")` | Message shown in alert logs                          |
+| `sid:5000001;` | Unique Signature ID (must not conflict with others!) |
+
+---
+
+## 🎨 4. Visual Rule Breakdown Diagram
+
+```mermaid
+flowchart LR
+    A[alert] --> B[tcp]
+    B --> C[any (src IP)]
+    C --> D[any (src port)]
+    D --> E[-> direction]
+    E --> F[any (dest IP)]
+    F --> G[any (dest port)]
+    G --> H[msg: "TCP packet detected"]
+    H --> I[sid: 5000001]
+```
+
+### 📌 Best Practices:
+
+* Use `sid` > **7000000** for custom rules to avoid collisions
+* Comment unused rules with `#` to avoid performance impact
+* Place custom rules in `local.rules`
+* Keep your rules **short, specific**, and **context-aware**
+
+---
+
+## 🏠 5. Preconfigured Variables
+
+Suricata supports **variables** to simplify and modularize rule definitions.
+
+```snort
+var HOME_NET [10.0.0.0/8]
+var HTTP_PORTS [80,8080,443]
+var EXTERNAL_NET !$HOME_NET
+```
+
+You can use variables in rules like this:
+
+```snort
+alert tcp $EXTERNAL_NET any -> $HOME_NET $HTTP_PORTS (msg:"HTTP attempt"; sid:7000001;)
+```
+
+---
+
+## 🧪 6. Testing & Enabling Custom Rules
+
+### 🔬 Step 1: Test Rule Syntax
+
+```bash
+sudo suricata -T -c /etc/suricata/suricata.yaml -v
+```
+
+### ✅ Step 2: Enable Rule
+
+Restart Suricata to apply the new rule:
+
+```bash
+sudo service suricata restart
+```
+
+---
+
+## 📁 7. Alerts & Full Packet Capture
+
+### 🔔 Alert Log File
+
+```bash
+/var/log/suricata/fast.log
+```
+
+### 🧵 To search for a specific alert:
+
+```bash
+grep 5000001 /var/log/suricata/fast.log
+```
+
+### 💽 Full Packet Capture (.pcap)
+
+Suricata automatically captures packet data in:
+
+```bash
+/var/log/suricata/*.pcap
+```
+
+Ensure the system is on a **NAT or bridge** mode interface to capture the correct traffic (e.g., `eth0`, `ens33`, `enp0s3`).
+
+---
+
+## 🎇 8. Simulate Traffic (Generate Noise)
+
+Download known malicious traffic to simulate real-world alerts:
+
+1. 📦 Download Sample PCAP:
+
+```bash
+wget https://www.malware-traffic-analysis.net/2023/10/31/2023-10-31-icedID-traffic.pcap.zip
+unzip 2023-10-31-icedID-traffic.pcap.zip
+```
+
+2. 🛠️ Replay with `tcpreplay`:
+
+```bash
+sudo tcpreplay -i eth0 -M10 2023-10-31-icedID-infection-traffic.pcap
+```
+
+> 📢 This sends the packet stream to the interface, generating alerts that Suricata will log and potentially match rules for.
+
+---
+
+## 🚦 9. Common Pitfalls
+
+| Mistake                         | Solution                                                                |
+| ------------------------------- | ----------------------------------------------------------------------- |
+| `sid` collision                 | Use unique SID values > 7000000                                         |
+| Rules not firing                | Check direction, port, and protocol accuracy                            |
+| Interface not capturing traffic | Ensure NIC is in **promiscuous** mode (`ip link set eth0 promisc on`)   |
+| Overloaded system               | Disable unused rules (`# comment`) or apply rule thresholds             |
+| IDS not seeing ARP              | IDS systems typically don’t parse L2 ARP packets – consider switch logs |
+
+---
+
+## 🔚 Summary
+
+| Action                    | Tool / Command                         |
+| ------------------------- | -------------------------------------- |
+| Check Suricata is running | `sudo service suricata status`         |
+| Update community rules    | `sudo suricata-update`                 |
+| Create/test rule          | `local.rules` → `sudo suricata -T`     |
+| Simulate attack           | `tcpreplay -i eth0 -M10 pcapfile.pcap` |
+| View alerts               | `grep sid /var/log/suricata/fast.log`  |
+| View PCAPs                | `ls /var/log/suricata/*.pcap`          |
+
+---
+
+## 🧠 Pro Tip
+
+> Combine this rule-testing pipeline with **Kibana dashboards** and a **SIEM rule framework** to detect, visualize, and respond to threats efficiently.
+
+---
+
+## 📚 Further Reading
+
+* 📘 [Suricata Rule Writing Guide](https://suricata.readthedocs.io/en/latest/rules/intro.html)
+* 📘 [Snort Rule Basics](https://www.snort.org/documents)
+* 🧪 [malware-traffic-analysis.net](https://www.malware-traffic-analysis.net/)
+* 📊 [Elasticsearch SIEM](https://www.elastic.co/siem)
+
+```
+
+---
+
+Would you like a **PDF export** of this chapter or integration into a larger online cybersecurity knowledge base?
 ```
 
 ---
