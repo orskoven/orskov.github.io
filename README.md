@@ -4,6 +4,215 @@ ALL RIGHTS RESERVED SIMON ØRSKOV BECKMANN
 
 ___
 
+# IDS (intrusion detection system(live real time)) / IPS🛰️ #
+
+
+> IDS = passive system -> sits on the switch and duplicates/mirror ports on switch
+> Cannot block traffic - but inspect the traffic
+> Traffic doesnt pass through IDS / is parrallel to the traffic
+> ONLY Promiscous mode / doesnt have its own ip address and sends packets through analysis tools
+> Makes full packet capture + more
+> 2 interfaces > monitoring and configuration
+> reactive IDS'es with an attack -> it actively sets an alert -> firewalls -> built in gateways that are under attacks and lock down
+> Can be dangerous to turn on and automatically lock network and possibly lock down production environemnts
+> IDS cannot block current package and can reactively deploy gateway rules to block attack
+> Can actively send reset packets to source IP
+
+
+# IPS ( Intrusion prevention ) #
+
+> serial connection with the network components
+> 3 interfaces -> 2 for input/output  - 1 for configuration
+> Should be overdimensionded to handle rules -> not firewall rules -> we have 1000 of rules for each packet passing through
+> Heavy load on the network
+> Looks at the packet -> look for matching rules -> can block the packet
+> can also make rules for alarm
+
+
+## implementation ##
+
+> typically setup rules not to block at initial setup
+> scan the traffic and undersstand the traffic of the business
+> start ips as ids and then after some time turn on ips features
+> often we combine ips and ids -> set of rules for logging traffic if uncertain -> and be sure to block only certain attack
+> IDS can helo verify IPS is still operational and error detect ips
+> IDS can alert the ips (since ips is further down the network chain)
+> We can place a NIDS (network intrusion detection) on the trusted network subnet for detection of attacks from hosts on the edge of the network
+> Limit IDS to the most important segments
+
+
+## TYPES of IDS / IPS ##
+
+## TYPES of IDS / IPS ##
+
+| Type               | Description                                                                 |
+|--------------------|-----------------------------------------------------------------------------|
+| **Network-based**  | Network sensors scan traffic that is designated to many hosts               |
+| **Host-based**     | Host agent monitors all operations within an operating system               |
+| **Signature-based**| Monitors for specific patterns (signatures) that match known threats        |
+| **Anomaly-based**  | Flags behavior that deviates from established normal usage patterns         |
+| **Hybrid-based**   | Combines multiple detection methods for more accurate threat detection      |
+
+
+## NETWORK-BASED and Host-Based IPS ##
+
+# 🛡️ NETWORK-BASED vs. HOST-BASED IPS
+
+Intrusion Prevention Systems (IPS) are critical tools in cybersecurity. They actively monitor and analyze traffic to detect and prevent malicious activity in real-time.
+
+---
+
+## 🌐 Network-Based IPS (NIPS)
+
+> **Monitors traffic across the entire network.**
+
+### 🔍 Characteristics:
+- Deployed at strategic points (e.g., gateway, firewall).
+- Inspects **network packets**.
+- Can block **DoS/DDoS** attacks and scanning.
+- **Cannot decrypt encrypted payloads** (e.g., TLS, symmetric encryption).
+
+### 🧠 Example Detection:
+- Port scans
+- SYN floods
+- Known exploit signatures
+
+### ❌ Limitation:
+```diff
+- Cannot see inside encrypted traffic
+- Cannot detect host-level malware
+```
+
+```less
+[Internet] ---> [NIPS Firewall] ---> [Internal Network]
+                   ||      
+            Scans packets 
+         Detects network threats
+```
+
+___
+Certainly! Here's a **complete and enhanced Markdown** explanation of **Network-Based Intrusion Prevention Systems (NIPS)** and **Host-Based Intrusion Prevention Systems (HIPS)** — structured, styled, and secured for clarity, insight, and professional presentation.
+This includes:
+
+* ✅ **Emojis for visual cues**
+* 🧠 **Explanations for clarity**
+* 🎯 **Use cases**
+* 📊 **ASCII diagrams for visual understanding**
+* 🔐 **Security insights**
+
+---
+# 🛡️ NETWORK-BASED vs. HOST-BASED IPS
+
+Intrusion Prevention Systems (IPS) are critical tools in cybersecurity. They actively monitor and analyze traffic to detect and prevent malicious activity in real-time.
+
+---
+
+## 🌐 Network-Based IPS (NIPS)
+
+> **Monitors traffic across the entire network.**
+
+### 🔍 Characteristics:
+- Deployed at strategic points (e.g., gateway, firewall).
+- Inspects **network packets**.
+- Can block **DoS/DDoS** attacks and scanning.
+- **Cannot decrypt encrypted payloads** (e.g., TLS, symmetric encryption).
+
+### 🧠 Example Detection:
+- Port scans
+- SYN floods
+- Known exploit signatures
+
+### ❌ Limitation:
+```diff
+- Cannot see inside encrypted traffic
+- Cannot detect host-level malware
+````
+
+### 📊 ASCII Diagram:
+
+```
+[Internet] ---> [NIPS Firewall] ---> [Internal Network]
+                   ||      
+            Scans packets 
+         Detects network threats
+```
+
+---
+
+## 💻 Host-Based IPS (HIPS)
+
+> **Installed directly on endpoint hosts (e.g., servers, laptops).**
+
+### 🔍 Characteristics:
+
+* Analyzes **system-level activity** (files, processes, registry).
+* Can **detect encrypted malware** (e.g., ransomware).
+* Monitors behavior at **kernel-level**.
+
+### 🧠 Example Detection:
+
+* Code injection (DLL)
+* Registry manipulation
+* Privilege escalation
+
+### 🔐 Advantage:
+
+```diff
++ Can decrypt and analyze local encrypted activity
++ Detects polymorphic and obfuscated malware
+```
+
+### 📊 ASCII Diagram:
+
+```
+[Host System]
+     |
+[ HIPS Agent ]
+     |
+Monitors OS-level activity
+Detects ransomware, privilege abuse
+```
+
+---
+
+## ⚔️ NIPS vs HIPS — Key Differences
+
+| Feature              | NIPS 🌐                   | HIPS 💻                            |
+| -------------------- | ------------------------- | ---------------------------------- |
+| Deployment Location  | Network perimeter         | Individual host machines           |
+| Visibility           | Network traffic           | Host activity                      |
+| Encryption Awareness | ❌ Cannot decrypt payloads | ✅ Can analyze decrypted data       |
+| Attack Focus         | DDoS, worms, scans        | Malware, exploits, privilege abuse |
+| Performance Overhead | Low (network-wide)        | Higher (host CPU/memory)           |
+
+---
+
+## 🎯 Summary:
+
+> 🛡️ **Use both NIPS and HIPS for a layered defense strategy**.
+
+* NIPS provides **broad visibility** and **traffic control**.
+* HIPS provides **deep visibility** and **system-level detection**.
+* Together, they cover both **external threats** and **internal exploits**.
+
+---
+
+## 🧩 Cybersecurity Expert Insight
+
+* 🔐 **Encrypted traffic (SSL/TLS, symmetric keys)** bypasses NIPS.
+* 🧬 **HIPS can catch payloads once decrypted on host memory**.
+* 🎭 Malware authors use **encryption + polymorphism** to evade NIPS.
+
+> 💡 Best Practice: Use **SSL decryption** + **Endpoint Detection & Response (EDR)** in combination with HIPS/NIPS.
+
+___
+
+> NIPS can better detect broad attacks on the network ( DDOS )
+> HIPS detect specific host based attacks ( cryptology in malware
+> NIPS cannot detect symmmetric key encryption and not decrypt -> NIPS cannot see payload and will not detect BUT host can detectypt on the host 
+
+
+UTM -> NIDS MAC M1
 
 ___
 
