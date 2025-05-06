@@ -16,81 +16,125 @@ Here’s the complete script:
 ```bash
 #!/bin/bash
 
-# Function to check if a container is running
-check_container() {
-    container_name=$1
-    if [[ "$(docker ps -q -f name=$container_name)" ]]; then
-        echo "$container_name is running."
-    else
-        echo "$container_name is not running."
-    fi
-}
+# Step 1: Create necessary directories for Docker Compose setup
+echo "Creating necessary directories for Docker Compose setup..."
+mkdir -p ./logstash/config
+mkdir -p ./logstash/pipeline
 
-# Function to test a web service is accessible
-test_web_service() {
-    url=$1
-    port=$2
-    echo "Testing $url:$port ..."
-    if curl -s --head "http://$url:$port" | grep "HTTP/1.1 200 OK" > /dev/null; then
-        echo "Service $url:$port is accessible."
-    else
-        echo "Service $url:$port is not accessible."
-    fi
-}
+# Step 2: Create the docker-compose.yml file
+echo "Creating docker-compose.yml..."
 
-# Pull Docker images
-echo "Pulling Docker images..."
-docker pull docker.elastic.co/kibana/kibana:8.13.4
-docker pull docker.elastic.co/elasticsearch/elasticsearch:8.13.4
-docker pull docker.elastic.co/beats/filebeat:8.13.4
-docker pull heywoodlh/nfcapd:latest
+cat <<EOF > docker-compose.yml
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.10.0
+    environment:
+      - discovery.type=single-node
+      - ELASTIC_PASSWORD=elastic_password
+    networks:
+      - elastic
 
-# Run Kibana container
-echo "Running Kibana container..."
-docker run -d --name kibana -p 5601:5601 docker.elastic.co/kibana/kibana:8.13.4
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.10.0
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - ELASTICSEARCH_USERNAME=elastic
+      - ELASTICSEARCH_PASSWORD=elastic_password
+    ports:
+      - "5601:5601"
+    networks:
+      - elastic
 
-# Run Elasticsearch container
-echo "Running Elasticsearch container..."
-docker run -d --name elasticsearch -p 9200:9200 -p 9300:9300 docker.elastic.co/elasticsearch/elasticsearch:8.13.4
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.10.0
+    environment:
+      - LOGSTASH_HOME=/usr/share/logstash
+    volumes:
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./logstash/pipeline:/usr/share/logstash/pipeline
+    networks:
+      - elastic
 
-# Run Filebeat container
-echo "Running Filebeat container..."
-docker run -d --name filebeat docker.elastic.co/beats/filebeat:8.13.4
+  packetbeat:
+    image: docker.elastic.co/beats/packetbeat:8.10.0
+    environment:
+      - ELASTICSEARCH_HOST=http://elasticsearch:9200
+      - ELASTICSEARCH_USERNAME=elastic
+      - ELASTICSEARCH_PASSWORD=elastic_password
+    networks:
+      - elastic
+    command: >
+      packetbeat -e -E output.elasticsearch.hosts=["http://elasticsearch:9200"] -E packetbeat.interfaces.device=eth0
 
-# Run nfcapd container
-echo "Running nfcapd container..."
-docker run -d --name nfcapd -p 9995:9995 heywoodlh/nfcapd:latest
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:8.10.0
+    environment:
+      - ELASTICSEARCH_HOST=http://elasticsearch:9200
+      - ELASTICSEARCH_USERNAME=elastic
+      - ELASTICSEARCH_PASSWORD=elastic_password
+    networks:
+      - elastic
+    command: >
+      filebeat -e -E output.elasticsearch.hosts=["http://elasticsearch:9200"]
 
-# Wait for containers to fully start
-echo "Waiting for containers to initialize..."
-sleep 20  # Adjust if needed based on container startup time
+networks:
+  elastic:
+    driver: bridge
+EOF
 
-# Test Kibana (http://localhost:5601)
-test_web_service "localhost" 5601
+# Step 3: Create Packetbeat configuration
+echo "Creating Packetbeat configuration file..."
 
-# Test Elasticsearch (http://localhost:9200)
-test_web_service "localhost" 9200
+cat <<EOF > ./logstash/config/packetbeat.yml
+packetbeat.interfaces.device: eth0
+packetbeat.protocols.dns:
+  enabled: true
+  domain_name: example.com
+  include_authorities: true
+packetbeat.protocols.http:
+  enabled: true
+  transaction_timeout: 1500ms
+output.elasticsearch:
+  hosts: ["http://elasticsearch:9200"]
+  username: "elastic"
+  password: "elastic_password"
+EOF
 
-# Test Filebeat (this doesn't have a direct web service, but ensure it's running)
-check_container "filebeat"
+# Step 4: Create Filebeat configuration
+echo "Creating Filebeat configuration file..."
 
-# Test nfcapd (port 9995 for the nfcapd service)
-test_web_service "localhost" 9995
+cat <<EOF > ./logstash/config/filebeat.yml
+filebeat.inputs:
+  - type: log
+    paths:
+      - /var/log/*.log
+output.elasticsearch:
+  hosts: ["http://elasticsearch:9200"]
+  username: "elastic"
+  password: "elastic_password"
+EOF
 
-# Check if all containers are running
-check_container "kibana"
-check_container "elasticsearch"
-check_container "nfcapd"
+# Step 5: Pull the latest Docker images to avoid pulling errors
+echo "Pulling latest Docker images for Elastic Stack..."
+docker pull docker.elastic.co/elasticsearch/elasticsearch:8.10.0
+docker pull docker.elastic.co/kibana/kibana:8.10.0
+docker pull docker.elastic.co/logstash/logstash:8.10.0
+docker pull docker.elastic.co/beats/packetbeat:8.10.0
+docker pull docker.elastic.co/beats/filebeat:8.10.0
 
-# Stop the containers
-echo "Stopping all containers..."
-docker stop kibana elasticsearch filebeat nfcapd
+# Step 6: Start Docker Compose in detached mode
+echo "Starting Docker Compose..."
+docker-compose up -d
 
-# Optional: Remove the containers
-# echo "Removing containers..."
-# docker rm kibana elasticsearch filebeat nfcapd
+# Step 7: Check Docker Compose status
+echo "Checking the status of the Docker Compose services..."
+docker-compose ps
 
-echo "All tests are complete!"
+# Step 8: Final message
+echo "Elastic Stack setup is complete!"
+echo "Access Kibana at http://localhost:5601"
+echo "Your Elasticsearch is running on http://elasticsearch:9200"
+
 ```
 
 ### Explanation:
