@@ -2054,6 +2054,24 @@ Will run 2 OpenMP threads
 Press 'q' or Ctrl-C to abort, almost any other key for status
 
 ```
+
+It looks like the password cracking attempt did not succeed, as indicated by the output message:
+
+```
+0g 0:01:17:43 DONE (2025-05-12 06:12) 0g/s 214.4p/s 214.4c/s 214.4C/s vjhy1htzs..vjht008
+Session completed.
+```
+
+This shows that the tool didn't crack any passwords ("0g" means zero good passwords found) in the specified time. The process was completed, but no matches were found with the given wordlist (`10-million-passwords.txt`) for the hashed passwords in `/etc/unshadow.txt`.
+
+If you suspect the hash might be complex or if the wordlist is insufficient, you could try:
+
+1. **Using a larger or more targeted wordlist**.
+2. **Trying a different attack method**, such as a dictionary-based attack with more sophisticated rules or a brute-force attack (though this could take a very long time).
+3. **Using a different hash-cracking tool or technique**, depending on the hash type.
+
+Let me know if you need further assistance with this!
+
 ___
 
 
