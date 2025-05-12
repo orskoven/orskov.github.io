@@ -1911,9 +1911,135 @@ cd h4cker/cracking_passwords/more_wordlists
 ```bash
 sudo john --wordlist=/10-million-passwords.txt /etc/unshadow.txt
 ```
-
-``
 ___
+
+## John The ripper cracking password: mAgwyv-zaxdem-6nunvu ##
+
+> Cracking mAgwyv-zaxdem-6nunvu will take significant longer time.
+> This password has been created using MacOs password manager.
+
+Certainly! Below is a markdown chapter that explains this type of password `mAgwyv-zaxdem-6nunvu` based on common patterns found in password creation and security analysis.
+
+---
+
+# Chapter: Understanding Complex Password Patterns
+
+## 1. Introduction to Complex Passwords
+
+Complex passwords are designed to increase security by making it more difficult for attackers to guess or crack them using brute force or dictionary-based attacks. The password `mAgwyv-zaxdem-6nunvu` is a typical example of a complex password that incorporates a mix of different character types and structures.
+
+In this chapter, we will break down the components of this password and discuss why this type of structure is more secure compared to simpler passwords.
+
+---
+
+## 2. Breaking Down the Structure
+
+The password `mAgwyv-zaxdem-6nunvu` follows a specific structure, which includes:
+
+### 2.1 Mixed Case Letters
+
+* **mAgwyv** and **zaxdem** contain both uppercase and lowercase letters.
+* Using a mix of lowercase and uppercase letters makes a password harder to guess because it increases the potential number of character combinations for each position.
+
+  * For example, a lowercase letter has 26 possibilities, while an uppercase letter also has 26 possibilities. Combining both increases the strength of the password exponentially.
+
+### 2.2 Hyphen as a Separator
+
+* The hyphen `-` used between `mAgwyv` and `zaxdem`, and again between `zaxdem` and `6nunvu`, can act as a delimiter to visually separate different sections of the password.
+* While separators like hyphens don't directly increase the entropy (randomness) of a password, they can make it easier for a user to remember complex passwords by breaking them into recognizable chunks.
+
+  However, note that a hyphen might not significantly impact password strength from a technical standpoint unless combined with other unique characters.
+
+### 2.3 Numbers
+
+* The inclusion of the digit `6` in `6nunvu` adds another layer of complexity. Numbers are essential in making passwords more robust. Without them, a password would only consist of 26 lowercase and 26 uppercase letters, significantly reducing the number of possible combinations.
+
+  * When numbers are used along with letters, the character set grows, improving password security.
+
+### 2.4 Length of the Password
+
+* The length of `mAgwyv-zaxdem-6nunvu` is 21 characters, which is relatively long for a password. Longer passwords exponentially increase the number of possible combinations. For example, if each character had 62 possible choices (26 lowercase letters, 26 uppercase letters, and 10 digits), a 21-character password would have $62^{21}$ possible combinations, making it much harder to crack.
+
+---
+
+## 3. Security Considerations
+
+### 3.1 Entropy
+
+The strength of a password depends heavily on its entropy, which refers to the unpredictability or randomness of the password.
+
+* **Entropy Formula**: Entropy can be calculated based on the number of characters in the password and the size of the character set used. For example:
+
+  * Lowercase letters: 26 characters
+  * Uppercase letters: 26 characters
+  * Digits: 10 characters
+  * Special characters (if applicable): typically around 32 characters
+
+Given that `mAgwyv-zaxdem-6nunvu` uses a combination of these elements, its entropy is considerably higher than a password consisting of only lowercase letters or a common word.
+
+### 3.2 Brute Force Resistance
+
+The password is resistant to **brute force attacks**, where an attacker attempts every possible combination to guess the password. A brute force attack is typically more feasible for short, simple passwords.
+
+* **Brute Force Example**: If an attacker tries all combinations of characters, the length and diversity of the character set in `mAgwyv-zaxdem-6nunvu` make such an attack computationally expensive and time-consuming.
+
+### 3.3 Dictionary and Rainbow Table Attacks
+
+* While `mAgwyv-zaxdem-6nunvu` may appear to be a random string, it does not seem to contain easily guessable words or common phrases, which reduces the risk of **dictionary attacks**.
+* A **rainbow table attack** uses precomputed hashes for common passwords. Since the password in question includes a mix of characters and numbers, it is more likely to be resistant to such attacks, especially if the password hash uses a strong encryption algorithm.
+
+---
+
+## 4. Tips for Creating Strong Passwords
+
+To create a password similar to `mAgwyv-zaxdem-6nunvu`, consider the following best practices:
+
+### 4.1 Use a Combination of Character Types
+
+* Use **uppercase** and **lowercase** letters.
+* Include **numbers** to increase entropy.
+* Use **special characters** like `@`, `#`, `-`, etc. to further complicate the password.
+
+### 4.2 Avoid Common Patterns
+
+* Avoid easily guessable combinations such as `"password123"`, `"admin"`, or simple keyboard patterns like `"qwerty"`.
+
+### 4.3 Keep the Password Length Long
+
+* Longer passwords are generally stronger. Aim for passwords that are at least **16-20 characters** in length.
+
+### 4.4 Consider Password Managers
+
+* Using a password manager to store complex passwords is an excellent way to avoid forgetting them, especially when you are required to use long and random passwords for different accounts.
+
+---
+
+## 5. Conclusion
+
+The password `mAgwyv-zaxdem-6nunvu` is a good example of a strong, complex password that incorporates multiple character types and a reasonable length. By understanding the structure and strength of passwords like this, you can create better, more secure passwords for your online accounts.
+
+Always remember to consider entropy, length, and diversity when creating passwords, and ensure that you’re using tools like password managers to help manage them securely.
+
+---
+
+This concludes the chapter on understanding complex password patterns.
+___
+
+```bash
+┌──(john㉿john)-[~/h4cker/cracking_passwords/more_wordlists]
+└─$ sudo john --format=crypt  --wordlist=./10-million-passwords.txt  /etc/unshadow.txt
+
+Using default input encoding: UTF-8
+Loaded 3 password hashes with 3 different salts (crypt, generic crypt(3) [?/64])
+Remaining 1 password hash
+Cost 1 (algorithm [1:descrypt 2:md5crypt 3:sunmd5 4:bcrypt 5:sha256crypt 6:sha512crypt]) is 0 for all loaded hashes
+Cost 2 (algorithm specific iterations) is 1 for all loaded hashes
+Will run 2 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+
+```
+___
+
 
 ### IPTABLES : HOW TO ###
 
