@@ -2,7 +2,240 @@ ALL RIGHTS RESERVED SIMON ØRSKOV BECKMANN
 
 # SIMON'S ✍️ CYBER SECURITY NOTES
 ___
+Certainly! Here's how to install the open-source tools for Cybercrime and Digital Forensics on Kali Linux or Ubuntu using terminal commands:
 
+---
+
+It appears you're encountering a `403 Forbidden` error when attempting to update or install packages on Kali Linux. This issue often arises due to mirror problems, repository misconfigurations, or outdated keys. Let's address these systematically:
+
+---
+
+### 🔧 Step 1: Update Your APT Sources to HTTPS
+
+Kali Linux repositories are transitioning to HTTPS for enhanced security. If your `/etc/apt/sources.list` file still uses HTTP, you might face access issues.([Medium][1], [Magenaut][2])
+
+1. **Edit the sources list:**
+
+   ```bash
+   sudo nano /etc/apt/sources.list
+   ```
+
+2. **Update the repository line:**
+
+   Change:
+
+   ```plaintext
+   deb http://http.kali.org/kali kali-rolling main contrib non-free
+   ```
+
+   To:
+
+   ```plaintext
+   deb https://http.kali.org/kali kali-rolling main contrib non-free
+   ```
+
+3. **Save and exit:**
+
+   * Press `Ctrl + O` to save.
+   * Press `Enter` to confirm.
+   * Press `Ctrl + X` to exit.
+
+---
+
+### 🔑 Step 2: Update the Kali Archive Keyring
+
+Outdated keys can cause signature verification failures. To update the keyring:([Super User][3])
+
+```bash
+wget https://http.kali.org/kali/pool/main/k/kali-archive-keyring/kali-archive-keyring_2024.1_all.deb
+sudo dpkg -i kali-archive-keyring_2024.1_all.deb
+rm kali-archive-keyring_2024.1_all.deb
+```
+
+---
+
+### 🔄 Step 3: Update Package Lists
+
+After making the above changes, refresh your package lists:
+
+```bash
+sudo apt update
+```
+
+---
+
+### 🧪 Step 4: Upgrade Your System
+
+To ensure all packages are up to date:
+
+```bash
+sudo apt full-upgrade
+```
+
+This command not only upgrades existing packages but also handles dependencies and removes obsolete ones. ([Kali Linux][4])
+
+---
+
+### 🧰 Step 5: Install Required Packages
+
+If you're setting up tools for digital forensics, you might need to install specific packages. For instance, to install Wireshark:
+
+```bash
+sudo apt install wireshark
+```
+
+Replace `wireshark` with the package name of the tool you wish to install.
+
+---
+
+### 🛠️ Additional Troubleshooting Tips
+
+* **Check Network Connectivity:** Ensure your system has a working internet connection.
+
+  ```bash
+  ping -c 4 8.8.8.8
+  ```
+
+* **Use a Different Mirror:** If issues persist, consider switching to a different Kali mirror. You can configure this using the `kali-tweaks` tool:([Kali Forums][5])
+
+  ```bash
+  sudo apt install kali-tweaks
+  sudo kali-tweaks
+  ```
+
+Navigate to the "Repositories" section and select a different mirror. ([Kali Forums][5])
+
+* **Proxy Settings:** If you're behind a proxy, ensure your proxy settings are correctly configured in `/etc/apt/apt.conf`. Add the following lines, replacing `proxy` and `port` with your actual proxy details:([Magenaut][2])
+
+  ```bash
+  Acquire::http::proxy "http://proxy:port/";
+  Acquire::ftp::proxy "ftp://proxy:port/";
+  Acquire::https::proxy "https://proxy:port/";
+  ```
+
+---
+
+If you continue to experience issues, please provide the exact error messages you're encountering, and I'll assist you further.
+
+[1]: https://medium.com/%40berataksit/how-to-update-kali-linux-and-fix-update-error-60176b582412?utm_source=chatgpt.com "How to update Kali Linux and Fix update error | by Berataksit | Medium"
+[2]: https://magenaut.com/apt-get-update-error-in-kali-linux-after-dist-upgrade/?utm_source=chatgpt.com "apt-get update error in Kali Linux after dist-upgrade - Magenaut"
+[3]: https://superuser.com/questions/1644520/apt-get-update-issue-in-kali?utm_source=chatgpt.com "linux - apt-get update issue in Kali - Super User"
+[4]: https://www.kali.org/docs/troubleshooting/handling-common-apt-errors/?utm_source=chatgpt.com "Handling common APT problems | Kali Linux Documentation"
+[5]: https://forums.kali.org/t/hi-help-me-pls-ive-got-error-403-forbidden-when-i-use-apt-update-what-i-must-to-do-to-get-it-work/592?utm_source=chatgpt.com "Hi, help me pls, I've got error 403 Forbidden when I use apt update, what I must to do to get it work? - Kali Linux Troubleshooting - Kali Linux Forum"
+
+___
+### 🧠 1. **Volatility 3** – Memory Analysis Tool
+
+**Install Dependencies:**
+
+```bash
+sudo apt update
+sudo apt install -y python3-pip python3-dev libssl-dev libffi-dev build-essential
+```
+
+**Install Volatility 3:**
+
+```bash
+pip3 install volatility3
+```
+
+**Usage Example:**
+
+```bash
+vol -f /path/to/memory.dmp windows.info
+```
+
+For more information, visit the official GitHub repository: [Volatility 3](https://github.com/volatilityfoundation/volatility3)
+
+---
+
+### 🧩 2. **Strings v2.54** – Extract Printable Characters
+
+**Install Dependencies:**
+
+```bash
+sudo apt update
+sudo apt install -y libmono-system-core4.0-cil
+```
+
+**Download and Extract Strings:**
+
+```bash
+wget https://download.sysinternals.com/files/Strings.zip
+unzip Strings.zip -d strings
+```
+
+**Usage Example:**
+
+```bash
+mono strings/Strings.exe -n 5 /path/to/file
+```
+
+For more information, visit the official Microsoft Sysinternals page: [Strings](https://learn.microsoft.com/en-us/sysinternals/downloads/strings)
+
+---
+
+### 🧪 3. **FTK Registry Viewer** – Analyze Windows Registries
+
+**Download FTK Registry Viewer:**
+
+```bash
+wget https://www.exterro.com/ftk-product-downloads/registry-viewer-2-0-0
+```
+
+**Extract and Run:**
+
+```bash
+tar -xvzf registry-viewer-2-0-0.tar.gz
+cd registry-viewer-2-0-0
+./ftk_registry_viewer
+```
+
+For more information, visit the official Exterro page: [FTK Registry Viewer](https://www.exterro.com/ftk-product-downloads/registry-viewer-2-0-0)
+
+---
+
+### 🌐 4. **Wireshark** – Network Analysis Tool
+
+**Install Wireshark:**
+
+```bash
+sudo apt update
+sudo apt install -y wireshark
+```
+
+**Usage Example:**
+
+```bash
+sudo wireshark
+```
+
+For more information, visit the official Wireshark page: [Wireshark](https://www.wireshark.org)
+
+---
+
+### 🧰 5. **Autopsy** – Digital Forensics Tool
+
+**Install Autopsy:**
+
+```bash
+sudo apt update
+sudo apt install -y autopsy
+```
+
+**Usage Example:**
+
+```bash
+autopsy
+```
+
+For more information, visit the official Autopsy page: [Autopsy](https://www.autopsy.com/download/)
+
+---
+
+Let me know if you need further assistance with any of these tools or additional configurations!
+
+___
 The error message you're encountering is due to Kali Linux's implementation of [PEP 668](https://peps.python.org/pep-0668/), which restricts direct modifications to the system's Python environment to prevent potential conflicts between system-managed and user-installed packages. This is particularly relevant when attempting to install Python packages globally using `sudo pip install`.
 
 ### Recommended Solutions
