@@ -1913,6 +1913,22 @@ sudo john --wordlist=/10-million-passwords.txt /etc/unshadow.txt
 ```
 ___
 
+```bash
+┌──(john㉿john)-[~/h4cker/cracking_passwords/more_wordlists]
+└─$ sudo john --format=crypt  --wordlist=./10-million-passwords.txt  /etc/unshadow.txt
+
+Using default input encoding: UTF-8
+Loaded 3 password hashes with 3 different salts (crypt, generic crypt(3) [?/64])
+Remaining 1 password hash
+Cost 1 (algorithm [1:descrypt 2:md5crypt 3:sunmd5 4:bcrypt 5:sha256crypt 6:sha512crypt]) is 0 for all loaded hashes
+Cost 2 (algorithm specific iterations) is 1 for all loaded hashes
+Will run 2 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+0g 0:01:17:43 DONE (2025-05-12 06:12) 0g/s 214.4p/s 214.4c/s 214.4C/s vjhy1htzs..vjht008
+Session completed. 
+
+```
+
 ## John The ripper cracking password: mAgwyv-zaxdem-6nunvu ##
 
 > Cracking mAgwyv-zaxdem-6nunvu will take significant longer time.
