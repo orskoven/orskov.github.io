@@ -2,7 +2,196 @@ ALL RIGHTS RESERVED SIMON ØRSKOV BECKMANN
 
 # SIMON'S ✍️ CYBER SECURITY NOTES
 ___
-Certainly! Here's how to install the open-source tools for Cybercrime and Digital Forensics on Kali Linux or Ubuntu using terminal commands:
+
+Absolutely. Here's an **expert-level cybersecurity tutorial** in **Markdown** for building an **SNMP lab with SNMP Simulator** on **Kali Linux**. It's structured, professional, and tailored for hands-on security training, DFIR, and network protocol analysis.
+
+---
+
+# 🧪 SNMP LAB | SNMP SIMULATOR on Kali Linux
+
+> 🎯 **Goal**: Simulate SNMP-enabled network devices for monitoring, enumeration, and security testing (Red Team & Blue Team perspectives).
+
+---
+
+## 📦 Prerequisites
+
+* ✅ **Kali Linux** (up-to-date)
+* ✅ Internet access
+* ✅ Basic Bash & SNMP knowledge
+
+---
+
+## 🛠️ Step 1: Install Required SNMP Tools
+
+### 🔧 Install Core SNMP Utilities and MIB Packages
+
+```bash
+sudo apt-get update && sudo apt-get install -y \
+  snmp \
+  snmp-mibs-downloader
+```
+
+> This installs `snmpwalk`, `snmpget`, `snmpset`, and MIB support.
+
+---
+
+## 🛠️ Step 2: Install SNMP Simulator (`snmpsim`)
+
+```bash
+sudo apt-get install -y snmpsim
+```
+
+> ⏳ *This may take 10–15 minutes depending on your system.*
+
+---
+
+## 📁 Step 3: Prepare SNMP Simulator Directories
+
+```bash
+sudo mkdir -p /usr/snmpsim/data
+sudo mkdir -p /var/log/snmpsim/161/2NetworkCoreDFIRAttacks
+```
+
+> 🔒 Use `-p` to create nested directories in one command.
+
+---
+
+## 📁 Step 4: Load Example SNMP Data
+
+```bash
+sudo cp -r /usr/share/doc/snmpsim/examples/data/* /usr/snmpsim/data/
+```
+
+> This populates your simulator with **prebuilt SNMP data profiles**, simulating real-world devices like Cisco routers and printers.
+
+---
+
+## 🚀 Step 5: Run SNMP Simulator
+
+Launch the SNMP agent on **UDP port 161** (standard SNMP port):
+
+```bash
+sudo snmpsim-command-responder \
+  --data-dir=/usr/snmpsim/data \
+  --agent-udp-endpoint=127.0.0.1:161
+```
+
+> 💡 You can modify `--agent-udp-endpoint` to simulate multiple devices on different ports or IPs (e.g. `192.168.56.101:161`, `127.0.0.1:16101`).
+
+---
+
+## 🧪 Step 6: Test SNMP Access
+
+Use `snmpwalk` to verify SNMP simulation is working.
+
+```bash
+snmpwalk -v2c -c public 127.0.0.1
+```
+
+### 🔍 Targeting Specific OID Example:
+
+```bash
+snmpget -v2c -c public 127.0.0.1 1.3.6.1.2.1.1.5.0
+```
+
+> Should return simulated system name: `SNMP Simulator device`
+
+---
+
+## 🛡️ Blue Team Use Cases
+
+* 🧠 Practice parsing **SNMP Traps**
+* 📊 Baseline normal SNMP telemetry
+* 🛑 Detect anomalous polling behavior (e.g., brute force community strings)
+* 🔎 Integrate simulated SNMP into **SIEM** (Splunk, ELK)
+
+---
+
+## 🧨 Red Team Use Cases
+
+* 🔓 Practice SNMP enumeration on "live" targets
+* 🔐 Test password reuse on SNMP community strings (`public`, `private`)
+* 📦 Exploit SNMP write access (via `snmpset`)
+* 🧬 Observe how traps could be abused for covert signaling
+
+---
+
+## 🔄 Bonus: Simulate Multiple SNMP Devices
+
+### Run multiple agents:
+
+```bash
+sudo snmpsim-command-responder \
+  --data-dir=/usr/snmpsim/data \
+  --agent-udp-endpoint=127.0.0.1:16101 &
+  
+sudo snmpsim-command-responder \
+  --data-dir=/usr/snmpsim/data \
+  --agent-udp-endpoint=127.0.0.1:16102 &
+```
+
+Now query each one independently:
+
+```bash
+snmpwalk -v2c -c public 127.0.0.1:16101
+snmpwalk -v2c -c public 127.0.0.1:16102
+```
+
+---
+
+## 🧰 Common SNMP Enumeration Commands
+
+```bash
+snmpwalk -v2c -c public 127.0.0.1
+snmpget -v2c -c public 127.0.0.1 1.3.6.1.2.1.1.1.0
+snmpbulkwalk -v2c -c public 127.0.0.1
+snmpset -v2c -c private 127.0.0.1 1.3.6.1.2.1.1.5.0 s "pwned-by-redteam"
+```
+
+---
+
+## 📁 Lab Directory Structure (after setup)
+
+```bash
+/usr/snmpsim/
+├── data/
+│   ├── cisco.snmprec
+│   ├── printer.snmprec
+│   └── windows.snmprec
+/var/log/snmpsim/
+└── 161/
+    └── 2NetworkCoreDFIRAttacks/
+```
+
+---
+
+## 🧪 Wrap-Up
+
+| Objective             | Verified ✅ |
+| --------------------- | ---------- |
+| Installed SNMP tools  | ✅          |
+| Simulated SNMP device | ✅          |
+| Tested SNMP queries   | ✅          |
+| Lab ready for attacks | ✅          |
+
+---
+
+## 📚 Resources
+
+* 🔗 [SNMP Simulator GitHub](https://github.com/etingof/snmpsim)
+* 📖 [SNMP RFC 1157](https://datatracker.ietf.org/doc/html/rfc1157)
+* 🛠️ [Net-SNMP Toolset](https://www.net-snmp.org/)
+* 📊 [MIB Browser](https://www.ireasoning.com/)
+
+---
+
+
+
+
+
+
+
+
 
 ---
 
