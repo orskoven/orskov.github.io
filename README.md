@@ -3,6 +3,75 @@ ALL RIGHTS RESERVED SIMON ØRSKOV BECKMANN
 # SIMON'S ✍️ CYBER SECURITY NOTES
 ___
 
+## LLM red teaming ## 
+
+System message leaking valuable IP _> attack LLM redteaming
+
+pentesting -> improving red teaming an ai
+
+bench marking explore vulnerabilities
+
+manual and automated red teaming LLM 
+
+opensoruce Giskard library
+
+new field of technology 
+
+novel and complex concept of risk 
+
+development deployment 
+
+a lot of orgs wants red teaming 
+
+## key vulnerabilities in LLM ##
+
+LLM evalutation bench marking 
+
+ARC hellaswag MMLU 
+
+questions answering tasks
+
+generate offensice 
+
+propagate stereotypes
+
+benchmarks 
+
+toxitcitty offensive content support crirminal activity bias privacy data security 
+
+politics off topic
+
+context matters for appropiatness 
+
+hallucinations 
+
+LLM application safty no one size fits all 
+
+identify scenarios to protect against 
+
+OWASP top 10 LLM applicationss 
+
+AI incident database
+
+AVID -> AI vulnerablit database real incidents
+
+
+service disruption
+
+sensitive information 
+
+
+Demo LLM application 
+
+Zephyr bank 
+
+fictional bank 
+
+LLM -> orchestration -> knowledgebase -> 
+
+
+
+___
 Absolutely. Here's your **McKinsey-style cybersecurity guide** to building a **professional-grade Nagios 4 Monitoring Lab on Ubuntu**, complete with **network security context**, **ASCII diagrams**, **DFIR monitoring use cases**, and **modular exercises**. This guide aligns with **top industry practices** in **cybersecurity monitoring architecture, SNMP enumeration, and proactive threat detection**.
 
 ---
