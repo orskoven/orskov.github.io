@@ -3,6 +3,281 @@ ALL RIGHTS RESERVED SIMON ØRSKOV BECKMANN
 # SIMON'S ✍️ CYBER SECURITY NOTES
 ___
 
+Absolutely. Here's your **McKinsey-style cybersecurity guide** to building a **professional-grade Nagios 4 Monitoring Lab on Ubuntu**, complete with **network security context**, **ASCII diagrams**, **DFIR monitoring use cases**, and **modular exercises**. This guide aligns with **top industry practices** in **cybersecurity monitoring architecture, SNMP enumeration, and proactive threat detection**.
+
+---
+
+```ascii
+╔════════════════════════════════════════════════════════╗
+║      NETWORK CORE DFIR ATTACKS MONITORING LAB         ║
+║      ┌────────────────────────────────────────────┐    ║
+║      │      🧠 NAGIOS4 CYBERSECURITY MONITORING    │    ║
+║      └────────────────────────────────────────────┘    ║
+╚════════════════════════════════════════════════════════╝
+```
+
+---
+
+# 🧭 NAGIOS4 LAB: NETWORK MONITORING & DFIR DESIGN (Ubuntu 22.04)
+
+> 🎯 **Objective**: Build a modular, real-world SNMP/Nagios4-based monitoring and alerting lab using Kali, Ubuntu, and optionally SOF-ELK/NIDS/IDS nodes. This guide is **field-ready** for SOC/NOC/DFIR training.
+
+---
+
+## 🛠️ PHASE 1: INITIAL SETUP (Base Monitoring)
+
+### 🔧 Step 1: Install Nagios 4 on Ubuntu
+
+```bash
+sudo apt update
+sudo apt install nagios4 nagios-plugins-contrib nagios-nrpe-plugin -y
+```
+
+### ✅ Verify Nagios Web Interface
+
+* Visit: `http://localhost/nagios4`
+* Username: `nagiosadmin` (created during setup)
+* Password: Set during install (`htpasswd` file)
+
+---
+
+## 📁 Directory Structure Overview
+
+```bash
+/etc/nagios4/
+├── conf.d/               ← Add new hosts/services here
+├── objects/              ← Command templates & default objects
+├── nagios.cfg            ← Main config file (includes conf.d/*.cfg)
+└── plugins/              ← Check scripts (/usr/lib/nagios/plugins/)
+```
+
+---
+
+## 📄 \[NM.01] SNMP SECURITY FEATURES SNAPSHOT
+
+| SNMP Version | Auth | Encryption | Recommended Use |
+| ------------ | ---- | ---------- | --------------- |
+| SNMPv1       | No   | No         | ❌ Legacy only   |
+| SNMPv2c      | No   | No         | ❌ Use in labs   |
+| SNMPv3       | ✅    | ✅          | ✅ Production    |
+
+---
+
+## 🌐 PHASE 2: ADDING SERVICES & MONITORED HOSTS
+
+### 🔁 Exercise 1: Add Basic Monitoring for Localhost
+
+Edit:
+
+```bash
+sudo nano /etc/nagios4/objects/localhost.cfg
+```
+
+Add or validate:
+
+```cfg
+define service {
+  use                 local-service
+  host_name           localhost
+  service_description Root Partition
+  check_command       check_all_disks!20%!10%
+}
+```
+
+Check config and restart:
+
+```bash
+sudo nagios4 -v /etc/nagios4/nagios.cfg
+sudo service nagios4 restart
+```
+
+---
+
+### 🧪 Exercise 2: Install and Monitor a New Service
+
+Install FTP:
+
+```bash
+sudo apt install vsftpd
+```
+
+Add this to `localhost.cfg`:
+
+```cfg
+define service {
+  use                 local-service
+  host_name           localhost
+  service_description FTP
+  check_command       check_ftp
+}
+```
+
+---
+
+## 🛰️ PHASE 3: REMOTE HOST & SNMP MONITORING (Kali + OIDs)
+
+### 🔍 \[NM.03] SNMP Monitor (Kali + Object Identifier)
+
+```ascii
+╭─────────────────────────────╮
+│ Ubuntu (Nagios Server)     │
+│  └─ Monitors Kali via SNMP │
+╰─────────────────────────────╯
+            │
+     SNMPv2c Poll
+            ↓
+╭─────────────────────────────╮
+│ Kali (SNMP Sim / Target)   │
+│  └─ Responds to OID Probe  │
+╰─────────────────────────────╯
+```
+
+---
+
+### 🔧 Create Kali Config: `/etc/nagios4/conf.d/kali.cfg`
+
+```bash
+sudo nano /etc/nagios4/conf.d/kali.cfg
+```
+
+Paste and modify IP accordingly:
+
+```cfg
+define host {
+  use                 linux-server
+  host_name           kali
+  alias               kali
+  address             192.168.234.131
+}
+
+define service {
+  use                 local-service
+  host_name           kali
+  service_description PING
+  check_command       check_ping!100.0,20%!500.0,60%
+}
+
+define service {
+  use                 local-service
+  host_name           kali
+  service_description HTTP
+  check_command       check_http
+  notifications_enabled 0
+}
+
+define service {
+  use                 local-service
+  host_name           kali
+  service_description TimeTicks
+  check_command       check_snmp!-o 1.3.6.1.2.1.1.8.0 -C recorded/linksys-system -P 2c
+  notifications_enabled 0
+}
+```
+
+---
+
+### 🧪 Test Your SNMP Plugin Directly
+
+```bash
+/usr/lib/nagios/plugins/check_snmp -H 192.168.234.131 -o 1.3.6.1.2.1.1.8.0 -C recorded/linksys-system -P 2c
+```
+
+✅ Should return something like:
+
+```
+SNMP OK - Timeticks: (123456) 0:20:34.56
+```
+
+---
+
+### 🔧 Update `commands.cfg` if necessary
+
+```bash
+sudo nano /etc/nagios4/objects/commands.cfg
+```
+
+Ensure this exists:
+
+```cfg
+define command {
+  command_name    check_snmp
+  command_line    /usr/lib/nagios/plugins/check_snmp -H $HOSTADDRESS$ $ARG1$
+}
+```
+
+> `check_snmp! -o <OID> -C <community> -P <version>` ← this is how Nagios parses it
+
+---
+
+## 📦 \[NM.04] ADDITIONAL HOST MONITORING
+
+### Add Another Host (Optional)
+
+* Example: SOF-ELK, pfSense, NIDS
+
+```cfg
+define host {
+  use                 linux-server
+  host_name           elk-siem
+  alias               ELK
+  address             192.168.234.150
+}
+
+define service {
+  use                 local-service
+  host_name           elk-siem
+  service_description Logstash Status
+  check_command       check_tcp!5044
+}
+```
+
+---
+
+## 📊 PRO TIPS & BEST PRACTICES
+
+```ascii
+╭────────────────────────────────────╮
+│ NAGIOS CYBERSECURITY CHECKLIST 🛡️ │
+╰────────────────────────────────────╯
+```
+
+| Task                             | Best Practice                              |
+| -------------------------------- | ------------------------------------------ |
+| ✅ Use SNMPv3                     | For secure authentication                  |
+| 🔒 Restrict SNMP to Mgmt Subnets | IPtables, UFW, SNMP ACLs                   |
+| 🔁 Centralize logs to SIEM       | ELK, SOF-ELK, or Splunk                    |
+| 🧠 Document OID Inventory        | Track MIBs and relevance to DFIR use cases |
+| 🔔 Alert on threshold deviations | CPU, disk, SNMP OIDs                       |
+| 📈 Baselining behavior           | Use RRDTool + Nagiosgraph or Grafana       |
+
+---
+
+## 📚 References & Tools
+
+* 📖 [Nagios 4 Official Docs](https://www.nagios.org/documentation/)
+* 🛠️ [SNMP Simulator](https://github.com/etingof/snmpsim)
+* 📦 [Net-SNMP Tools](http://www.net-snmp.org/)
+* 📡 [OID Database](https://oidref.com/)
+* 🔗 [SOF-ELK DFIR SIEM](https://github.com/teamdfir/sof-elk)
+
+---
+
+## ✅ LAB COMPLETION CHECKLIST
+
+| Task                                           | Status |
+| ---------------------------------------------- | ------ |
+| Nagios Installed on Ubuntu                     | ✅      |
+| Monitored Ubuntu localhost + FTP               | ✅      |
+| Kali Added with SNMP + HTTP + Ping             | ✅      |
+| SNMP OID (Timeticks) Monitored via check\_snmp | ✅      |
+| Optional Third Host Monitored                  | ⬜      |
+
+
+
+
+
+___
+
 Absolutely. Here's an **expert-level cybersecurity tutorial** in **Markdown** for building an **SNMP lab with SNMP Simulator** on **Kali Linux**. It's structured, professional, and tailored for hands-on security training, DFIR, and network protocol analysis.
 
 ---
@@ -183,6 +458,184 @@ snmpset -v2c -c private 127.0.0.1 1.3.6.1.2.1.1.5.0 s "pwned-by-redteam"
 
 ---
 
+Absolutely — here’s how to **inspect, verify, and analyze SNMP communication using `tshark`** on Kali Linux. These additions elevate your lab with **network forensics, protocol dissection**, and **real-time packet analysis**, key skills in **Red Team ops**, **Blue Team threat hunting**, and **DFIR investigations**.
+
+---
+
+# 🧪 SNMP LAB ENHANCEMENT | 🔍 Traffic Inspection with `tshark`
+
+> 🎯 **Goal**: Monitor, inspect, and validate SNMP packets sent and received using Wireshark’s CLI tool `tshark`.
+
+---
+
+## 🛠️ Step 7: Install `tshark`
+
+```bash
+sudo apt-get update && sudo apt-get install -y tshark
+```
+
+> 📦 `tshark` is the CLI version of **Wireshark**, ideal for scripting and headless inspection.
+
+---
+
+## 🔍 Step 8: Capture SNMP Traffic in Real Time
+
+### ✅ Basic Packet Capture on UDP Port 161
+
+```bash
+sudo tshark -i lo -f "udp port 161"
+```
+
+> 📡 This captures SNMP packets on the **loopback interface** (`lo`). If your SNMP simulator runs on another interface (e.g., `eth0`, `tun0`, `br0`), replace `lo` accordingly.
+
+---
+
+### 📄 Save to PCAP File for Further Analysis
+
+```bash
+sudo tshark -i lo -f "udp port 161" -w snmp_lab_capture.pcap
+```
+
+> Analyze later using Wireshark or send it to a forensic suite.
+
+---
+
+### 🧵 Live Decode of SNMP Data
+
+```bash
+sudo tshark -i lo -f "udp port 161" -Y "snmp" -V
+```
+
+> `-V` = verbose decode of **SNMP layer**, showing OIDs, values, community strings.
+
+---
+
+## 📌 Step 9: Trigger & Observe SNMP Activity
+
+From another terminal, trigger SNMP activity to generate traffic:
+
+```bash
+snmpwalk -v2c -c public 127.0.0.1
+```
+
+Then watch `tshark` output to **validate**:
+
+* SNMP version
+* Community string (`public`)
+* Requested OIDs
+* SNMP Response values
+
+---
+
+### 📊 Example Output (tshark -V)
+
+```
+SNMP
+  version: v2c (1)
+  community: public
+  data: get-request (0)
+    request-id: 12345
+    error-status: noError (0)
+    error-index: 0
+    variable-bindings: 1 item
+      1.3.6.1.2.1.1.1.0 (sysDescr)
+```
+
+---
+
+## 🧪 Step 10: Validate Simulator Responses
+
+```bash
+snmpget -v2c -c public 127.0.0.1 1.3.6.1.2.1.1.5.0
+```
+
+Then match response in `tshark`:
+
+```bash
+community: public
+data: get-response
+  sysName.0 = "SNMP Simulator device"
+```
+
+---
+
+## 🧰 Advanced Traffic Filters
+
+### 🔎 Filter Only SNMP Get-Requests
+
+```bash
+sudo tshark -i lo -Y "snmp.pdu.type == 0" -V
+```
+
+> SNMP Get-Request = Type `0`
+
+### 🔎 Filter Only SNMP Get-Responses
+
+```bash
+sudo tshark -i lo -Y "snmp.pdu.type == 2" -V
+```
+
+> SNMP Get-Response = Type `2`
+
+### 🔍 Filter Based on OID
+
+```bash
+sudo tshark -i lo -Y "snmp.oid contains 1.3.6.1.2.1.1.5.0"
+```
+
+---
+
+## 💡 Tip: List Interfaces for Capture
+
+```bash
+tshark -D
+```
+
+> Use this to find the correct interface (`eth0`, `lo`, `wlan0`, etc.) for traffic inspection.
+
+---
+
+## 📂 Bonus: Filter and Extract SNMP Values from a Capture File
+
+```bash
+tshark -r snmp_lab_capture.pcap -Y "snmp" -T fields -e snmp.oid -e snmp.value
+```
+
+> 🎯 Useful for scripting and reporting OID enumerations.
+
+---
+
+## 📜 Final Output Summary
+
+| Test                   | Output Example                             |
+| ---------------------- | ------------------------------------------ |
+| SNMP walk on localhost | `sysDescr = STRING: "BEFSX41"`             |
+| SNMP get sysName       | `STRING: "SNMP Simulator device"`          |
+| Tshark live capture    | `community: public`, `sysName`, `sysDescr` |
+| Tshark OID filter      | Captures only `1.3.6.1.2.1.1.5.0` traffic  |
+
+---
+
+## 🧠 Wrap-Up: DFIR & Threat Hunting Applications
+
+| Scenario                         | `tshark` Usage                                |
+| -------------------------------- | --------------------------------------------- |
+| Detect brute force on SNMP       | Monitor `snmp.community` patterns             |
+| Validate misconfigured devices   | Inspect unencrypted SNMP packets (v1/v2c)     |
+| Evidence for incident response   | Save `.pcap` and extract `snmp.oid`, `.value` |
+| Integrate in SIEM pre-processing | Use CLI output for alert enrichment           |
+
+---
+
+## 📚 References
+
+* 📖 [`man tshark`](https://www.wireshark.org/docs/man-pages/tshark.html)
+* 🔬 [SNMP Dissector in Wireshark](https://wiki.wireshark.org/SNMP)
+* 📊 [SNMP OID List Reference](https://oidref.com/)
+
+---
+
+Let me know if you'd like a companion **`tcpdump`-based approach**, or how to trigger **SNMP traps and capture them live**.
 
 
 
