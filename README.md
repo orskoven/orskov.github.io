@@ -71,9 +71,7 @@ sudo cp -r /usr/share/doc/snmpsim/examples/data/* /usr/snmpsim/data/
 Launch the SNMP agent on **UDP port 161** (standard SNMP port):
 
 ```bash
-sudo snmpsim-command-responder \
-  --data-dir=/usr/snmpsim/data \
-  --agent-udp-endpoint=127.0.0.1:161
+sudo snmpsimd --agent-udpv4-endpoint=0.0.0.0:161 --process-user=nobody --process-group=nogroup --logging-method=file:/var/log/snmpsim/snmpsimd.log
 ```
 
 > 💡 You can modify `--agent-udp-endpoint` to simulate multiple devices on different ports or IPs (e.g. `192.168.56.101:161`, `127.0.0.1:16101`).
