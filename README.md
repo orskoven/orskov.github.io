@@ -3,6 +3,209 @@ ALL RIGHTS RESERVED SIMON ØRSKOV BECKMANN
 # SIMON'S ✍️ CYBER SECURITY NOTES
 ___
 
+
+Sure! Here's a **top professional Markdown tutorial** designed in the style of a **McKinsey-level cybersecurity consultant** for completing the **System Security – Notes 15 – Kristoffer Miklas** exercise from **IT Sik PBA**. This guide is crafted with clarity, structure, and a security consulting mindset, optimized for presentation or documentation.
+
+---
+
+# 🛡️ System Security Lab Exercise 15 — Remote Logging & Auditing (Professional Tutorial)
+
+**Author:** Kristoffer Miklas
+**Program:** IT Sik PBA
+**Topic:** System Security – Logging & Auditing
+**Consulting Style:** McKinsey Cybersecurity Professional
+**Status:** 🟢 In Progress | 🔴 Must be Completed to Qualify for Exam
+
+---
+
+## 📌 Objectives
+
+> "You cannot secure what you cannot see." — Security Engineering Principle
+
+This tutorial covers:
+
+1. 🔄 **Remote Logging Configuration using `rsyslog`**
+2. 🔍 **System Auditing using `Lynis`**
+3. 📊 **Analysis & Reflection: Security Posture Insights**
+4. ✅ **Deliverables & Documentation Guidelines**
+
+---
+
+## 🗂️ Exercise 15.a: Remote Logging with rsyslog
+
+### 🎯 Goal:
+
+Send logs from one VMware Linux server to another remote logging server for redundancy, integrity, and forensic readiness.
+
+---
+
+### 🛠️ Step-by-Step Implementation
+
+#### 🔧 1. **Prepare the Remote Log Server**
+
+```bash
+sudo nano /etc/rsyslog.conf
+```
+
+* **Uncomment** the following lines to allow remote log reception:
+
+```conf
+# provides UDP syslog reception
+module(load="imudp")
+input(type="imudp" port="514")
+
+# provides TCP syslog reception
+module(load="imtcp")
+input(type="imtcp" port="514")
+```
+
+* **Prefer TCP over UDP**:
+
+  * **TCP** = Reliable, ordered delivery, better for security logs.
+  * **UDP** = Lightweight, but risk of log loss.
+
+```bash
+sudo systemctl restart rsyslog
+sudo ufw allow 514/tcp
+```
+
+---
+
+#### 💻 2. **Configure the Local Machine to Send Logs**
+
+```bash
+sudo nano /etc/rsyslog.d/10-remote.conf
+```
+
+* Add the following to send all logs:
+
+```conf
+*.*    @@REMOTE_SERVER_IP:514
+```
+
+> The `@` denotes UDP, `@@` denotes TCP. Always prefer TCP in professional environments.
+
+```bash
+sudo systemctl restart rsyslog
+```
+
+---
+
+### 📘 Understand Key rsyslog Settings
+
+| Setting             | Meaning                       | Why It Matters                        |
+| ------------------- | ----------------------------- | ------------------------------------- |
+| `/etc/rsyslog.conf` | Core configuration            | Defines modules, protocols            |
+| `/etc/rsyslog.d/`   | Custom rules                  | Override defaults modularly           |
+| `*.*`               | All facilities and priorities | Send everything for full auditability |
+
+---
+
+### 🔍 Top-3 Security Advantages of rsyslog
+
+1. **Tamper-resistance**: Attackers cannot easily modify logs on remote server.
+2. **Forensic integrity**: Timeline reconstruction possible post-breach.
+3. **Separation of duties**: Syslog can be centralized, limiting access to critical logs.
+
+---
+
+## 🗂️ Exercise 15.b: System Auditing with Lynis
+
+### 🎯 Goal:
+
+Identify security weaknesses using the industry-standard auditing tool **Lynis** on three different system types.
+
+---
+
+### 🛠️ Step-by-Step Auditing Process
+
+#### 📦 1. **Install Lynis**
+
+```bash
+sudo apt install lynis
+```
+
+#### 🔎 2. **Run a Full Audit**
+
+```bash
+sudo lynis audit system
+```
+
+* Logs are saved to `/var/log/lynis.log`.
+
+#### 🔍 3. **Extract Warnings & Suggestions**
+
+```bash
+grep -Ei 'warning|suggestion' /var/log/lynis.log
+```
+
+---
+
+### 🧠 4. **Interpret Results**
+
+| Type       | Sample Finding           | Explanation        | Why It Matters                  |
+| ---------- | ------------------------ | ------------------ | ------------------------------- |
+| Warning    | Insecure SSH setting     | Root login allowed | Increases attack surface        |
+| Suggestion | Enable automatic updates | Patching risk      | Mitigates known vulnerabilities |
+| Warning    | No firewall active       | No traffic control | Critical exposure risk          |
+
+---
+
+## 🧪 Audit Across Environments
+
+| System              | Typical Findings                      | Risk Profile                |
+| ------------------- | ------------------------------------- | --------------------------- |
+| **Desktop**         | GUI services enabled, user data risks | Moderate                    |
+| **Server**          | Open ports, weak configurations       | High (especially public)    |
+| **Metasploitable2** | Intentionally vulnerable              | Maximum – for training only |
+
+> 🛡️ **Observation**: Each environment’s role determines its risk tolerance and necessary hardening.
+
+---
+
+## 📦 Final Deliverables Checklist
+
+| Task                                                  | Status |
+| ----------------------------------------------------- | ------ |
+| \[ ] rsyslog remote log configured                    |        |
+| \[ ] Remote server receiving logs                     |        |
+| \[ ] Logs verified on remote machine                  |        |
+| \[ ] Lynis run on Desktop VM                          |        |
+| \[ ] Lynis run on Server VM                           |        |
+| \[ ] Lynis run on Metasploitable2                     |        |
+| \[ ] Warning/Suggestion logs documented               |        |
+| \[ ] Key findings explained and mitigations suggested |        |
+
+---
+
+## 📘 Recommended Resources
+
+* 🔗 [rsyslog Official Guide](https://www.rsyslog.com/category/guides-for-rsyslog/)
+* 🔗 [Lynis Official Site](https://cisofy.com/lynis/)
+* 📚 [Linux Logging Best Practices](https://www.thegeekdiary.com/rsyslog-configuration/)
+* 🧠 [CIS Benchmarks](https://www.cisecurity.org/cis-benchmarks/) — For industry-standard security baselines.
+
+---
+
+## 🧭 Consultant's Takeaway
+
+> “Logging is not just about recording events — it's about **creating a trusted record** of your system’s history, one that even attackers cannot erase.” — McKinsey Security Lead
+
+* Always test log tamper resistance by simulating a local file deletion.
+* Compare logs across nodes regularly for anomaly detection.
+* Rotate and protect remote logs with strict ACLs.
+
+---
+
+## 🧾 Notes for Exam
+
+✅ You **must demonstrate and explain** both Exercise 15.a and 15.b to qualify for **exam or re-exam**.
+
+---
+
+Let me know if you want this exported to PDF, or integrated into a professional report format (e.g. DOCX or LaTeX).
+
+___
 Here is a **comprehensive expert-level Markdown guide** for **LLM Red Teaming in Cybersecurity**, designed for professionals building, testing, or securing large language models. It integrates practical tools, real-world threats, benchmark references, and fictional demo environments to help structure secure LLM development and deployment pipelines.
 
 ---
