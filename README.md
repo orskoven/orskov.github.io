@@ -3,6 +3,274 @@ ALL RIGHTS RESERVED SIMON ØRSKOV BECKMANN
 # SIMON'S ✍️ CYBER SECURITY NOTES
 ___
 
+Absolutely! Here's a professional, clear, and comprehensive guide in Markdown format that addresses **Exercise 13 (a–d)**, with a strong cybersecurity consulting and tutorial tone. This layout is designed for internal security teams, cybersecurity students, or audit professionals, based on industry practices like those followed at McKinsey-level operations.
+
+---
+
+# 🛡️ Exercise 13: Rootkit Defense, Tripwire/AIDE Monitoring, and Incident Response (Full Tutorial)
+
+**Author:** Cybersecurity Consultant (Enterprise Audit & Risk Perspective)
+**Audience:** Security Analysts, SOC Engineers, Cybersecurity Students
+**Level:** Intermediate – Advanced
+**Purpose:** Understand, detect, and respond to advanced threats like rootkits and ransomware using tools like **Tripwire** or **AIDE**.
+
+---
+
+## 📘 13.a — Understanding Rootkits
+
+### 🔍 What Is a Rootkit?
+
+A **rootkit** is a type of malicious software designed to hide its presence or the presence of other malicious software. It gives attackers root-level access to a system while remaining undetected.
+
+### 🔬 Key Characteristics
+
+| Feature                  | Description                                                                |
+| ------------------------ | -------------------------------------------------------------------------- |
+| **Stealth**              | Rootkits hide processes, files, logs, and network activity from detection. |
+| **Persistence**          | Can survive reboots or reinstallations (especially kernel-level rootkits). |
+| **Privilege Escalation** | Often used to maintain or escalate system access privileges.               |
+
+### 🧠 Types of Rootkits
+
+* **User-mode**: Operates in user space (e.g., via LD\_PRELOAD).
+* **Kernel-mode**: Hooks kernel system calls, hardest to detect.
+* **Bootkits**: Infect the bootloader or firmware (BIOS/UEFI).
+* **Firmware**: Hides in device firmware (e.g., NICs, drives).
+
+### 📚 Recommended Reading
+
+* **SANS Paper**: *"Linux Rootkits for Beginners"* – Introduction to rootkit behavior and detection.
+* **Modern Update**: Rootkit techniques today often use virtualization evasion, BIOS/UEFI implants, or cloud persistence (e.g., container rootkits).
+
+### 🔄 What's Changed?
+
+* Legacy rootkits focused on file-system manipulation.
+* **Modern rootkits** increasingly focus on:
+
+  * Kernel Module Injection
+  * Evasion in EDR/XDR environments
+  * Containerized or ephemeral infrastructure
+
+---
+
+## 🧰 13.b — Installing & Using Tripwire (or AIDE)
+
+### 🧪 Step-by-Step: Tripwire Installation & Setup
+
+#### 1. 🔧 Install Tripwire
+
+```bash
+sudo apt-get update
+sudo apt-get install tripwire
+```
+
+You will be prompted to set a **site key** and **local passphrase**—keep these secure!
+
+---
+
+#### 2. 📁 Choose Directories to Monitor
+
+Edit the configuration to define which parts of the system Tripwire should monitor.
+
+```bash
+sudo nano /etc/tripwire/twpol.txt
+```
+
+Example directories to monitor:
+
+```
+/etc
+/bin
+/sbin
+/var
+/usr
+/root
+```
+
+> Be mindful not to monitor volatile directories like `/tmp` or `/proc`.
+
+---
+
+#### 3. 🏗️ Initialize the Tripwire Database
+
+```bash
+sudo tripwire --init
+```
+
+This creates a cryptographically signed baseline snapshot of your system.
+
+---
+
+#### 4. 🧪 Test Tripwire
+
+Create and modify files in monitored directories:
+
+```bash
+sudo touch /etc/testfile.txt
+sudo echo "modified" >> /etc/passwd
+```
+
+Now run Tripwire's check:
+
+```bash
+sudo tripwire --check
+```
+
+### ✅ Expected Output
+
+Tripwire will alert to **new files** and **changes in critical system files**.
+
+---
+
+#### 5. 🔁 Automate via Crontab
+
+Edit crontab to run every 20 minutes:
+
+```bash
+sudo crontab -e
+```
+
+Add:
+
+```bash
+*/20 * * * * /usr/sbin/tripwire --check > /var/log/tripwire_check.log 2>&1
+```
+
+---
+
+#### 6. 🔄 Alternatives
+
+| Tool     | Features                         | Comments                            |
+| -------- | -------------------------------- | ----------------------------------- |
+| Tripwire | Cryptographic integrity checking | Payable version offers GUI & SIEM   |
+| AIDE     | Simpler config, open-source      | Lightweight alternative to Tripwire |
+
+---
+
+## 💻 13.c — Simulated Rootkit Attack Lab (Optional but Highly Recommended)
+
+### 🔧 Prepare a Scratch VM
+
+1. **Create new Linux VM** in VMware.
+2. Take an initial **snapshot**.
+3. Install Tripwire or AIDE as described above.
+
+---
+
+### 🦠 Install a Test Rootkit (For Educational Purposes Only)
+
+> ⚠️ **WARNING:** Only do this in an **isolated lab environment**!
+
+Download rootkits (e.g., `knark`, `adore`, `bo2k`) from:
+
+```
+https://packetstormsecurity.com/UNIX/penetration/rootkits/
+```
+
+Example:
+
+```bash
+wget https://packetstormsecurity.com/.../adore-ng.tar.gz
+```
+
+Unpack and install per included instructions.
+
+---
+
+### 🧪 Detect with Tripwire
+
+1. **Run the rootkit**.
+2. **Run Tripwire check** again:
+
+   ```bash
+   sudo tripwire --check
+   ```
+3. If changes go **undetected**, add files/binaries associated with the rootkit manually into Tripwire's policy.
+
+Edit:
+
+```bash
+sudo nano /etc/tripwire/twpol.txt
+```
+
+Then reinitialize:
+
+```bash
+sudo tripwire --init
+```
+
+---
+
+## 🚨 13.d — Incident Response Procedures
+
+### 🛑 Rootkit Detection Procedure
+
+**Objective**: Isolate, preserve, and respond without alerting the attacker.
+
+#### 🧭 Step-by-Step Response
+
+| Step                      | Description                                                |
+| ------------------------- | ---------------------------------------------------------- |
+| **1. Isolate Host**       | Disconnect from the network immediately.                   |
+| **2. Preserve Evidence**  | Take disk and memory snapshot before any shutdown.         |
+| **3. Use Trusted Boot**   | Reboot from a clean live CD or USB, not the infected OS.   |
+| **4. Forensic Analysis**  | Use tools like Volatility, chkrootkit, rkhunter.           |
+| **5. Reimage System**     | Wipe and rebuild from clean sources.                       |
+| **6. Rotate Credentials** | Assume credentials were compromised.                       |
+| **7. Report**             | Log the incident and notify internal/external authorities. |
+
+### 🎯 Justification
+
+Rebuilding ensures full trust. Rootkits can compromise logs, binaries, and kernel modules beyond recovery.
+
+---
+
+### 🧨 Ransomware Handling Procedure
+
+**Objective**: Contain, mitigate spread, restore business continuity.
+
+#### 🧭 Response Plan
+
+| Step                       | Description                                                   |
+| -------------------------- | ------------------------------------------------------------- |
+| **1. Contain Infection**   | Isolate affected systems (network segmentation or shutdown).  |
+| **2. Identify Scope**      | Run network scans and logs to find lateral movement.          |
+| **3. Do NOT Pay**          | Paying incentivizes attackers and may not guarantee recovery. |
+| **4. Restore from Backup** | Only after confirming backup integrity.                       |
+| **5. Notify Authorities**  | Ransomware often involves criminal actors (e.g., FBI, CERT).  |
+| **6. Post-Mortem Review**  | Patch vulnerability, educate staff, and update disaster plan. |
+
+### 🎯 Justification
+
+Paying ransom is not only discouraged by law enforcement but is no guarantee of recovery. A good backup and containment strategy are your best defenses.
+
+---
+
+## ✅ Summary
+
+This guide has covered:
+
+* ✔️ Understanding and detecting rootkits.
+* ✔️ Using **Tripwire/AIDE** for file integrity monitoring.
+* ✔️ Performing a controlled rootkit test.
+* ✔️ Implementing rootkit and ransomware incident response procedures.
+
+---
+
+## 🧩 Bonus: Recommended Tools
+
+| Tool               | Use Case                               |
+| ------------------ | -------------------------------------- |
+| **chkrootkit**     | Detect common Linux rootkits           |
+| **rkhunter**       | Rootkit, backdoor, and exploit scanner |
+| **Volatility**     | Memory forensics (post-infection)      |
+| **Sysmon + Wazuh** | Advanced endpoint visibility           |
+
+---
+
+Let me know if you’d like this in `.md` or `.pdf` format, or to build this into a hands-on lab environment.
+
+___
 Certainly! Here’s a **complete and comprehensive guide** that will walk you through the **PortSentry** and **Squid Proxy** configuration on an Ubuntu server, as outlined in your request. This guide includes detailed installation and configuration steps, as well as an explanation of the key concepts.
 
 ---
