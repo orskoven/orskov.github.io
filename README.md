@@ -3,6 +3,258 @@ ALL RIGHTS RESERVED SIMON ØRSKOV BECKMANN
 # SIMON'S ✍️ CYBER SECURITY NOTES
 ___
 
+Here is a **complete professional cybersecurity tutorial** in **Markdown format**, following a McKinsey-style consulting approach for configuring and using **Tripwire** (or **AIDE**) for file integrity monitoring.
+
+---
+
+# 🛡️ File Integrity Monitoring with Tripwire (or AIDE)
+
+**Module:** System Security – Notes 15
+**Author:** Kristoffer Miklas
+**Goal:** Learn how to use Tripwire (or AIDE) to monitor critical system files and detect unauthorized changes.
+
+---
+
+## 📌 Objectives
+
+* ✅ Install and configure **Tripwire** for file integrity checking.
+* ✅ Define which directories and files to monitor.
+* ✅ Initialize the baseline database.
+* ✅ Simulate file tampering and detect it.
+* ✅ Automate monitoring using **cron**.
+* ✅ Compare Tripwire with AIDE as an alternative.
+
+---
+
+## 🧰 Step 1: Installation
+
+```bash
+sudo apt-get update
+sudo apt-get install tripwire
+```
+
+* During installation, you'll be prompted to:
+
+  * Set a **site passphrase** (used for signing policies and configurations).
+  * Set a **local passphrase** (used for signing the database and reports).
+
+> 💡 **Security Tip:** Use strong, separate passphrases and store them securely.
+
+---
+
+## ⚙️ Step 2: Configure What to Protect
+
+Edit the Tripwire **policy file**:
+
+```bash
+sudo nano /etc/tripwire/twpol.txt
+```
+
+> Focus on sensitive directories such as:
+
+```text
+/etc
+/bin
+/sbin
+/usr/bin
+/usr/sbin
+/var/log
+/root
+```
+
+### Example Entry:
+
+```text
+(
+  rulename = "Critical System Binaries",
+  severity = 100
+)
+{
+  /bin -> $(ReadOnly) ;
+  /sbin -> $(ReadOnly) ;
+}
+```
+
+Once modified, compile the policy:
+
+```bash
+sudo twadmin --create-polfile /etc/tripwire/twpol.txt
+```
+
+---
+
+## 🧱 Step 3: Initialize the Tripwire Database
+
+This creates a snapshot of the system’s current state:
+
+```bash
+sudo tripwire --init
+```
+
+* The database will be created in: `/var/lib/tripwire/HOSTNAME.twd`
+* This baseline will be compared against future scans.
+
+---
+
+## 🔬 Step 4: Test Tripwire (Integrity Check)
+
+Simulate common threats:
+
+1. **Create a new file:**
+
+   ```bash
+   sudo touch /etc/new-config.conf
+   ```
+
+2. **Modify an existing file:**
+
+   ```bash
+   sudo nano /etc/hosts
+   ```
+
+3. **Run Tripwire:**
+
+   ```bash
+   sudo tripwire --check
+   ```
+
+### 📄 Result:
+
+Tripwire generates a report showing **added**, **modified**, or **deleted** files.
+
+Check the report for:
+
+* ✅ Severity score
+* 🧩 Type of change
+* 🛠️ Suggested actions
+
+---
+
+## 🛠️ Step 5: Review the Report
+
+Reports are stored in:
+
+```bash
+/var/lib/tripwire/report/
+```
+
+To **view a report**:
+
+```bash
+sudo twprint --print-report --twrfile /var/lib/tripwire/report/<filename>.twr
+```
+
+---
+
+## ⏱️ Step 6: Automate Tripwire with Cron
+
+Add a scheduled integrity check every 20 minutes:
+
+```bash
+sudo crontab -e
+```
+
+Add the following line:
+
+```bash
+*/20 * * * * /usr/sbin/tripwire --check > /var/log/tripwire/cron_report.txt 2>&1
+```
+
+> 🧠 **Best Practice:** Combine with log monitoring to alert admins via email or SIEM.
+
+---
+
+## 🔁 Step 7: Update the Database After Legit Changes
+
+When legitimate changes are made (e.g., updates), use:
+
+```bash
+sudo tripwire --update --twrfile /var/lib/tripwire/report/<latest>.twr
+```
+
+Tripwire will prompt to accept/deny each change.
+
+---
+
+## 🔄 Alternative Tool: AIDE (Advanced Intrusion Detection Environment)
+
+### Pros of AIDE:
+
+* Lightweight and faster
+* Easier to configure for basic setups
+* Simpler database update process
+
+### To install AIDE:
+
+```bash
+sudo apt-get install aide
+```
+
+### Initialize database:
+
+```bash
+sudo aideinit
+```
+
+### Run scan:
+
+```bash
+sudo aide --check
+```
+
+---
+
+## 📌 Summary
+
+| Task           | Tripwire Command               |
+| -------------- | ------------------------------ |
+| Install        | `apt-get install tripwire`     |
+| Configure      | Edit `/etc/tripwire/twpol.txt` |
+| Compile policy | `twadmin --create-polfile`     |
+| Initialize DB  | `tripwire --init`              |
+| Scan system    | `tripwire --check`             |
+| View report    | `twprint --print-report`       |
+| Update DB      | `tripwire --update`            |
+
+---
+
+## ✅ Consultant Recommendations
+
+| Action                                       | Reason                           |
+| -------------------------------------------- | -------------------------------- |
+| Monitor critical system paths                | Prevent rootkit persistence      |
+| Automate integrity checks                    | Early detection of tampering     |
+| Use remote log server (combine with rsyslog) | Prevent log deletion by attacker |
+| Consider using AIDE on lightweight systems   | Faster, simpler for small VMs    |
+
+---
+
+## 🔖 Deliverables Checklist
+
+| Item                                           | Completed |
+| ---------------------------------------------- | --------- |
+| \[ ] Tripwire installed and passphrases set    |           |
+| \[ ] Critical directories configured in policy |           |
+| \[ ] Database initialized                      |           |
+| \[ ] System scanned with tampering test        |           |
+| \[ ] Reports reviewed and interpreted          |           |
+| \[ ] Cron job configured for 20 min intervals  |           |
+| \[ ] AIDE compared and optionally installed    |           |
+
+---
+
+## 📘 References
+
+* 🔗 [Tripwire Open Source Docs](https://sourceforge.net/projects/tripwire/)
+* 🔗 [AIDE Official](https://aide.github.io/)
+* 🔐 [Debian Security Guide: Tripwire](https://wiki.debian.org/Tripwire)
+* 🔄 [System Hardening Guides – CIS Benchmarks](https://www.cisecurity.org/cis-benchmarks/)
+
+---
+
+Let me know if you'd like a **PDF version**, **diagram for Tripwire setup**, or **shell script automation**.
+
+___
 
 Sure! Here's a **top professional Markdown tutorial** designed in the style of a **McKinsey-level cybersecurity consultant** for completing the **System Security – Notes 15 – Kristoffer Miklas** exercise from **IT Sik PBA**. This guide is crafted with clarity, structure, and a security consulting mindset, optimized for presentation or documentation.
 
