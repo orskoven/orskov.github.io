@@ -3,6 +3,227 @@ ALL RIGHTS RESERVED SIMON ØRSKOV BECKMANN
 # SIMON'S ✍️ CYBER SECURITY NOTES
 ___
 
+Certainly! Here’s a **complete and comprehensive guide** that will walk you through the **PortSentry** and **Squid Proxy** configuration on an Ubuntu server, as outlined in your request. This guide includes detailed installation and configuration steps, as well as an explanation of the key concepts.
+
+---
+
+# 🚀 **Comprehensive Guide to PortSentry & Squid Proxy Configuration on Ubuntu Server**
+
+## 🧭 Table of Contents
+
+1. [PortSentry Setup & Configuration](#portsentry-setup--configuration)
+
+   * Task 1: Install PortSentry
+   * Task 2: Configure PortSentry
+   * Task 3: Test PortSentry Configurations
+2. [Squid Proxy Setup & Configuration](#squid-proxy-setup--configuration)
+
+   * Task 1: Install Squid Proxy
+   * Task 2: Configure Squid Proxy Filters
+   * Task 3: Testing Squid Proxy Filters
+
+---
+
+## 🚨 **PortSentry Setup & Configuration**
+
+**PortSentry** is a tool designed to detect and protect against unauthorized port scans, blocking the IP addresses that perform the scans using firewall rules like **iptables**.
+
+### 🧰 **Task 1: Install PortSentry on Ubuntu Server**
+
+1. **Update the package list:**
+
+   ```bash
+   sudo apt-get update
+   ```
+
+2. **Install PortSentry:**
+
+   ```bash
+   sudo apt-get install portsentry
+   ```
+
+   After installation, the configuration file for PortSentry will be available at `/etc/portsentry/portsentry.conf`.
+
+---
+
+### 🔧 **Task 2: Configure PortSentry**
+
+1. **Open the PortSentry configuration file for editing:**
+
+   ```bash
+   sudo nano /etc/portsentry/portsentry.conf
+   ```
+
+2. **Modify the following settings based on your test requirements:**
+
+   * **Test 1: Protect a few ports from visibility outside the local network:**
+     In the `portsentry.conf` file, configure which ports you want to monitor. If you want to protect ports `22` (SSH), `80` (HTTP), and `443` (HTTPS), add them as follows:
+
+     ```bash
+     TCP_PORTS="22,80,443"
+     UDP_PORTS="22,80,443"
+     ```
+
+     To restrict visibility to your local network, you can adjust **iptables** in the next step.
+
+   * **Test 2: Add a few ports that do not exist (for testing purposes):**
+     You can add some non-existent ports to simulate scanning of invalid ports. Example:
+
+     ```bash
+     TCP_PORTS="99999,88888"
+     UDP_PORTS="99999,88888"
+     ```
+
+   * **Test 3: Block all UDP and TCP ports:**
+     If you want to block all UDP and TCP traffic for testing, use:
+
+     ```bash
+     TCP_PORTS="all"
+     UDP_PORTS="all"
+     ```
+
+   * **Uncomment the iptables filter rule:**
+     Look for the line related to `iptables` and uncomment it to activate firewall protection:
+
+     ```bash
+     # Uncomment the following line to activate iptables filtering
+     IPTABLES -A INPUT -p tcp --dport 12345 -j DROP
+     ```
+
+     **Why uncomment the iptables rule?**
+     This ensures that PortSentry uses **iptables** to block access to ports that are being scanned, helping to protect your server from unauthorized access.
+
+3. **Save and close the configuration file** by pressing `CTRL+O`, then `CTRL+X`.
+
+---
+
+### 🕵️‍♂️ **Task 3: Test PortSentry Configurations**
+
+1. **Install Nmap on another Linux machine** (if not already installed):
+
+   ```bash
+   sudo apt-get install nmap
+   ```
+
+2. **Run a TCP scan on your Ubuntu server** from the other machine:
+
+   ```bash
+   nmap -p 1-65535 <target-server-ip>
+   ```
+
+3. **Run a UDP scan on your Ubuntu server**:
+
+   ```bash
+   nmap -sU -p 1-65535 <target-server-ip>
+   ```
+
+4. After running the scans, check the logs to see that PortSentry has blocked the scanning IPs:
+
+   ```bash
+   sudo tail -f /var/log/syslog
+   ```
+
+   You should observe that PortSentry has blocked scanning attempts based on your configuration.
+
+---
+
+## 🖥️ **Squid Proxy Setup & Configuration**
+
+**Squid Proxy** is a high-performance proxy server that supports HTTP, HTTPS, FTP, and caching. It can be configured to block websites based on their domain, content, or keywords.
+
+### 🧰 **Task 1: Install Squid Proxy on Ubuntu Server**
+
+1. **Update the package list:**
+
+   ```bash
+   sudo apt-get update
+   ```
+
+2. **Install Squid Proxy:**
+
+   ```bash
+   sudo apt-get install squid3
+   ```
+
+3. After installation, the Squid configuration file is located at `/etc/squid3/squid.conf`.
+
+---
+
+### 🔧 **Task 2: Configure Squid Proxy Filters**
+
+1. **Open the Squid configuration file for editing:**
+
+   ```bash
+   sudo nano /etc/squid3/squid.conf
+   ```
+
+2. **Set proxy filters based on domain:**
+   To block traffic to `.se`, `.ru`, and `.ch` domains, add the following Access Control Lists (ACLs) and HTTP access rules:
+
+   ```bash
+   acl blocked_sites dstdomain .se .ru .ch
+   http_access deny blocked_sites
+   ```
+
+3. **Set proxy filters based on content:**
+   To block traffic containing certain strings (such as "Sverige", "Sweden", "drop table", and "insert"), you can use regular expressions (regex). Add the following lines:
+
+   ```bash
+   acl blocked_content url_regex -i Sverige
+   acl blocked_content url_regex -i Sweden
+   acl blocked_content url_regex -i "drop table"
+   acl blocked_content url_regex -i "insert"
+   http_access deny blocked_content
+   ```
+
+   **Why block "drop table" and "insert" strings?**
+   Blocking these SQL-related strings helps prevent **SQL injection attacks**, which involve attackers attempting to manipulate databases using malicious queries.
+
+4. **Save and close the file** (`CTRL+O`, then `CTRL+X`).
+
+---
+
+### 🔄 **Task 3: Testing Squid Proxy Filters**
+
+1. **Restart Squid to apply the configuration:**
+
+   ```bash
+   sudo systemctl restart squid
+   ```
+
+2. **Configure your browser to use the Squid Proxy:**
+
+   * In Firefox, go to `Preferences > Network Settings > Manual Proxy Configuration`.
+   * Set `HTTP Proxy` to the IP of your Squid server and use the default port `3128`.
+
+3. **Test the Filters:**
+
+   * Try to access websites with `.se`, `.ru`, and `.ch` domains to verify they are blocked.
+   * Try accessing websites that contain "Sverige", "Sweden", "drop table", or "insert" to ensure these are also blocked.
+
+---
+
+## 📚 **Conclusion**
+
+You have successfully installed and configured **PortSentry** to protect your server from port scanning and **Squid Proxy** to filter web traffic based on domain and content. These configurations help to reduce the attack surface of your network by:
+
+* **PortSentry**: Blocking unauthorized port scans and reducing the risk of exploitation.
+* **Squid Proxy**: Filtering web traffic and blocking potential malicious content, which helps prevent common attack vectors like SQL injection.
+
+---
+
+### 🔐 **Next Steps**
+
+* **PortSentry**: Review the firewall rules periodically and refine the port protections based on your organization’s needs.
+* **Squid Proxy**: Extend the filtering rules to block additional harmful domains or content types, and consider enabling logging to monitor traffic for suspicious activity.
+
+This guide has equipped you with practical knowledge of securing your Ubuntu server against scanning attacks and controlling web traffic.
+
+---
+
+Feel free to ask if you need further clarifications or additional configurations!
+
+___
 Here is a **complete professional cybersecurity tutorial** in **Markdown format**, following a McKinsey-style consulting approach for configuring and using **Tripwire** (or **AIDE**) for file integrity monitoring.
 
 ---
