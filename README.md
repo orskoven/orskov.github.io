@@ -1,6 +1,149 @@
 ALL RIGHTS RESERVED SIMON ØRSKOV BECKMANN
 
 # SIMON'S ✍️ CYBER SECURITY NOTES
+
+___
+Great question! OSINT (Open Source Intelligence) on **images** can reveal **a lot of hidden information** — metadata, location, device data, even clues in the pixels themselves.
+
+---
+
+# 🕵️‍♂️ How to Do OSINT on Images (Step-by-Step)
+
+---
+
+## 🔍 Step 1: **EXIF Metadata Extraction**
+
+**EXIF** (Exchangeable Image File Format) metadata may include:
+
+* GPS coordinates
+* Device make/model
+* Date/time
+* Software used
+
+### 🛠 Tools:
+
+| Tool               | Platform           | Usage                                                                                                |
+| ------------------ | ------------------ | ---------------------------------------------------------------------------------------------------- |
+| **ExifTool**       | Cross-platform CLI | `exiftool image.jpg`                                                                                 |
+| **FOCA**           | Windows GUI        | Import image and analyze                                                                             |
+| **Online Viewers** | Web                | [exif.regex.info](https://exif.regex.info/exif.cgi), [fotoforensics.com](https://fotoforensics.com/) |
+
+#### ✅ Example (using ExifTool):
+
+```bash
+exiftool myphoto.jpg
+```
+
+> If GPS data is found, plug it into [Google Maps](https://maps.google.com).
+
+---
+
+## 🖼 Step 2: **Reverse Image Search**
+
+Use this to:
+
+* Find where else the image appears online
+* Trace image origin or identify people/places
+
+### 🛠 Tools:
+
+* **Google Reverse Image**: [images.google.com](https://images.google.com)
+* **TinEye**: [tineye.com](https://tineye.com)
+* **Yandex Images**: [yandex.com/images](https://yandex.com/images)
+* **Bing Visual Search**
+
+> Tip: Yandex is especially good at facial recognition and location matching.
+
+---
+
+## 🧠 Step 3: **Analyze Visual Content**
+
+Look for clues **within** the image:
+
+* License plates, street signs, brand logos
+* Clothing, languages, architecture
+* Weather, shadows, and time of day
+
+### Tools to help:
+
+* **FotoForensics** (error level analysis, clone detection)
+* **Image Edited?** [imageedited.com](https://imageedited.com)
+* **AI tools** (like GPT-4o Vision 👋) — upload and ask “what can you tell me about this photo?”
+
+---
+
+## 🗺 Step 4: **Geolocation & Map Analysis**
+
+If the image has **landmarks**, try:
+
+* [Google Earth](https://earth.google.com)
+* [GeoGuessr](https://www.geoguessr.com) (fun but effective)
+* [Mapillary](https://www.mapillary.com)
+* [Mapcheck](https://mapcheck.info/)
+
+> Also search by visual similarity or specific visual clues.
+
+---
+
+## 🧪 Step 5: **Check Image Creation & Edits**
+
+Detect manipulation or inconsistency:
+
+* Compare original vs. reposted versions
+* Use:
+
+  * **FotoForensics ELA**
+  * **Izitru** (image authenticity analysis)
+
+---
+
+## 🛠 Step 6: Optional Automation & Scripts
+
+Want to analyze at scale?
+
+### Use Python:
+
+```python
+from PIL import Image
+from PIL.ExifTags import TAGS
+img = Image.open("image.jpg")
+exif = img._getexif()
+for tag, value in exif.items():
+    print(f"{TAGS.get(tag)}: {value}")
+```
+
+---
+
+# 📦 Summary Table
+
+| Goal            | Tool                              | Output          |
+| --------------- | --------------------------------- | --------------- |
+| Get EXIF        | ExifTool / FOCA / exif.regex.info | Metadata, GPS   |
+| Reverse Search  | Google / Yandex / TinEye          | Origin, copies  |
+| Image Analysis  | FotoForensics / AI                | Alteration, ELA |
+| Geolocation     | Google Maps / Earth / Mapillary   | Position        |
+| Content Insight | GPT-4o / Human analysis           | Scene, signs    |
+
+---
+
+## ⚠️ Legal & Ethical Reminder
+
+Always follow OSINT principles:
+
+* **Respect privacy**
+* Only use **public images**
+* Don’t exploit sensitive data without **clear legal/ethical justification**
+
+---
+
+Would you like to:
+
+* Upload an image here for OSINT breakdown?
+* Build an automated OSINT script?
+* Learn how to apply these steps in real investigations?
+
+Let me know how deep you want to go.
+
 ___
 
 Certainly. Here's a well-structured, professional **Markdown guide** for securely and efficiently transferring files from **macOS to Ubuntu**, geared for both IT professionals and technical end-users. The style is clean and strategic, suitable for an internal knowledge base or enterprise playbook.
