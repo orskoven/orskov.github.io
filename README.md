@@ -3,6 +3,144 @@ ALL RIGHTS RESERVED SIMON ØRSKOV BECKMANN
 # SIMON'S ✍️ CYBER SECURITY NOTES
 ___
 
+
+---
+
+# 🕵️‍♂️ Tracking Digital Breadcrumbs: A Forensic Walkthrough from SCP to OSINT
+
+**Author**: A McKinsey Cybersecurity Strategist
+**Tags**: `Digital Forensics`, `OSINT`, `Metadata Analysis`, `WiGLE`, `EXIF`, `TryHackMe`, `Threat Intel`
+
+---
+
+## 📦 Step 1: Secure File Transfer Using SCP
+
+Our investigation begins with a simple file transfer. A `.jpg` file named `WindowsXP_1551719014755.jpg` is moved from a macOS device to a remote Kali Linux machine using `scp`.
+
+```bash
+john@johns-MacBook-Pro Downloads % scp ~/Downloads/WindowsXP_1551719014755.jpg kk@192.168.251.134:/home/kk/
+kk@192.168.251.134's password:
+WindowsXP_1551719014755.jpg 100% 229KB 16.9MB/s   00:00
+```
+
+**Why SCP?**
+Secure Copy (SCP) uses SSH for encrypted file transfer—ideal for safe movement of potentially sensitive forensic files.
+
+---
+
+## 🧭 Step 2: Metadata Extraction Using `exiftool`
+
+We now analyze the image metadata using the powerful utility `exiftool` to extract geolocation and other embedded information.
+
+```bash
+┌──(kk㉿kali)-[~]
+└─$ exiftool WindowsXP.jpg WindowsXP_1551719014755.jpg | grep GPS
+```
+
+### 🔍 Extracted GPS Metadata
+
+```text
+GPS Latitude      : 54 deg 17' 41.27" N
+GPS Longitude     : 2 deg 15' 1.33" W
+GPS Position      : 54 deg 17' 41.27" N, 2 deg 15' 1.33" W
+```
+
+✅ **Tip**: Always cross-reference this data with a mapping tool (Google Maps, OpenStreetMap) to identify the physical location. In this case, it places us **in the UK**, likely near **Cumbria**.
+
+---
+
+## 🧑‍💻 Step 3: Tracing the Author via Embedded Copyright
+
+```text
+Copyright : OWoodflint
+```
+
+This is a unique handle likely embedded by the author or device. A quick OSINT move is to search this name across GitHub, social media, and forums.
+
+🔗 **GitHub Profile Found**:
+[OWoodfl1nt/people\_finder](https://github.com/OWoodfl1nt/people_finder)
+
+---
+
+## 🐦 Step 4: OSINT Footprint — Twitter Clue
+
+Searching `OWoodflint` on Google reveals a **Twitter profile** with a **cat profile picture**. This innocuous-looking image leads to the answer in a TryHackMe challenge (likely an Easter egg hint).
+
+📌 **Flag or Clue Found**: TryHackMe often uses social profiles as treasure hunts.
+
+---
+
+## 🌐 Step 5: WiGLE Wireless Network Forensics
+
+To correlate location and wireless activity, we reference WiGLE — a global wireless network mapping service.
+
+```plaintext
+SSID: UnileverWiFi
+BSSID: B4:5D:50:AA:86:41
+Crypto: WPA2
+Lat: 51.50835419
+Lon: -0.13207622
+```
+
+### 🗺️ Mapping the SSID
+
+* **SSID**: `UnileverWiFi`
+* **Location**: Central London, near Trafalgar Square
+* **Logged Activity**: Multiple users tagging this SSID with phrases like:
+
+  * `"TryHackMeFlag"`
+  * `"bop"`
+  * `"s"` (likely part of a challenge trail)
+
+✅ **WiGLE Tip**: Filter by SSID, BSSID, or coordinates. Always verify against timestamps and comment logs.
+
+---
+
+## 🎯 Summary: Our Forensic Timeline
+
+| Step | Tool Used       | Insight Gained                          |
+| ---- | --------------- | --------------------------------------- |
+| 1    | `scp`           | Secure transfer of forensic evidence    |
+| 2    | `exiftool`      | Extracted geolocation + author info     |
+| 3    | `Google`/GitHub | Identified author handle & repository   |
+| 4    | `Twitter`       | Clue hidden in profile (TryHackMe link) |
+| 5    | `WiGLE.net`     | Mapped SSID to physical urban footprint |
+
+---
+
+## 🧠 Final Thoughts
+
+This exercise showcases how **metadata, OSINT, and wireless mapping tools** can be combined to de-anonymize content, locate suspects, or solve red team exercises. Whether you're working on real-world investigations or CTF-style challenges, your toolkit should always include:
+
+* 📍 **EXIF metadata tools**
+* 🌐 **Open-source intelligence**
+* 📡 **Wi-Fi mapping via WiGLE**
+* 🧬 **Social engineering breadcrumbs**
+
+---
+
+## ✅ Tools Recap
+
+| Tool        | Purpose                               |
+| ----------- | ------------------------------------- |
+| `scp`       | Secure file transfer                  |
+| `exiftool`  | Extract image metadata                |
+| `GitHub`    | Trace handles to developer activity   |
+| `Twitter`   | Social OSINT for profile analysis     |
+| `WiGLE.net` | Locate Wi-Fi networks and triangulate |
+
+---
+
+> *“In the age of data, privacy is a myth. Our job is to understand the risks, map the exposure, and secure the perimeter.”*
+> — Cyber Intelligence Lead, McKinsey & Co.
+
+---
+
+If you'd like this blog turned into a PDF, a web-based walkthrough, or embedded as a TryHackMe-style room writeup, let me know!
+
+
+___
+
 Sure! Below is a **Python script for advanced image-based OSINT**. This script performs:
 
 1. **EXIF metadata extraction**
